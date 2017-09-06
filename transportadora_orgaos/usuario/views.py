@@ -8,7 +8,8 @@ class Index(TemplateView):
 
 def cadastro(request):
 	form = UsuarioModelForm(request.POST or None)
+	context = {'form':form}
 	if request.method == 'POST':
 		if form.is_valid():
 			form.save()
-	return render(request, 'usuarios/cadastro.html', context)
+	return render(request, 'usuario/cadastro.html', context)

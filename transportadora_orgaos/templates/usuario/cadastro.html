@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<form action="{% url 'usuario:cadastro' %}" class="form-sign" method="POST">
+	{% csrf_token %}
+	<h2 class="form-sign-heading">Cadastro</h2>
+	<label>Nome de Usuário</label>
+	{{ form.username }}
+	<label>Nome</label>
+	{{ form.first_name }}
+	<label>Email</label>
+	{{ form.email }}
+	<label>Senha</label>
+	{{ form.password }}
+
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Registrar</button>
+</form>
+{% endblock %}

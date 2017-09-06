@@ -14,3 +14,9 @@ class UsuarioModelForm(forms.ModelForm):
 			'password': forms.PasswordInput(attrs={'class': 'form_control', 'maxlength': 100}),
 		}
 
+def save(self, commit="True"):
+	user = super(UsuarioModelForm, self).save(commit="false")
+	user.set_password(self.cleaned_data['password'])
+	if commit:
+		user.save()
+	return user
