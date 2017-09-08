@@ -18,8 +18,7 @@ Instruções para Instalação
 
 1 - Dependências Necessárias:
   ```
-  $ sudo apt-get update && sudo apt-get install -y git python3-dev 
-  python-django postgresql postgresql-contrib pgadmin3 python-psycopg2 npm
+  $ sudo apt-get update && sudo apt-get install -y git python3-dev python-django postgresql postgresql-contrib pgadmin3 python-psycopg2 npm
   ```
 
 2 - Clonar o Repositório:
