@@ -47,7 +47,7 @@ postgres=# \q
 4 - Criar uma nova conexão no pgadmin:
 
 ```
-pgadmin3
+$ pgadmin3
 ```
 
 * Ao abrir a interface gráfica do pgadmin, clicar no ícone da tomada para criar uma nova conexão. Entrar com as seguintes informações:
@@ -67,11 +67,12 @@ password: postgres
 
 6 - Atualize o banco de dados e rode o servidor:
   ```
-  python manage.py migrate
+  $ cd transportadora_orgaos
+  $ python manage.py migrate
  
   ```
 7 - Rodar o Servidor
  ```
- python manage.py runserver
+ $ python manage.py runserver
 
  ```
