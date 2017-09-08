@@ -42,7 +42,7 @@ Enter it again:
 postgres=# \q
 
 ```
-Entre com a senha: postgres
+* Entre com a senha: postgres
 
 4 - Criar uma nova conexão no pgadmin:
 
@@ -50,20 +50,20 @@ Entre com a senha: postgres
 pgadmin3
 ```
 
-Ao abrir a interface gráfica do pgadmin, clicar no ícone da tomada para criar uma nova conexão. Entrar com as seguintes informações:
+* Ao abrir a interface gráfica do pgadmin, clicar no ícone da tomada para criar uma nova conexão. Entrar com as seguintes informações:
 
 ```
 name: postgreSQL
 host: 127.0.0.1
 password: postgres
 ```
-Não altere os outros campos
+* Não altere os outros campos
 
 5 - Criar o banco de dados na nova conexão (pgadmin)
 
-Na barra lateral da interface gráfica do pgadmin, clicar com o mouse direito em databases > New Database...
+* Na barra lateral da interface gráfica do pgadmin, clicar com o mouse direito em databases > New Database...
 
-Criar um novo database com o nome: transorg
+* Criar um novo database com o nome: transorg
 
 6 - Atualize o banco de dados e rode o servidor:
   ```
