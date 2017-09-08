@@ -30,6 +30,8 @@ $ cd pi2-transport_orgaos
 
 3 - Configurar senha para o usuário postgres do banco de dados
 
+* Em "Enter new password:", digitar a seguinte senha: postgres
+
 ```
 $ sudo -u postgres psql postgres
 
@@ -42,7 +44,7 @@ Enter it again:
 postgres=# \q
 
 ```
-* Entre com a senha: postgres
+
 
 4 - Criar uma nova conexão no pgadmin:
 
