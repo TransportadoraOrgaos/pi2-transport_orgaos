@@ -25,6 +25,7 @@ Instruções para Instalação
 
 ```
 $ git clone https://github.com/TransportadoraOrgaos/pi2-transport_orgaos.git
+$ cd pi2-transport_orgaos
 ```
 
 3 - Configurar senha para o usuário postgres do banco de dados
