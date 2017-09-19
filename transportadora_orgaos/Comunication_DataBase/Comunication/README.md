@@ -5,11 +5,11 @@ Como o I2C e um protocolo de comunicacao, definido, o codigo usado na RPI pode s
 
 Para compilar basta escrever no terminal:
 
-$ gcc name_progam.c -o name_program
+	$ gcc name_progam.c -o name_program
 
 
 Refs:
 
-http://www.arduinobr.com/arduino/i2c-protocolo-de-comunicacao/
+	http://www.arduinobr.com/arduino/i2c-protocolo-de-comunicacao/
 
 

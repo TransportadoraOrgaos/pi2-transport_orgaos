@@ -3,25 +3,25 @@ Pasta criada para codigos relacionados a comunicacao entre a Raspberry Pi e o MS
 
 # Instalation MySQL
 
-$ sudo apt-get install mysql-server
+	$ sudo apt-get install mysql-server
 	The default user and password is 'root', 'root'.
 
 Intall the lib of MySQL
 
-$ sudo apt-get install libmysqlclient-dev
+	$ sudo apt-get install libmysqlclient-dev
 
-	Mas na RPI usada para testes nao houve como instalar a lib do MySQL, entao teve quer ser intalada a do MariaDB
+Mas na RPI usada para testes nao houve como instalar a lib do MySQL, entao teve quer ser intalada a do MariaDB
 
-$ sudo apt-get install libmariadbclient-dev
+	$ sudo apt-get install libmariadbclient-dev
 
 # To Compile 
 
-	Using GCC and using libs of MySQL:
+Using GCC and using libs of MySQL:
 
-$ gcc name_program.c -o name_program $(mysql_config --libs --cflags)
+	$ gcc name_program.c -o name_program $(mysql_config --libs --cflags)
 
 Refs:
 
-http://zetcode.com/databases/mysqltutorial/installation/
+	http://zetcode.com/databases/mysqltutorial/installation/
 
-http://zetcode.com/db/mysqlc/
+	http://zetcode.com/db/mysqlc/
