@@ -25,3 +25,8 @@ Refs:
 	http://zetcode.com/databases/mysqltutorial/installation/
 
 	http://zetcode.com/db/mysqlc/
+
+# OBS.:
+Dentro de DataBase, o creat_db_TransOrg.c, basta ser executado uma unica vez para que haja a criacao do banco de dados transorg.
+O tableTrans.c cria a tabela dentro do banco de dados.
+
