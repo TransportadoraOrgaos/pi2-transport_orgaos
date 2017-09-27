@@ -47,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">TransOrg</a>
+                <a class="navbar-brand" href="{% url 'camara:listar_camaras' %}">TransOrg</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -82,9 +82,11 @@
                         <li>
                             <a href='{% url "camara:camaras_cadastro" %}'><i class="fa fa-bar-chart-o fa-fw"></i> Cadastro de Câmaras</a>
                         </li>
+                        <!--
                         <li>
                             <a href="{% url 'camara:listar_camaras' %}"><i class="fa fa-table fa-fw"></i> Visualizar Andamento de Transporte</a>
                         </li>
+                        -->
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -109,7 +111,7 @@
                             <p> <small>Nenhuma câmara rastreada</small> </p>
                         {% endif %}
                         {% for camara in lista_camaras %}
-                            <p> <small><a href="#"></a>Nenhuma câmara rastreada</small> </p>
+                            <p> <small><a href="#">{{camara}}</a></small> </p>
                         {% endfor %}
                     </h2>
                 </div>
