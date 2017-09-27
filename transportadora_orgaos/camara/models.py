@@ -5,10 +5,6 @@ from django.db import models
 
 
 class Camara(models.Model):
- """
- Models de camara. 
- """ 	
-
  name = models.CharField(max_length = 50)
 
 

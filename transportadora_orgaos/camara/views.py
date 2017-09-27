@@ -1,32 +1,21 @@
+from django.forms import ModelForm
+from .models import *
 from django.shortcuts import render
-from django.views import View
-# Create your views here.
 
 
-class CamaraView(View):
-	"""
-	Classe para retornar listas de camaras cadastradas
-	"""
+class CamaraForm(ModelForm):
+	class Meta:
+		model = Camara
+		fields = ['name']
 
-	def get(self, request):
-		camaras = "anna lari"
-		return render(request, "camaras_list.html", {'camaras': camaras})
+def camara_list(request, template_name='camaras_list.html'):
+	camara = Camara.objects.all()
+	camaras = {'lista_camaras' : camara}
+	return render(request, template_name, camaras)
 
-	def post(self, request):
-		pass
-
-class CamarasCadastro(View):
-    """
-    Classe para cadastro de camaras
-    """
-
-    def get(self, request):
-		return render(request, "camaras_form.html")
-
-		pass
-
-    def post(self, request):
-		pass
-
-
-		
+def camara_cadastro(request, template_name='camaras_cadastro.html'):
+	form = CamaraForm(request.POST or None)
+	if form.is_valid():
+		form.save()
+		#return redirect('^$')
+	return render(request, template_name, {'form': form})
