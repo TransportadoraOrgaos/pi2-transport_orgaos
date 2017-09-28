@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:800');
+
+.navbar-brand{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+}

@@ -10,6 +10,8 @@
 
     <title>TransOrg - Sistema de Trasporte de Órgãos para Transplante</title>
 
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+
     <!-- Bootstrap Core CSS -->
     <link href="{% static "bootstrap/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
 
@@ -49,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{% url 'camara:listar_camaras' %}">TransOrg</a>
+                <a class="navbar-brand" href="{% url 'camara:listar_camaras' %}">TRANSORG</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -134,7 +136,7 @@
                             
                             
                         {% endfor %}
-                    </div>
+                        </div>
                     </h2>
                 </div>
             </div>

@@ -16,10 +16,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from usuario.views import Index
+from camara.views import camara_list
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', Index.as_view(), name='home'),
+    url(r'^$', camara_list, name='home'),
     url(r'^', include('usuario.urls', namespace='usuario', app_name='usuario')),
     url(r'^', include('camara.urls', namespace='camara', app_name='camara'))
 ]
