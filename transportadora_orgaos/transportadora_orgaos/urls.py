@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', Index.as_view(), name='home'),
     url(r'^', include('usuario.urls', namespace='usuario', app_name='usuario')),
+    url(r'^', include('camara.urls', namespace='camara', app_name='camara'))
 ]
