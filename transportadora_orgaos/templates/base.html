@@ -51,7 +51,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{% url 'camara:listar_camaras' %}">TRANSORG</a>
+                <a class="navbar-brand" href="{% url 'camara:listar_camaras' %}"><span class="brand-part-1">TRANS</span><span class="brand-part-2">ORG</span></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -60,15 +60,15 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-2x fa-fw"></i> <i class="fa fa-2x fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        <li><a href="#"><i class="fa fa-user fa-2x fa-fw"></i>Perfil do Usuário</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="#"><i class="fa fa-gear fa-2x fa-fw"></i>Configurações</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-2x fa-fw"></i>Sair</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -81,10 +81,13 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="{% url 'usuario:cadastro' %}"><i class="fa fa-dashboard fa-fw"></i> Cadastro de Usuários</a>
+                            <a href="{% url 'camara:listar_camaras' %}"><i class="fa fa-ambulance fa-2x fa-fw"></i> <span class="text-sidebar">Câmaras Rastreadas</span></a>
                         </li>
                         <li>
-                            <a href='{% url "camara:camaras_cadastro" %}'><i class="fa fa-bar-chart-o fa-fw"></i> Cadastro de Câmaras</a>
+                            <a href="{% url 'usuario:cadastro' %}"><i class="fa fa-user fa-2x fa-fw"></i> <span class="text-sidebar">Cadastro de Usuários</span></a>
+                        </li>
+                        <li>
+                            <a href='{% url "camara:camaras_cadastro" %}'><i class="fa fa-archive fa-2x fa-fw"></i> <span class="text-sidebar">Cadastro de Câmaras</span></a>
                         </li>
                         <!--
                         <li>
@@ -120,7 +123,7 @@
                                     <!--Card-->
                                     <div class="card">
                                         <!--Card image-->
-                                        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
+                                        <img class="img-fluid" src="{% static "images/transportadora.jpg" %}" alt="Card image cap">
                 
                                         <!--Card content-->
                                         <div class="card-body">
@@ -128,7 +131,7 @@
                                             <h4 class="card-title">{{camara}}</h4>
                                             <!--Text-->
                                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            <a href="#" class="btn btn-primary">Button</a>
+                                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
                                         </div>
                                     </div>
                                     <!--/.Card-->
