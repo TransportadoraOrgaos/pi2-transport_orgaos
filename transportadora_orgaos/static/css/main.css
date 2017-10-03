@@ -1,12 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800');
-
-*{
-    /*font-family: 'Montserrat', sans-serif;*/
+@font-face{
+    font-family: montserrat-extrabold;
+    src: url(../fonts/montserrat/Montserrat-ExtraBold.ttf)
 }
 
 .navbar-brand{
     font-size: 40px !important;
-    font-family: 'Montserrat', sans-serif;
+    font-family: montserrat-extrabold, sans-serif;
     font-weight: 800; 
     margin-top: 13px;
 }
