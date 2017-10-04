@@ -27,5 +27,9 @@ def camara_cadastro(request, template_name='camaras_cadastro.html'):
 	if form.is_valid():
 		url = "https://transports-rest-api.herokuapp.com/transport/" + form.cleaned_data['name']
 		response = requests.request("POST", url, data=payload, headers=headers)
-		return redirect('camara:listar_camaras')
+		if 'message' in response.json():
+			response_dict = response.json()
+			return render(request, template_name, {'form': form, 'response_dict': response_dict})
+		else:
+			return redirect('camara:listar_camaras')
 	return render(request, template_name, {'form': form})
