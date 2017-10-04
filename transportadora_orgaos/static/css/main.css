@@ -54,9 +54,11 @@
 
 .card{
     padding: 25px;
+    margin-bottom: 20px;
 }
 
-.card{
-    margin-bottom: 20px;
+.error-message{
+    color: #cc0000;
+    font-weight: 500;
 }
 
