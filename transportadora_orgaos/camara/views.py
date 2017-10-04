@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from .models import *
 from django.shortcuts import render, redirect
 import requests
-
+import json
 
 class CamaraForm(ModelForm):
 	class Meta:
@@ -10,9 +10,13 @@ class CamaraForm(ModelForm):
 		fields = ['name']
 
 def camara_list(request, template_name='camaras_list.html'):
-	camara = Camara.objects.all()
-	camaras = {'lista_camaras' : camara}
-	return render(request, template_name, camaras)
+	url = "https://transports-rest-api.herokuapp.com/transports"
+	headers = {'content-type': 'application/json'}
+
+	camaras = requests.request("GET", url, headers=headers)
+	camaras_dict = camaras.json()['transports']
+	
+	return render(request, template_name, {'camaras_dict':camaras_dict})
 
 def camara_cadastro(request, template_name='camaras_cadastro.html'):
 	 

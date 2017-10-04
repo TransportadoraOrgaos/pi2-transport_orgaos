@@ -114,31 +114,32 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="painel-body">
-                        {% if not lista_camaras %}
+                        {% if not camaras_dict %}
                             <p> <small>Nenhuma câmara rastreada</small> </p>
                         {% endif %}
                         <div class="row">
-                        {% for camara in lista_camaras %}
-                                <div class="col-md-4">
-                                    <!--Card-->
-                                    <div class="card">
-                                        <!--Card image-->
-                                        <img class="img-fluid" src="{% static "images/transportadora.jpg" %}" alt="Card image cap">
-                
-                                        <!--Card content-->
-                                        <div class="card-body">
-                                            <!--Title-->
-                                            <h4 class="card-title">{{camara}}</h4>
-                                            <!--Text-->
-                                            <p class="card-text"></p>
-                                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                                        </div>
+                            
+                        {% for camara in camaras_dict %}
+                            <div class="col-md-4">
+                                <!--Card-->
+                                <div class="card">
+                                    <!--Card image-->
+                                    <img class="img-fluid" src="{% static "images/transportadora.jpg" %}" alt="Card image cap">
+            
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <!--Title-->
+                                        <h4 class="card-title">{{camaras_dict.1.name}}</h4>
+                                        <!--Text-->
+                                        <p class="card-text"></p>
+                                        <a href="#" class="btn btn-primary">Ver Detalhes</a>
                                     </div>
-                                    <!--/.Card-->
-                                </div> 
-                            
-                            
+                                </div>
+                                <!--/.Card-->
+                            </div> 
                         {% endfor %}
+                            
+                        
                         </div>
                     </h2>
                 </div>
