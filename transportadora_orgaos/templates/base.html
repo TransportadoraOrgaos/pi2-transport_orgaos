@@ -119,6 +119,7 @@
                         {% endif %}
                         <div class="row">
                             
+                        
                         {% for camara in camaras_dict %}
                             <div class="col-md-4">
                                 <!--Card-->
@@ -129,11 +130,12 @@
                                     <!--Card content-->
                                     <div class="card-body">
                                         <!--Title-->
-                                        <h4 class="card-title">{{camara.name}}</h4>
-                                        {{ camara.id }}
+                                        <h2 class="card-title">{{camara.name}}</h2>
+                                        <p>Órgão: {{ camara.organ }}</p>
+                                        <p>Responsável: {{ camara.responsible }}</p>
                                         <!--Text-->
                                         <p class="card-text"></p>
-                                        <a href="#" class="btn btn-primary">Ver Detalhes</a>
+                                        <a href="{% url 'camara:camara_info' camara.id %}" class="btn btn-primary">Ver Detalhes</a>
                                     </div>
                                 </div>
                                 <!--/.Card-->

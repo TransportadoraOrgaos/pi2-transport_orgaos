@@ -3,6 +3,11 @@
     src: url(../fonts/montserrat/Montserrat-ExtraBold.ttf)
 }
 
+p{
+    font-size: 15px;
+    color: #00bcd4 !important;
+}
+
 .navbar-brand{
     font-size: 40px !important;
     font-family: montserrat-extrabold, sans-serif;
@@ -40,7 +45,7 @@
     padding: 8px;
 }
 
-.brand-part-1, .fa, h1, h2, h3{
+.brand-part-1, .fa, h1, h3{
     color: #00bcd4 !important;
 }
 
@@ -48,7 +53,7 @@
     vertical-align: middle;
 }
 
-.brand-part-2, .text-sidebar, h4{
+.brand-part-2, .text-sidebar, h2, h4{
     color: #ff9800 !important;
 }
 

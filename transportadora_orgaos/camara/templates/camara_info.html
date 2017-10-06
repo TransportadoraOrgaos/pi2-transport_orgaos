@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-
 {% block conteudo %}
-
-
-
-
+<div id="page-wrapper">
+    {% for report in camara_reports %}
+        {{ report.latitude }}
+    {% endfor %}
+</div>
 {% endblock %}
