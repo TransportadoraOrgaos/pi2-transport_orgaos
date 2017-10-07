@@ -21,16 +21,18 @@
 								<label>Nome da Câmara: </label>
 									{{ form.name }}
 							</div>
+							<br>
 							<div class="form-group">
 								<label>Nome da Responsável: </label>
 									{{ form.responsible }}
 							</div>
+							<br>
 							<div class="form-group">
 								<label>Nome do Órgão: </label>
 									{{ form.organ }}
 							</div>
 
-							<span class="error-message">{{ response_dict.message }}</span> 
+							<span class="error-message">{{ response_dict.error_message }}</span> 
 						</div>
 						<div class="col-lg-2">
 							<div class="form-group">
