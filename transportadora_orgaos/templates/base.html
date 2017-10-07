@@ -133,6 +133,7 @@
                                         <h2 class="card-title">{{camara.name}}</h2>
                                         <p>Órgão: {{ camara.organ }}</p>
                                         <p>Responsável: {{ camara.responsible }}</p>
+                                        <p>Identificador: {{ camara.id }}</p>
                                         <!--Text-->
                                         <p class="card-text"></p>
                                         <a href="{% url 'camara:camara_info' camara.id %}" class="btn btn-primary">Ver Detalhes</a>
