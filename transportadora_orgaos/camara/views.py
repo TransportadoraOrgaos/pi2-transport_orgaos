@@ -1,3 +1,5 @@
+# -*-encoding: utf-8 -*-
+
 from django.forms import ModelForm
 from .models import *
 from django.shortcuts import render, redirect
@@ -44,7 +46,6 @@ def camara_cadastro(request, template_name='camaras_cadastro.html'):
 	return render(request, template_name, {'form': form})
 
 def camara_info(request, camara_id, template_name='camara_info.html'):
-	url = "https://transports-rest-api.herokuapp.com/report/" + str(camara_id)
 	headers = {
 		'content-type': 'application/json', 
 		'authorization': "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDczMDIxNzAs" 
@@ -52,19 +53,22 @@ def camara_info(request, camara_id, template_name='camara_info.html'):
 		+"--NgkSWzCz96UFuqvBKZ-jk3g"
     }
 
+	#Recupera todos os reports da camara_id
+	url = "https://transports-rest-api.herokuapp.com/report/" + str(camara_id)
 	camara_reports = requests.request("GET", url, headers=headers).json()['reports']
-	#print(camara_reports)
 
+	#Recupera as informações da camara_id
+	url = "https://transports-rest-api.herokuapp.com/transports"
+	camaras = requests.request("GET", url, headers=headers)
+	camara = camaras.json()['transports'][int(camara_id)-1]
+
+	#Recupera as temperaturas da camara_id para a construção do gráfico
 	temperaturas = []
-
 	i = 0
 	for temperatura in camara_reports:
 		temperaturas.append([i, camara_reports[i]['temperature']])
 		i += 1
 	
-
-	print(temperaturas)
-	
-	return render(request, template_name, {'camara_reports':camara_reports, 'temperaturas':temperaturas})
+	return render(request, template_name, {'camara_reports':camara_reports, 'temperaturas':temperaturas, 'camara':camara})
 
 	
