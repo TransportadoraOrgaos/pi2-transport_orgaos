@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from .models import *
 from django.shortcuts import render, redirect
+#from django.utils import simplejson
 import requests
 import json
 
@@ -28,20 +29,12 @@ def camara_cadastro(request, template_name='camaras_cadastro.html'):
 	
 	if form.is_valid():
 		responsible = form.cleaned_data['responsible']
-		print(form.cleaned_data)
-		print("Responsavel: " + responsible)
 		organ = form.cleaned_data['organ']
-		print("Orgao: " + organ)
-
-		
 
 		headers = {'content-type': 'application/json'}
 		payload = "{\n\t\"responsible\": \""+ responsible +"\",\n\t\"organ\": \""+ organ +"\"\n}"
-		print("Payload: " + payload)
 		url = "https://transports-rest-api.herokuapp.com/transport/" + form.cleaned_data['name']
-		print("URL: " + url)
 		response = requests.post(url, data=payload, headers=headers)
-		print("response: " + str(response.json()))
 
 		if 'error_message' or 'message' in response.json():
 			response_dict = response.json()
@@ -60,7 +53,18 @@ def camara_info(request, camara_id, template_name='camara_info.html'):
     }
 
 	camara_reports = requests.request("GET", url, headers=headers).json()['reports']
+	#print(camara_reports)
 
-	return render(request, template_name, {'camara_reports':camara_reports})
+	temperaturas = []
+
+	i = 0
+	for temperatura in camara_reports:
+		temperaturas.append([i, camara_reports[i]['temperature']])
+		i += 1
+	
+
+	print(temperaturas)
+	
+	return render(request, template_name, {'camara_reports':camara_reports, 'temperaturas':temperaturas})
 
 	
