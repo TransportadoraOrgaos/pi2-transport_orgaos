@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 import requests
 import json
 
+
 class CamaraForm(ModelForm):
 	class Meta:
 		model = Camara
@@ -18,20 +19,31 @@ def camara_list(request, template_name='camaras_list.html'):
 	
 	return render(request, template_name, {'camaras_dict':camaras_dict})
 
+
 def camara_cadastro(request, template_name='camaras_cadastro.html'):
+
+	
 	 
 	form = CamaraForm(request.POST or None)
 	
-	headers = {'content-type': 'application/json'}
-	
 	if form.is_valid():
 		responsible = form.cleaned_data['responsible']
+		print(form.cleaned_data)
+		print("Responsavel: " + responsible)
 		organ = form.cleaned_data['organ']
-		payload = "{\n\t\"responsible\": \""+ responsible +"\",\n\t\"organ\": \""+ organ +"\"\n}"
-		url = "https://transports-rest-api.herokuapp.com/transport/" + form.cleaned_data['name']
-		response = requests.request("POST", url, data=payload, headers=headers)
+		print("Orgao: " + organ)
 
-		if 'error_message' in response.json():
+		
+
+		headers = {'content-type': 'application/json'}
+		payload = "{\n\t\"responsible\": \""+ responsible +"\",\n\t\"organ\": \""+ organ +"\"\n}"
+		print("Payload: " + payload)
+		url = "https://transports-rest-api.herokuapp.com/transport/" + form.cleaned_data['name']
+		print("URL: " + url)
+		response = requests.post(url, data=payload, headers=headers)
+		print("response: " + str(response.json()))
+
+		if 'error_message' or 'message' in response.json():
 			response_dict = response.json()
 			return render(request, template_name, {'form': form, 'response_dict': response_dict})
 		else:
