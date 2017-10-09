@@ -70,5 +70,3 @@ def camara_info(request, camara_id, template_name='camara_info.html'):
 		i += 1
 	
 	return render(request, template_name, {'camara_reports':camara_reports, 'temperaturas':temperaturas, 'camara':camara})
-
-	

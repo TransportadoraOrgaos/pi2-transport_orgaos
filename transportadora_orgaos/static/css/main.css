@@ -43,6 +43,12 @@ p{
     }
 }
 
+.container{
+    width: 100% !important;
+}
+
+
+
 .sidebar ul li {
     border-bottom: none !important;
 }
@@ -57,7 +63,7 @@ p{
     padding: 8px;
 }
 
-.brand-part-1, .fa, h1, h3{
+.brand-part-1, .fa, h1{
     color: #00bcd4 !important;
 }
 
@@ -65,7 +71,7 @@ p{
     vertical-align: middle;
 }
 
-.brand-part-2, .text-sidebar, h2, h4{
+.brand-part-2, .text-sidebar, h2, h3, h4{
     color: #ff9800 !important;
 }
 
