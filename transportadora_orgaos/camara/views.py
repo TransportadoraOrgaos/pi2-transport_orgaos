@@ -37,6 +37,7 @@ def camara_cadastro(request, template_name='camaras_cadastro.html'):
 		payload = "{\n\t\"responsible\": \""+ responsible +"\",\n\t\"organ\": \""+ organ +"\"\n}"
 		url = "https://transports-rest-api.herokuapp.com/transport/" + form.cleaned_data['name']
 		response = requests.post(url, data=payload, headers=headers)
+		import ipdb; ipdb.set_trace()
 
 		if 'error_message' or 'message' in response.json():
 			response_dict = response.json()
