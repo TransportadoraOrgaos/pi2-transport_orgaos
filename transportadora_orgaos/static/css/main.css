@@ -83,6 +83,7 @@ p{
 .error-message{
     color: #cc0000;
     font-weight: 500;
+    font-size: 17px;
 }
 
 #camara-name{
