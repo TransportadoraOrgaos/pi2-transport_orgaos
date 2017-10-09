@@ -12,3 +12,12 @@ class UsuarioModelForm(ModelForm):
 			'email': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 50}),
 			'password': forms.PasswordInput(attrs={'class': 'form_control', 'maxlength': 50}),
 		}
+
+class UsuarioLoginForm(ModelForm):
+	class Meta:
+		model = Usuario
+		fields = ['username', 'password']
+		widgets = {
+			'username': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 50}),
+			'email': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 50}),
+		}
