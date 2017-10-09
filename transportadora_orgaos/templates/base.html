@@ -36,6 +36,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="{% static "js/google-charts.js" %}"></script>
 </head>
 
 <body>
@@ -107,38 +109,44 @@
     <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                	<h1>Câmaras Rastreadas</h1>
+                	<h2>Câmaras Rastreadas</h2>
                 </div>
             </div>
             
             <div class="row">
                 <div class="col-lg-12">
                     <h2 class="painel-body">
-                        {% if not lista_camaras %}
-                            <p> <small>Nenhuma câmara rastreada</small> </p>
+                        {% if not camaras_dict %}
+                            <p> Nenhuma câmara rastreada </p>
                         {% endif %}
                         <div class="row">
-                        {% for camara in lista_camaras %}
-                                <div class="col-md-4">
-                                    <!--Card-->
-                                    <div class="card">
-                                        <!--Card image-->
-                                        <img class="img-fluid" src="{% static "images/transportadora.jpg" %}" alt="Card image cap">
-                
-                                        <!--Card content-->
-                                        <div class="card-body">
-                                            <!--Title-->
-                                            <h4 class="card-title">{{camara}}</h4>
-                                            <!--Text-->
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                                        </div>
+                            
+                        
+                        {% for camara in camaras_dict %}
+                            <div class="col-md-4">
+                                <!--Card-->
+                                <div class="card">
+                                    <!--Card image
+                                    <img class="img-fluid" src="{% static "images/transportadora.jpg" %}" alt="Card image cap">-->
+            
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <!--Title-->
+                                        <h2 id="camara-name" class="card-title">{{camara.name}}</h2>
+                                        <br>
+                                        <p>Órgão: {{ camara.organ }}</p>
+                                        <p>Responsável: {{ camara.responsible }}</p>
+                                        <p>Identificador: {{ camara.id }}</p>
+                                        <!--Text-->
+                                        <p class="card-text"></p>
+                                        <a href="{% url 'camara:camara_info' camara.id %}" class="btn btn-primary">Ver Detalhes</a>
                                     </div>
-                                    <!--/.Card-->
-                                </div> 
-                            
-                            
+                                </div>
+                                <!--/.Card-->
+                            </div> 
                         {% endfor %}
+                            
+                        
                         </div>
                     </h2>
                 </div>
