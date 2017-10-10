@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-md-12">
                 
-                <h1>{{camara.name}}</h1>
+                <h1><b>{{camara.name}}</b></h1>
                 {% if not camara_reports %}
                 <span class="error-message">Nenhum report registrado para a câmara</span>
             {% endif %}
@@ -47,9 +47,19 @@
                     <div class="card-body">
                         <center>
                             <h3>Informações</h3>
-                            <p>Nome: {{ camara.name }}</p>
-                            <p>Órgão: {{ camara.organ }}</p>
-                            <p>Responsável: {{ camara.responsible }}</p>
+                            <p><b>Nome:</b> {{ camara.name }}<br>
+                            <b>Órgão:</b> {{ camara.organ }}<br>
+                            <b>Responsável:</b> {{ camara.responsible }}<br>
+                            <b>Status:</b> 
+                            {% with camara_reports|last as last %}
+                                {% if last.is_locked == 1 %}
+                                    Fechada
+                                    {% else %}
+                                    Aberta
+                                {% endif %}
+                            {% endwith %}
+                            </p>
+                            <a href="#" class="btn btn-primary">Relatório Completo</a>
                         </center>
                     </div>
                 </div>
@@ -130,7 +140,7 @@
       ]);
 
       var options = {
-        width: 500, height: 180,
+        width: 500, height: 139,
         redFrom: 0, redTo: 4,
         yellowColor: "#99d6ff", yellowFrom:-4, yellowTo: 0,
         minorTicks: 10,
