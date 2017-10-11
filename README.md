@@ -13,7 +13,7 @@ João Paulo
 
 Lucas Couto
 
-Instruções para Instalação
+Instruções para instalação
 --------------------------
 
 1 - Dependências Necessárias:
@@ -33,7 +33,7 @@ Instruções para Instalação
  $ pip install requests
  ```
 
-2 - Clonar o Repositório:
+2 - Clonar o repositório:
 
 ```
 $ git clone https://github.com/TransportadoraOrgaos/pi2-transport_orgaos.git
@@ -41,7 +41,7 @@ $ cd pi2-transport_orgaos
 $ cd transportadora_orgaos
 ```
 
-3 - Rodar o Servidor
+3 - Rodar o servidor
 
  ```
  $ python manage.py runserver
