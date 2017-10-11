@@ -13,7 +13,7 @@ class CamaraForm(ModelForm):
 		model = Camara
 		fields = ['name', 'responsible', 'organ']
 
-def camara_list(request, template_name='camaras_list.html'):
+def camara_list(request, template_name='page_camaras_list.html'):
 	url = "https://transports-rest-api.herokuapp.com/transports"
 	headers = {'content-type': 'application/json'}
 
@@ -23,7 +23,7 @@ def camara_list(request, template_name='camaras_list.html'):
 	return render(request, template_name, {'camaras_dict':camaras_dict})
 
 
-def camara_cadastro(request, template_name='camaras_cadastro.html'):
+def camara_cadastro(request, template_name='page_camara_cadastro.html'):
 
 	
 	 
@@ -45,7 +45,7 @@ def camara_cadastro(request, template_name='camaras_cadastro.html'):
 			return redirect('camara:listar_camaras')
 	return render(request, template_name, {'form': form})
 
-def camara_info(request, camara_id, template_name='camara_info.html'):
+def camara_info(request, camara_id, template_name='page_camara_info.html'):
 	headers = {
 		'content-type': 'application/json', 
 		'authorization': "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDczMDIxNzAs" 

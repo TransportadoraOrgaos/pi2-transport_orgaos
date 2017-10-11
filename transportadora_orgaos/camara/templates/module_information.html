@@ -1,0 +1,20 @@
+<div class="card card-height">  
+    <div class="card-body">
+        <center>
+            <h3>Informações</h3>
+            <p><b>Nome:</b> {{ camara.name }}</p>
+            <p><b>Órgão:</b> {{ camara.organ }}</p>
+            <p><b>Responsável:</b> {{ camara.responsible }}</p>
+            <p><b>Status:</b> 
+            {% with camara_reports|last as last %}
+                {% if last.is_locked == 1 %}
+                    Fechada
+                    {% else %}
+                    Aberta
+                {% endif %}
+            {% endwith %}
+            </p>
+            <a href="#" class="btn btn-primary">Relatório Completo</a>
+        </center>
+    </div>
+</div>

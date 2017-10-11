@@ -1,0 +1,13 @@
+<div class="card card-height">  
+    <div class="card-body">
+        <center>
+            <h3>Temp. Atual</h3>
+            {% if not camara_reports %}
+                <div id="chart_div_current_temperature" data-current-temperature="0"></div>
+            {% endif %}
+            {% with camara_reports|last as last %}
+                <div id="chart_div_current_temperature" data-current-temperature="{{ last.temperature }}"></div>
+            {% endwith %} 
+        </center>
+    </div>
+</div>
