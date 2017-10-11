@@ -25,7 +25,7 @@ SECRET_KEY = 'uhckpy*nrateqo=nj6bzma_7as+e7_rf_+y$e#n9t%2g_*e6&%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.0.11", "192.168.0.13", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["192.168.0.11", "192.168.0.13", "127.0.0.1"]
 
 
 # Application definition
@@ -79,12 +79,7 @@ WSGI_APPLICATION = 'transportadora_orgaos.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'transorg',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
+
     }
 }
 
@@ -130,5 +125,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
-LOGIN_URL = '/login'
