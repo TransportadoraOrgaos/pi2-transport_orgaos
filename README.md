@@ -16,7 +16,7 @@ Lucas Couto
 Instruções para instalação
 --------------------------
 
-1 - Dependências Necessárias:
+1 - Dependências necessárias:
 
   * git
   * python
