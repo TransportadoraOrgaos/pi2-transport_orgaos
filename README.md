@@ -17,8 +17,13 @@ Instruções para Instalação
 --------------------------
 
 1 - Dependências Necessárias:
+
+  * git
+  * python
+  * django
+
   ```
-  $ sudo apt-get update && sudo apt-get install -y git python3-dev python-django npm
+  $ sudo apt-get update && sudo apt-get install -y git python3-dev python-django
   ```
 
 2 - Clonar o Repositório:
@@ -26,10 +31,11 @@ Instruções para Instalação
 ```
 $ git clone https://github.com/TransportadoraOrgaos/pi2-transport_orgaos.git
 $ cd pi2-transport_orgaos
+$ cd transportadora_orgaos
 ```
 
 3 - Rodar o Servidor
+
  ```
  $ python manage.py runserver
-
  ```
