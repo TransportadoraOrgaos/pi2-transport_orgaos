@@ -25,6 +25,13 @@ Instruções para Instalação
   ```
   $ sudo apt-get update && sudo apt-get install -y git python3-dev python-django
   ```
+2 - Instalar o pacote python necessário:
+
+ * requests
+ 
+ ```
+ $ pip install requests
+ ```
 
 2 - Clonar o Repositório:
 
