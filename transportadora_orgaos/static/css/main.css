@@ -18,6 +18,9 @@ p{
     color: #00bcd4 !important;
 }
 
+.card-height{
+    height: 30.6rem;
+}
 
 
 .navbar-brand{
@@ -41,6 +44,10 @@ p{
       margin-top: 90px !important;
       margin-left: -8px;
     }
+}
+
+.charts{
+    /*height: 40rem;*/
 }
 
 .container{

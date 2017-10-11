@@ -33,24 +33,25 @@
         
         <div class="row">
             <div class="col-md-8">
-                <div class="card temperature-card">  
+                <div class="card card-height">  
                     <div class="card-body">
                         <h3>Variação de temperatura</h3>
-                        <div id="chart_div_temperatures"></div>
+                        <div id="chart_div_temperatures" class="charts"></div>
                     </div>  
                 </div>
             </div>
         
+        
 
             <div class="col-md-4">
-                <div class="card temperature-card">  
+                <div class="card card-height">  
                     <div class="card-body">
                         <center>
                             <h3>Informações</h3>
-                            <p><b>Nome:</b> {{ camara.name }}<br>
-                            <b>Órgão:</b> {{ camara.organ }}<br>
-                            <b>Responsável:</b> {{ camara.responsible }}<br>
-                            <b>Status:</b> 
+                            <p><b>Nome:</b> {{ camara.name }}</p>
+                            <p><b>Órgão:</b> {{ camara.organ }}</p>
+                            <p><b>Responsável:</b> {{ camara.responsible }}</p>
+                            <p><b>Status:</b> 
                             {% with camara_reports|last as last %}
                                 {% if last.is_locked == 1 %}
                                     Fechada
@@ -64,21 +65,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card">  
-                    <div class="card-body">
-                        <center>
-                            <h3>Temperatura Atual</h3>
-                            <div id="chart_div_current_teperature"></div>
-                        </center>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12">
-                <div class="card">  
+            <div class="col-md-4">
+                    <div class="card card-height">  
+                        <div class="card-body">
+                            <center>
+                                <h3>Temp. Atual</h3>
+                                <div id="chart_div_current_teperature"></div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="col-md-8">
+                <div class="card card-height">  
                     <div class="card-body">
                         <center>
                             <h3>Rastreio da caixa</h3>
@@ -89,7 +91,6 @@
             </div>   
         </div>
     </div>
-    
     
 
     
@@ -115,12 +116,21 @@
                     title: 'Temperatura'
                 },
                 //backgroundColor: '#f1f8e9',
-                width: 650,
-                height: 400
+                //width: 650,
+                //height: 400
             };
-        
+
             var chart = new google.visualization.LineChart(document.getElementById('chart_div_temperatures'));
-            chart.draw(data, options);
+            chart.draw(data,options);
+            
+            function resize(){
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div_temperatures'));
+                chart.draw(data, options);
+            }
+
+            window.onload = resize;
+            window.onresize = resize;
+            
     }
     
     google.charts.load('current', {'packages':['gauge']});
@@ -140,7 +150,7 @@
       ]);
 
       var options = {
-        width: 500, height: 139,
+        width: 500, height: 160,
         redFrom: 0, redTo: 4,
         yellowColor: "#99d6ff", yellowFrom:-4, yellowTo: 0,
         minorTicks: 10,
