@@ -69,4 +69,6 @@ def camara_info(request, camara_id, template_name='camara_info.html'):
 		temperaturas.append([i, camara_reports[i]['temperature']])
 		i += 1
 	
+	print(temperaturas)
+	
 	return render(request, template_name, {'camara_reports':camara_reports, 'temperaturas':temperaturas, 'camara':camara})

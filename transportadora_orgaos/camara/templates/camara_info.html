@@ -1,29 +1,23 @@
 {% extends 'base.html' %}
 {% block conteudo %}
 <div id="page-wrapper">
-    
-    <div class="container">
+    <!--<div class="container">
         <div class="row">
-            
-
-            
-
             {% for report in camara_reports %}
             <div class="col-md-4">
-                <!--<h4>Report {{ forloop.counter }}</h4>
+                <h4>Report {{ forloop.counter }}</h4>
                 <p>Latitude: {{ report.latitude }}</p>
                 <p>Longitude: {{ report.longitude }}</p>
                 <p>Data: {{ report.date }}</p>
-                <p>Temperatura: {{ report.temperature }}</p>-->
+                <p>Temperatura: {{ report.temperature }}</p>
             </div> 
             {% endfor %}
         </div>
-    </div>
+    </div>-->
 
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                
                 <h1><b>{{camara.name}}</b></h1>
                 {% if not camara_reports %}
                 <span class="error-message">Nenhum report registrado para a câmara</span>
@@ -36,7 +30,7 @@
                 <div class="card card-height">  
                     <div class="card-body">
                         <h3>Variação de temperatura</h3>
-                        <div id="chart_div_temperatures" class="charts"></div>
+                        <div id="chart_div_temperatures" class="charts" data-temperatures="{{ temperaturas }}"></div>
                     </div>  
                 </div>
             </div>
@@ -73,7 +67,12 @@
                         <div class="card-body">
                             <center>
                                 <h3>Temp. Atual</h3>
-                                <div id="chart_div_current_teperature"></div>
+                                {% if not camara_reports %}
+                                    <div id="chart_div_current_temperature" data-current-temperature="0"></div>
+                                {% endif %}
+                                {% with camara_reports|last as last %}
+                                    <div id="chart_div_current_temperature" data-current-temperature="{{ last.temperature }}"></div>
+                                {% endwith %} 
                             </center>
                         </div>
                     </div>
@@ -90,76 +89,6 @@
                 </div>
             </div>   
         </div>
-    </div>
-    
-
-    
-   
-        
+    </div>        
 </div>
-<script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(drawBasic);
-    var teste = "[[0, 2], [1, -1]]";
-    function drawBasic(){
-            var data = new google.visualization.DataTable();
-            data.addColumn('number', 'X');
-            data.addColumn('number', 'ºC');
-        
-            data.addRows({{temperaturas}});
-        
-            var options = {
-                hAxis: {
-                    title: ''
-                },
-                vAxis: {
-                    title: 'Temperatura'
-                },
-                //backgroundColor: '#f1f8e9',
-                //width: 650,
-                //height: 400
-            };
-
-            var chart = new google.visualization.LineChart(document.getElementById('chart_div_temperatures'));
-            chart.draw(data,options);
-            
-            function resize(){
-                var chart = new google.visualization.LineChart(document.getElementById('chart_div_temperatures'));
-                chart.draw(data, options);
-            }
-
-            window.onload = resize;
-            window.onresize = resize;
-            
-    }
-    
-    google.charts.load('current', {'packages':['gauge']});
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-
-      var data = google.visualization.arrayToDataTable([
-        ['Label', 'Value'],
-        ['',
-        {% if not camara_reports %}
-            0
-        {% endif %}
-        {% with camara_reports|last as last %}
-            {{ last.temperature }}
-        {% endwith %}]
-      ]);
-
-      var options = {
-        width: 500, height: 160,
-        redFrom: 0, redTo: 4,
-        yellowColor: "#99d6ff", yellowFrom:-4, yellowTo: 0,
-        minorTicks: 10,
-        min: -4,
-        max: 4
-      };
-
-      var chart = new google.visualization.Gauge(document.getElementById('chart_div_current_teperature'));     
-      chart.draw(data, options);
-    }        
-</script>
 {% endblock %}
