@@ -11,31 +11,26 @@ import json
 class CamaraForm(ModelForm):
 	class Meta:
 		model = Camara
-		fields = ['name', 'responsible', 'organ']
+		fields = ['name']
 
 def camara_list(request, template_name='page_camaras_list.html'):
-	url = "https://transports-rest-api.herokuapp.com/transports"
+	url = "https://transports-rest-api.herokuapp.com/boxes"
 	headers = {'content-type': 'application/json'}
 
 	camaras = requests.request("GET", url, headers=headers)
-	camaras_dict = camaras.json()['transports']
+	camaras_dict = camaras.json()['boxes']
 	
 	return render(request, template_name, {'camaras_dict':camaras_dict})
 
 
 def camara_cadastro(request, template_name='page_camara_cadastro.html'):
 
-	
-	 
 	form = CamaraForm(request.POST or None)
 	
 	if form.is_valid():
-		responsible = form.cleaned_data['responsible']
-		organ = form.cleaned_data['organ']
-
 		headers = {'content-type': 'application/json'}
-		payload = "{\n\t\"responsible\": \""+ responsible +"\",\n\t\"organ\": \""+ organ +"\"\n}"
-		url = "https://transports-rest-api.herokuapp.com/transport/" + form.cleaned_data['name']
+		payload = ""
+		url = "https://transports-rest-api.herokuapp.com/box/" + form.cleaned_data['name']
 		response = requests.post(url, data=payload, headers=headers)
 
 		if 'error_message' or 'message' in response.json():
@@ -58,9 +53,9 @@ def camara_info(request, camara_id, template_name='page_camara_info.html'):
 	camara_reports = requests.request("GET", url, headers=headers).json()['reports']
 
 	#Recupera as informações da camara_id
-	url = "https://transports-rest-api.herokuapp.com/transports"
-	camaras = requests.request("GET", url, headers=headers)
-	camara = camaras.json()['transports'][int(camara_id)-1]
+	#url = "https://transports-rest-api.herokuapp.com/transports"
+	#camaras = requests.request("GET", url, headers=headers)
+	#camara = camaras.json()['transports'][int(camara_id)-1]
 
 	#Recupera as temperaturas da camara_id para a construção do gráfico
 	temperaturas = []
@@ -71,4 +66,4 @@ def camara_info(request, camara_id, template_name='page_camara_info.html'):
 	
 	print(temperaturas)
 	
-	return render(request, template_name, {'camara_reports':camara_reports, 'temperaturas':temperaturas, 'camara':camara})
+	return render(request, template_name, {'camara_reports':camara_reports, 'temperaturas':temperaturas})
