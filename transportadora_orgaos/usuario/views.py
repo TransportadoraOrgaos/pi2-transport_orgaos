@@ -16,11 +16,16 @@ def cadastro(request, template_name='usuario/cadastro.html'):
 		username = form.cleaned_data['username']
 		password = form.cleaned_data['password']
 		email = form.cleaned_data['email']
+		access_level = form.cleaned_data['access_level']
+
+		import ipdb; ipdb.set_trace()
 
 		headers = {'content-type': 'application/json'}
-		payload = "{\n\t\"username\": \""+ username +"\",\n\t\"password\": \""+ password +"\", \n\t\"email\": \""+ email +"\"\n}"
+		payload = "{\n\t\"username\": \""+ username +"\",\n\t\"password\": \""+ password +"\", \n\t\"email\": \""+ email +"\", \n\t\"access_level\": "+ str(access_level) +"\n}"
 		url = "https://transports-rest-api.herokuapp.com/register"
 		response = requests.post(url, data=payload, headers=headers)
+
+		
 
 		if 'error_message' or 'message' in response.json():
 			response_dict = response.json()
@@ -41,14 +46,19 @@ def do_login(request, template_name='usuario/login.html'):
 		url = "https://transports-rest-api.herokuapp.com/auth"
 		response = requests.post(url, data=payload, headers=headers)
 
-		if 'error_message' in response.json():
+		import ipdb; ipdb.set_trace()
+
+		if 'error_message' or 'message' in response.json():
 			response_dict = response.json()
 			return render(request, template_name, {'form': form, 'response_dict': response_dict})
 		elif 'access_token' in response.json():
-			response_dict = response.json()
+			token = response.json()
 			return redirect('home')
 	return render(request, template_name, {'form': form})
 
 # def do_logout(request):
 # 	logout(request)
 # 	return redirect('/login')
+
+def list(request):
+	return render(request,'usuario/list.html')
