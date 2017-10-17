@@ -18,7 +18,7 @@ def cadastro(request, template_name='usuario/cadastro.html'):
 		email = form.cleaned_data['email']
 		access_level = form.cleaned_data['access_level']
 
-		import ipdb; ipdb.set_trace()
+		# import ipdb; ipdb.set_trace()
 
 		headers = {'content-type': 'application/json'}
 		payload = "{\n\t\"username\": \""+ username +"\",\n\t\"password\": \""+ password +"\", \n\t\"email\": \""+ email +"\", \n\t\"access_level\": "+ str(access_level) +"\n}"
@@ -46,7 +46,7 @@ def do_login(request, template_name='usuario/login.html'):
 		url = "https://transports-rest-api.herokuapp.com/auth"
 		response = requests.post(url, data=payload, headers=headers)
 
-		import ipdb; ipdb.set_trace()
+		# import ipdb; ipdb.set_trace()
 
 		if 'error_message' or 'message' in response.json():
 			response_dict = response.json()
@@ -60,5 +60,11 @@ def do_login(request, template_name='usuario/login.html'):
 # 	logout(request)
 # 	return redirect('/login')
 
-def list(request):
-	return render(request,'usuario/list.html')
+def list(request, template_name='usuario/list.html'):
+	url = "https://transports-rest-api.herokuapp.com/users"
+	headers = {'content-type': 'application/json'}
+
+	users = requests.request("GET", url, headers=headers)
+	users_dict = users.json()['users']
+	
+	return render(request, template_name, {'users_dict':users_dict})
