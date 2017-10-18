@@ -134,16 +134,23 @@
                                         <center>
                                             <h2 id="camara-name" class="card-title">{{camara.id}} - {{camara.name}}</h2>
                                             <!--Text-->
-                                            <p class="card-text"></p>
-                                            <a href="{% url 'camara:camara_info' camara.id %}" class="btn btn-primary">Ver Detalhes</a>
+                                            {% if not camara.transports %}
+                                                <p class="card-text box-available">
+                                                    <i class="fa fa-circle"></i> Disponível
+                                                </p>
+                                                <a href="#" class="btn btn-primary">Iniciar Transporte</a>
+                                            {% else %}
+                                                <p class="card-text box-in-use">
+                                                    <i class="fa fa-circle" aria-hidden="true"></i> Em uso
+                                                </p>
+                                                <a href="{% url 'camara:camara_info' camara.id %}" class="btn btn-primary">Ver Transporte</a>
+                                            {% endif %}
                                         </center>
                                     </div>
                                 </div>
                                 <!--/.Card-->
                             </div> 
                         {% endfor %}
-                            
-                        
                         </div>
                     </h2>
                 </div>

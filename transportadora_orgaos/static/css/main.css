@@ -6,7 +6,19 @@
 html, body {
     max-width: 100%;
     overflow-x: hidden;
-    
+    font-size: 16px;
+}
+
+.card-text{
+    font-size: 16px !important;
+}
+
+.box-in-use{
+    color: red !important;
+}
+
+.box-available{
+    color: green !important;
 }
 
 #page-wrapper{
@@ -70,8 +82,8 @@ p{
     padding: 8px;
 }
 
-.brand-part-1, .fa, h1{
-    color: #00bcd4 !important;
+.brand-part-1, h1{
+    color: #00bcd4;
 }
 
 .fa{
