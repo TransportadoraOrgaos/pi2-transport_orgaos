@@ -5,12 +5,23 @@ from usuario.models import Usuario
 
 class UsuarioModelForm(ModelForm):
 	class Meta:
+		# ADMINISTRADOR = 1
+		# TRASPORTADOR = 2
+		# USUARIO = 3
+		# ACCESS_CHOICES = (
+		# (ADMINISTRADOR, 'Administrador'), 
+		# (TRASPORTADOR, 'Transportador'),
+		# (USUARIO, 'Usuario'),
+		# )
+
 		model = Usuario
-		fields = ['username', 'password', 'email']
+		fields = ['username', 'password', 'email', 'access_level']
 		widgets = {
 			'username': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 50}),
 			'email': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 50}),
 			'password': forms.PasswordInput(attrs={'class': 'form_control', 'maxlength': 50}),
+			'access_level': forms.TextInput(attrs={'class': 'form_control'}),
+			# 'access_level': forms.ChoiceField(widget=forms.RadioSelect(),  choices= ACCESS_CHOICES, required=True),
 		}
 
 class UsuarioLoginForm(ModelForm):

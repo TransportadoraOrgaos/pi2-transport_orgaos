@@ -18,14 +18,13 @@ def cadastro(request, template_name='usuario/cadastro.html'):
 		email = form.cleaned_data['email']
 		access_level = form.cleaned_data['access_level']
 
-		# import ipdb; ipdb.set_trace()
+		import ipdb; ipdb.set_trace()
 
 		headers = {'content-type': 'application/json'}
-		payload = "{\n\t\"username\": \""+ username +"\",\n\t\"password\": \""+ password +"\", \n\t\"email\": \""+ email +"\", \n\t\"access_level\": "+ str(access_level) +"\n}"
+		payload = "{\n\t\"username\": \""+ username +"\",\n\t\"password\": \""+ password +"\", \n\t\"email\": \""+ email +"\", \n\t\"access_level\": \""+ access_level +"\"\n}"
 		url = "https://transports-rest-api.herokuapp.com/register"
 		response = requests.post(url, data=payload, headers=headers)
 
-		
 
 		if 'error_message' or 'message' in response.json():
 			response_dict = response.json()
