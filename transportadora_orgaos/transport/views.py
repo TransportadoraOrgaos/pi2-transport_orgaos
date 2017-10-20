@@ -10,10 +10,11 @@ import json
 # Create your views here.
 class TransportForm(ModelForm):
     class Meta():
+        
         model = Transport
         fields = ['organ', 'responsible', 'box_id']
 
-def transport_cadastro(request, template_name='page_transport_cadastro.html'):
+def transport_cadastro(request, box_id, template_name='page_transport_cadastro.html'):
     
     form = TransportForm(request.POST or None)
     if form.is_valid():
@@ -30,3 +31,13 @@ def transport_cadastro(request, template_name='page_transport_cadastro.html'):
 			return redirect('transport:listar_camaras')
     else:
         return render(request, template_name, {'form' : form})
+
+def transport_list(request, template_name='page_transport_list.html'):   
+
+    url = "https://transports-rest-api.herokuapp.com/transports"
+    headers = {'content-type': 'application/json'}
+    transports = requests.request("GET", url, headers=headers)
+
+    transports_dict = transports.json()['transports']
+
+    return render(request, template_name, {'transports_dict' : transports_dict})
