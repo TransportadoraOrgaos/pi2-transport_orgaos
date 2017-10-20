@@ -40,7 +40,7 @@ def camara_cadastro(request, template_name='page_camara_cadastro.html'):
 			return redirect('camara:listar_camaras')
 	return render(request, template_name, {'form': form})
 
-def camara_info(request, camara_id, template_name='page_camara_info.html'):
+def camara_info(request, camara_id, template_name='page_reports.html'):
 	headers = {
 		'content-type': 'application/json', 
 		'authorization': "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDczMDIxNzAs" 
