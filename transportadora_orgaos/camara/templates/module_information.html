@@ -3,8 +3,8 @@
         <center>
             <h3>Informações</h3>
             <p><b>Nome:</b> {{ camara.name }}</p>
-            <p><b>Órgão:</b> {{ camara.organ }}</p>
-            <p><b>Responsável:</b> {{ camara.responsible }}</p>
+            <p><b>Órgão:</b> {{ transport.organ }}</p>
+            <p><b>Responsável:</b> {{ transport.responsible }}</p>
             <p><b>Status:</b> 
             {% with camara_reports|last as last %}
                 {% if last.is_locked == 1 %}
