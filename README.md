@@ -13,7 +13,7 @@ João Paulo
 
 Lucas Couto
 
-Instruções para instalação - Ubuntu
+Instruções para instalação
 --------------------------
 
 1 - Instalação do pip:
