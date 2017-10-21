@@ -16,20 +16,27 @@ Lucas Couto
 Instruções para instalação
 --------------------------
 
-1 - Dependências necessárias:
+1 - Instalação do pip:
 
-  * git
-  * python
-  * django
+  1.1 - Ubuntu (Linux)
 
   ```
-  $ sudo apt-get update && sudo apt-get install -y git python3-dev python-django
+  $ sudo apt-get update && sudo apt-get install -y python-pip
   ```
-2 - Instalar o pacote python necessário:
+  
+  1.2 - macOS
+  
+  ```
+  $ sudo easy_install pip
+  ```
+  
+2 - Instalar o pacotes python necessário:
 
+ * Django
  * requests
  
  ```
+ $ pip install Django
  $ pip install requests
  ```
 
