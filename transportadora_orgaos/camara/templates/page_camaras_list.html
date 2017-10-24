@@ -1,4 +1,55 @@
 {% extends 'base.html' %}
-
+{% block conteudo %}
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Câmaras Cadastradas</h2>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="painel-body">
+                {% if not camaras_dict %}
+                    <span class="error-message"> Nenhuma câmara cadastrada </span>
+                {% endif %}
+                <div class="row">
+                    
+                
+                {% for camara in camaras_dict %}
+                    <div class="col-md-4">
+                        <!--Card-->
+                        <div class="card">
+                            <!--Card image-->
+            
+                            <!--Card content-->
+                            <div class="card-body">
+                                <!--Title-->
+                                <center>
+                                    <h2 id="camara-name" class="card-title">{{camara.id}} - {{camara.name}}</h2>
+                                    <!--Text-->
+                                    {% if not camara.transports %}
+                                        <p class="card-text box-available">
+                                            <i class="fa fa-circle"></i> Disponível
+                                        </p>
+                                        <a href="{% url 'transport:transport_cadastro' camara.id %}" class="btn btn-success">Iniciar Transporte</a>
+                                    {% else %}
+                                        <p class="card-text box-in-use">
+                                            <i class="fa fa-circle" aria-hidden="true"></i> Em uso
+                                        </p>
+                                        <a href="{% url 'transport:transport_info' camara.id %}" class="btn btn-primary">Ver Transporte</a>
+                                    {% endif %}
+                                </center>
+                            </div>
+                        </div>
+                        <!--/.Card-->
+                    </div> 
+                {% endfor %}
+                </div>
+            </h2>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
 
