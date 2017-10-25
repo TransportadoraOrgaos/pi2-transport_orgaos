@@ -19,8 +19,6 @@
                             <div class="card-body">
                                 <center>
                                     <h2 id="camara-name" class="card-title">{{camara.id}} - {{camara.name}}</h2>
-
-
                                     {% if not camara.transports %}
                                         <!--  DISPONIVEL -->
                                         <p class="card-text box-available">
@@ -50,28 +48,14 @@
                                                         <i class="fa fa-circle" aria-hidden="true"></i> Em uso
                                                     </p>
                                                     <a href="{% url 'transport:transport_info' camara.id %}" class="btn btn-primary">Ver Transporte</a>
+                                                    <br><br>
+                                                    <p>Responsável: {{ last_transport.responsible }}</p>
+                                                    <p>Órgão: {{ last_transport.organ }}</p>
                                                     {% endif %}
                                                 {% endwith %}
                                             {% endif %}
                                         {% endwith %}
                                     {% endif %}
-
-
-                                        
-                                                
-                                            
-                                            
-                                        
-
-                                       
-
-                                        
-
-
-
-
-                                        
-                                    
                                 </center>
                             </div>
                         </div>
