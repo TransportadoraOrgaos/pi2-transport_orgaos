@@ -19,17 +19,59 @@
                             <div class="card-body">
                                 <center>
                                     <h2 id="camara-name" class="card-title">{{camara.id}} - {{camara.name}}</h2>
+
+
                                     {% if not camara.transports %}
+                                        <!--  DISPONIVEL -->
                                         <p class="card-text box-available">
                                             <i class="fa fa-circle"></i> Disponível
                                         </p>
                                         <a href="{% url 'transport:transport_cadastro' camara.id %}" class="btn btn-success">Iniciar Transporte</a>
                                     {% else %}
-                                        <p class="card-text box-in-use">
-                                            <i class="fa fa-circle" aria-hidden="true"></i> Em uso
-                                        </p>
-                                        <a href="{% url 'transport:transport_info' camara.id %}" class="btn btn-primary">Ver Transporte</a>
+                                        {% with camara.transports|last as last_transport %}
+                                            {% if not last_transport.reports %}
+                                            <!--  AGUARDANDO CONEXAO -->
+                                            <p class="card-text box-waiting">
+                                                <i class="fa fa-circle" aria-hidden="true"></i> Aguardando conexão...
+                                            </p>
+                                            <p>Responsável: {{ last_transport.responsible }}</p>
+                                            <p>Órgão: {{ last_transport.organ }}</p>
+                                            {% else %}
+                                                {% with last_transport.reports|last as last_report %}
+                                                    {% if last_report.enable == 0 %}
+                                                    <!--  DISPONIVEL -->
+                                                    <p class="card-text box-available">
+                                                        <i class="fa fa-circle"></i> Disponível
+                                                    </p>
+                                                    <a href="{% url 'transport:transport_cadastro' camara.id %}" class="btn btn-success">Iniciar Transporte</a>
+                                                    {%  elif last_report.enable == 1 %}
+                                                    <!-- EM USO -->
+                                                    <p class="card-text box-in-use">
+                                                        <i class="fa fa-circle" aria-hidden="true"></i> Em uso
+                                                    </p>
+                                                    <a href="{% url 'transport:transport_info' camara.id %}" class="btn btn-primary">Ver Transporte</a>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% endif %}
+                                        {% endwith %}
                                     {% endif %}
+
+
+                                        
+                                                
+                                            
+                                            
+                                        
+
+                                       
+
+                                        
+
+
+
+
+                                        
+                                    
                                 </center>
                             </div>
                         </div>

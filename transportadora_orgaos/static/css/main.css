@@ -21,11 +21,15 @@ html, body {
 }
 
 .box-in-use{
-    color: red !important;
+    color: #cc0000 !important;
 }
 
 .box-available{
     color: green !important;
+}
+
+.box-waiting{
+    color: #e6ac00 !important;
 }
 
 #page-wrapper{

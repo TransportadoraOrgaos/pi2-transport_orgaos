@@ -3,7 +3,6 @@
 from django.forms import ModelForm
 from .models import *
 from django.shortcuts import render, redirect
-#from django.utils import simplejson
 import requests
 import json
 
@@ -40,13 +39,8 @@ def camara_cadastro(request, template_name='page_camara_cadastro.html'):
 			return redirect('camara:listar_camaras')
 	return render(request, template_name, {'form': form})
 
-def camara_info(request, camara_id, template_name='page_reports.html'):
-	headers = {
-		'content-type': 'application/json', 
-		'authorization': "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDczMDIxNzAs" 
-		+"Im5iZiI6MTUwNzMwMjE3MCwiaWRlbnRpdHkiOjEsImV4cCI6MTUwNzMwMjQ3MH0.8e5Dgf79L4bIUGHdwX"
-		+"--NgkSWzCz96UFuqvBKZ-jk3g"
-    }
+def camara_info(request, camara_id, template_name='camaras_list.html'):
+	headers = {'content-type': 'application/json'}
 
 	#Recupera todos os reports da camara_id
 	url = "https://transports-rest-api.herokuapp.com/report/" + str(camara_id)
