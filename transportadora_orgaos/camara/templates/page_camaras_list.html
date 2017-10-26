@@ -47,7 +47,7 @@
                                                     <p class="card-text box-in-use">
                                                         <i class="fa fa-circle" aria-hidden="true"></i> Em uso
                                                     </p>
-                                                    <a href="{% url 'transport:transport_info' last_transport.id camara_id %}" class="btn btn-primary">Ver Transporte</a>
+                                                    <a href="{% url 'transport:transport_info' last_transport.id camara.name %}" class="btn btn-primary">Ver Transporte</a>
                                                     <br><br>
                                                     <p>Responsável: {{ last_transport.responsible }}</p>
                                                     <p>Órgão: {{ last_transport.organ }}</p>

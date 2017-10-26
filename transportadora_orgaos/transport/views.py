@@ -38,7 +38,7 @@ def transport_cadastro(request, box_id, template_name='page_transport_cadastro.h
 
 
 
-def transport_info(request, transport_id, template_name="page_reports.html"):
+def transport_info(request, transport_id, camara_name, template_name="page_reports.html"):
 
     #RECUPERAR REPORTS DO TRANSPORT_ID
     url = "https://transports-rest-api.herokuapp.com/report/" + transport_id
@@ -63,4 +63,4 @@ def transport_info(request, transport_id, template_name="page_reports.html"):
 
     #RECUPERAR DADOS DO BOX_ID
     
-    return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas})
+    return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas, 'camara_name':camara_name})

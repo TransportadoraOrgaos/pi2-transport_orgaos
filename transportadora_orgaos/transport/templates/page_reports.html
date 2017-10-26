@@ -1,27 +1,14 @@
 {% extends 'base.html' %}
 {% block conteudo %}
 <div id="page-wrapper">
-    <!--<div class="container">
-        <div class="row">
-            {% for report in camara_reports %}
-            <div class="col-md-4">
-                <h4>Report {{ forloop.counter }}</h4>
-                <p>Latitude: {{ report.latitude }}</p>
-                <p>Longitude: {{ report.longitude }}</p>
-                <p>Data: {{ report.date }}</p>
-                <p>Temperatura: {{ report.temperature }}</p>
-            </div> 
-            {% endfor %}
-        </div>
-    </div>-->
     <div class="container">
 
         <div class="row">
             <div class="col-md-12">
-                <h1><b>{{camara.name}}</b></h1>
+                <h1><b>{{camara_name}}</b></h1>
             </div>
         </div>
-        
+
         <div class="row">
             <!-- renderiza o gráfico de temperaturas -->
             <div class="col-md-8">
@@ -43,6 +30,7 @@
                {% include "module_google_maps.html" %}
             </div>   
         </div>
+        
     </div>        
 </div>
 {% endblock %}
