@@ -37,7 +37,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
 										<label>Nível de Acesso: </label>
-										{{ form.access_level }}
+										{% for choice in form.access_level %}
+									    <div>
+									        {{ choice }}
+									    </div>
+									{% endfor %}
 								    </div>
                                 </div>
                                 	<span class="error-message">{{ response_dict.error_message }}</span>
