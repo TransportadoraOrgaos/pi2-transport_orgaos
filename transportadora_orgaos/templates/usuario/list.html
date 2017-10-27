@@ -13,18 +13,20 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped" style="font-size: 13px">
+                                <table class="table table-striped" size="14">
                                     <thead>
                                         <tr>
-                                            <th>Nome</th>
-                                            <th>Email</th>
+                                            <th style="font-size: 15px">Nome</th>
+                                            <th style="font-size: 15px">Email</th>
+                                            <th style="font-size: 15px">Apagar?</th>
                                         </tr>
                                     </thead>
                         			{% for users in users_dict %}
                                     <tbody>
                                         <tr>
-                                            <td>{{users.username}}</td>
-                                            <td>{{users.email}}</td>
+                                            <td style="font-size: 13px">{{users.username}}</td>
+                                            <td style="font-size: 13px">{{users.email}}</td>
+                                            <td style="font-size: 13px"><button value="deletar" onclick="confirma()" style="background-color: #FA8072">X</button> </td>
                                         </tr>
                                     </tbody>
                    					{% endfor %}
