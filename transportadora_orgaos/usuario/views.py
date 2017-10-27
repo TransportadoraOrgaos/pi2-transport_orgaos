@@ -69,10 +69,13 @@ def do_logout(request):
 	return redirect('usuario:login')
 
 def list(request, template_name='usuario/list.html'):
-	url = "https://transports-rest-api.herokuapp.com/users"
-	headers = {'content-type': 'application/json'}
+	if 'token' in request.session:
+		url = "https://transports-rest-api.herokuapp.com/users"
+		headers = {'content-type': 'application/json'}
 
-	users = requests.request("GET", url, headers=headers)
-	users_dict = users.json()['users']
-	
-	return render(request, template_name, {'users_dict':users_dict})
+		users = requests.request("GET", url, headers=headers)
+		users_dict = users.json()['users']
+		
+		return render(request, template_name, {'users_dict':users_dict})
+	else:
+		return redirect('usuario:login')
