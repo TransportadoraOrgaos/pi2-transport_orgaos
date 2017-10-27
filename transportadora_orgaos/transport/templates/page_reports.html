@@ -3,34 +3,51 @@
 <div id="page-wrapper">
     <div class="container">
 
-        <div class="row">
-            <div class="col-md-12">
-                <h1><b>{{camara_name}}</b></h1>
-            </div>
-        </div>
+        {% with transport_reports|last as last_report  %}
 
-        <div class="row">
-            <!-- renderiza o gráfico de temperaturas -->
-            <div class="col-md-8">
-                {% include "modules_report/module_temperatures.html" %}
-            </div>
-            <!-- renderiza o card de info da câmara -->
-            <div class="col-md-4">
-                {% include 'modules_report/module_information.html' %}
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- renderiza o gráfico da temperatura atual --> 
-            <div class="col-md-4">
-                {% include "modules_report/module_current_temperature.html" %}
-            </div>
-            <!-- renderiza o mapa do google maps -->
-            <div class="col-md-8">
-               {% include "modules_report/module_google_maps.html" %}
-            </div>   
-        </div>
+        {% if last_report.enable == 0 %}
         
+            <div class="row">
+                <div class="col-md-12">
+                    <br><div class="alert alert-danger">
+                        <strong>O transporte atual foi finalizado</strong>
+                        <a href="{% url 'camara:listar_camaras' %}" class="btn btn-primary">Voltar</a>
+                    </div>
+                </div>
+            </div>
+
+        
+        {% else %}
+            <div class="row">
+                <div class="col-md-12">
+                    <h1><b>{{camara_name}}</b></h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- renderiza o gráfico de temperaturas -->
+                <div class="col-md-8">
+                    {% include "modules_report/module_temperatures.html" %}
+                </div>
+                <!-- renderiza o card de info da câmara -->
+                <div class="col-md-4">
+                    {% include 'modules_report/module_information.html' %}
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- renderiza o gráfico da temperatura atual --> 
+                <div class="col-md-4">
+                    {% include "modules_report/module_current_temperature.html" %}
+                </div>
+                <!-- renderiza o mapa do google maps -->
+                <div class="col-md-8">
+                {% include "modules_report/module_google_maps.html" %}
+                </div>   
+            </div>
+        {% endif %}
+        {% endwith %}
     </div>        
 </div>
+    
 {% endblock %}
