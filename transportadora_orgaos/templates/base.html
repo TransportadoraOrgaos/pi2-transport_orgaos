@@ -66,6 +66,13 @@
                             <li>
                                 <a href='{% url "camara:camaras_cadastro" %}'><i class="fa fa-archive fa-2x fa-fw"></i> <span class="text-sidebar">Cadastro de Câmaras</span></a>
                             </li>
+                            <li>
+                                <a href='#'><i class="fa fa-file-pdf-o fa-2x fa-fw"></i> <span class="text-sidebar">Gerar Relatórios</span></a>
+                                <ul>
+                                    <li><a href="#">Gerar Relatórios Completo de Todas as Câmaras</a></li>
+                                    <li><a href="{% url 'camara:listar_camaras_relatorios' %}">Gerar Relatórios De Uma Câmara Específica</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
