@@ -42,19 +42,30 @@ def do_login(request, template_name='usuario/login.html'):
 		url = "https://transports-rest-api.herokuapp.com/auth"
 		response = requests.post(url, data=payload, headers=headers)
 
-		# import ipdb; ipdb.set_trace()
+		import ipdb; ipdb.set_trace()
 
-		if 'error_message' or 'message' in response.json():
+		if 'error_message' in response.json():
 			response_dict = response.json()
 			return render(request, template_name, {'form': form, 'response_dict': response_dict})
 		elif 'access_token' in response.json():
 			token = response.json()
+			request.session['token'] = token
 			return redirect('home')
 	return render(request, template_name, {'form': form})
 
-# def do_logout(request):
-# 	logout(request)
-# 	return redirect('/login')
+def formView(request):
+	if request.session.has_key('token'):
+		token = request.session['token']
+		return render(request, 'home', {"token" : token})
+	else:
+		return render(request, 'usuario/login.html', {})
+
+def do_logout(request):
+	try:
+		del request.session['token']
+	except:
+		pass
+	return redirect('/login')
 
 def list(request, template_name='usuario/list.html'):
 	url = "https://transports-rest-api.herokuapp.com/users"

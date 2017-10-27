@@ -51,6 +51,8 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
 ROOT_URLCONF = 'transportadora_orgaos.urls'
 
 TEMPLATES = [
@@ -79,7 +81,6 @@ WSGI_APPLICATION = 'transportadora_orgaos.wsgi.application'
 
 DATABASES = {
     'default': {
-
     }
 }
 
