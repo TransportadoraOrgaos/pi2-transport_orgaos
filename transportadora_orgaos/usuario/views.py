@@ -45,8 +45,6 @@ def do_login(request, template_name='usuario/login.html'):
 		url = "https://transports-rest-api.herokuapp.com/auth"
 		response = requests.post(url, data=payload, headers=headers)
 
-		import ipdb; ipdb.set_trace()
-
 		if 'error_message' in response.json():
 			response_dict = response.json()
 			return render(request, template_name, {'form': form, 'response_dict': response_dict})
