@@ -3,6 +3,7 @@
 from django.forms import ModelForm
 from .models import *
 from django.shortcuts import render, redirect
+from django.conf import settings
 import requests
 
 
@@ -11,15 +12,19 @@ class TransportForm(ModelForm):
         model = Transport
         fields = ['organ', 'responsible']
         
-def transport_cadastro(request, box_id, template_name='page_transport_cadastro.html'):
+def transport_cadastro(request, box_id, camara_name, template_name='page_transport_cadastro.html'):
     form = TransportForm(request.POST or None)
 
-    if form.is_valid():
-        transport_id = 1
-        transport_id+=1
+    headers = {'content-type': 'application/json'}
+    url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
 
-        headers = {'content-type': 'application/json'}
-        url = "https://transports-rest-api.herokuapp.com/transport/"+str(transport_id)
+    camara_info = requests.request("GET", url, headers=headers).json()
+
+    if form.is_valid():
+        
+        settings.TRANSPORT_ID += 1
+
+        url = "https://transports-rest-api.herokuapp.com/transport/" + str(settings.TRANSPORT_ID)
 
         organ = form.cleaned_data['organ']
         responsible = form.cleaned_data['responsible']
@@ -34,7 +39,7 @@ def transport_cadastro(request, box_id, template_name='page_transport_cadastro.h
             return render(request, template_name, {'form': form, 'response_dict': response_dict})
         else:
             return redirect('camara:listar_camaras')
-    return render(request, template_name, {'form' : form})
+    return render(request, template_name, {'form' : form, 'camara_info' : camara_info})
 
 
 
@@ -61,6 +66,5 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
 
     transport = requests.request("GET", url, headers=headers).json()
 
-    #RECUPERAR DADOS DO BOX_ID
     
     return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas, 'camara_name':camara_name})

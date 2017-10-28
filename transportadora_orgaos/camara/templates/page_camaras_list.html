@@ -24,7 +24,7 @@
                                         <p class="card-text box-available">
                                             <i class="fa fa-circle"></i> Disponível
                                         </p>
-                                        <a href="{% url 'transport:transport_cadastro' camara.id %}" class="btn btn-success">Iniciar Transporte</a>
+                                        <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-success">Iniciar Transporte</a>
                                     {% else %}
                                         {% with camara.transports|last as last_transport %}
                                             {% if not last_transport.reports %}
@@ -41,7 +41,7 @@
                                                     <p class="card-text box-available">
                                                         <i class="fa fa-circle"></i> Disponível
                                                     </p>
-                                                    <a href="{% url 'transport:transport_cadastro' camara.id %}" class="btn btn-success">Iniciar Transporte</a>
+                                                    <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-success">Iniciar Transporte</a>
                                                     {%  elif last_report.enable == 1 %}
                                                     <!-- EM USO -->
                                                     <p class="card-text box-in-use">

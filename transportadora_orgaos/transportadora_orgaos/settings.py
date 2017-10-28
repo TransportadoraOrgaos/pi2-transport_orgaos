@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["192.168.0.11", "192.168.0.13", "127.0.0.1", "localhost"]
 
+TRANSPORT_ID = 1
+
 
 # Application definition
 
@@ -81,6 +83,12 @@ WSGI_APPLICATION = 'transportadora_orgaos.wsgi.application'
 DATABASES = {
     'default': {
 
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
 
