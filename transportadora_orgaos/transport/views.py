@@ -33,11 +33,11 @@ def transport_cadastro(request, box_id, camara_name, template_name='page_transpo
 
         response = requests.request("POST", url, data=payload, headers=headers)
 
-        if 'error_message' or 'message' in response.json():
+        if 'error_message' in response.json():
             response_dict = response.json()
             return render(request, template_name, {'form': form, 'response_dict': response_dict})
         else:
-            return render(request, 'camara:page_camaras_list')
+            return redirect("camara:listar_camaras")
     return render(request, template_name, {'form' : form, 'camara_info' : camara_info})
 
 

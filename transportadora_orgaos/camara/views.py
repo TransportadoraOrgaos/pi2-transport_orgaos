@@ -24,12 +24,13 @@ def camara_cadastro(request, template_name='page_camara_cadastro.html'):
 	form = CamaraForm(request.POST or None)
 	
 	if form.is_valid():
+		
 		headers = {'content-type': 'application/json'}
 		payload = ""
 		url = "https://transports-rest-api.herokuapp.com/box/" + form.cleaned_data['name']
 		response = requests.post(url, data=payload, headers=headers)
 
-		if 'error_message' or 'message' in response.json():
+		if 'error_message' in response.json():
 			response_dict = response.json()
 			return render(request, template_name, {'form': form, 'response_dict': response_dict})
 		else:
