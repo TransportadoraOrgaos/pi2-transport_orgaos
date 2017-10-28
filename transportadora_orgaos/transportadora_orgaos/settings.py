@@ -27,8 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["192.168.0.11", "192.168.0.13", "127.0.0.1", "localhost"]
 
-TRANSPORT_ID = 1
-
 
 # Application definition
 

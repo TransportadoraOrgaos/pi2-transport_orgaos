@@ -22,9 +22,8 @@ def transport_cadastro(request, box_id, camara_name, template_name='page_transpo
 
     if form.is_valid():
         
-        settings.TRANSPORT_ID += 1
 
-        url = "https://transports-rest-api.herokuapp.com/transport/" + str(settings.TRANSPORT_ID)
+        url = "https://transports-rest-api.herokuapp.com/createtransport"
 
         organ = form.cleaned_data['organ']
         responsible = form.cleaned_data['responsible']
@@ -38,7 +37,7 @@ def transport_cadastro(request, box_id, camara_name, template_name='page_transpo
             response_dict = response.json()
             return render(request, template_name, {'form': form, 'response_dict': response_dict})
         else:
-            return redirect('camara:listar_camaras')
+            return render(request, 'camara:page_camaras_list')
     return render(request, template_name, {'form' : form, 'camara_info' : camara_info})
 
 
