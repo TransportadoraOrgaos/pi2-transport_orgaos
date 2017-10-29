@@ -25,7 +25,10 @@
                                             <i class="fa fa-circle"></i> Disponível
                                         </p>
                                         <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-success btn-camara-card">Iniciar Transporte</a>
-                                        <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-danger btn-camara-card">Deletar câmara do sistema</a>
+                                        <button type="button" class="btn btn-danger btn-camara-card" data-toggle="modal" data-target="#myModal">Deletar câmara do sistema</button>
+                                        
+                                        {% include "modals/delete_camara.html" %}
+
                                     {% else %}
                                         {% with camara.transports|last as last_transport %}
                                             {% if not last_transport.reports %}
@@ -43,13 +46,16 @@
                                                         <i class="fa fa-circle"></i> Disponível
                                                     </p>
                                                     <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-success btn-camara-card">Iniciar Transporte</a>
-                                                    <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-danger btn-camara-card">Deletar câmara do sistema</a>
+                                                    <button type="button" class="btn btn-danger btn-camara-card" data-toggle="modal" data-target="#myModal">Deletar câmara do sistema</button>
+
+                                                    {% include "modals/delete_camara.html" %}
+
                                                     {%  elif last_report.enable == 1 %}
                                                     <!-- EM USO -->
                                                     <p class="card-text box-in-use">
                                                         <i class="fa fa-circle" aria-hidden="true"></i> Em uso
                                                     </p>
-                                                    <a href="{% url 'transport:transport_info' last_transport.id camara.name %}" class="btn btn-primary">Ver Transporte</a>
+                                                    <a href="{% url 'transport:transport_info' last_transport.id camara.name %}" class="btn btn-primary btn-camara-card">Ver Transporte</a>
                                                     <br><br>
                                                     <p>Responsável: {{ last_transport.responsible }}</p>
                                                     <p>Órgão: {{ last_transport.organ }}</p>

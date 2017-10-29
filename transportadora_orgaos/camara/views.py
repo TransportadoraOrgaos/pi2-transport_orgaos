@@ -36,3 +36,18 @@ def camara_cadastro(request, template_name='page_camara_cadastro.html'):
 		else:
 			return redirect('camara:listar_camaras')
 	return render(request, template_name, {'form': form})
+
+def camara_delete(request, camara_name, template_name="page_camaras_list.html"):
+	
+	payload = ""
+	headers = {'content-type': 'application/json'}
+
+	#Deletar câmara específica
+	url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
+	response = requests.request("DELETE", url, data=payload, headers=headers)
+
+	#Retornar todas as câmaras após a deleção da câmara específica
+	url = "https://transports-rest-api.herokuapp.com/boxes"
+	camaras_dict = requests.request("GET", url, headers=headers).json()['boxes']
+
+	return render(request, template_name, {'camaras_dict':camaras_dict})
