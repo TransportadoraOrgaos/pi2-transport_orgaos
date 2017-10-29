@@ -92,7 +92,7 @@ p{
 }
 
 .brand-part-1, h1{
-    color: #00bcd4;
+    color: #00bcd4 !important;
 }
 
 .fa{
@@ -120,4 +120,14 @@ p{
 
 .btn-camara-card{
     width: 70%;
+}
+
+.title-modules-report{
+    background: #ff9701;
+    color: white !important;
+    margin-top: -25px;
+    margin-bottom: 30px !important;
+    margin-left: -25px;
+    margin-right: -25px;
+    padding: 15px;
 }
