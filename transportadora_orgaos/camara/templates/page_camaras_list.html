@@ -36,8 +36,8 @@
                                             <p class="card-text box-waiting">
                                                 <i class="fa fa-circle" aria-hidden="true"></i> Aguardando conexão...
                                             </p>
-                                            <p>Responsável: {{ last_transport.responsible }}</p>
-                                            <p>Órgão: {{ last_transport.organ }}</p>
+                                            <p><b>Responsável:</b> {{ last_transport.responsible }}</p>
+                                            <p><b>Órgão:</b> {{ last_transport.organ }}</p>
                                             {% else %}
                                                 {% with last_transport.reports|last as last_report %}
                                                     {% if last_report.enable == 0 %}
@@ -57,8 +57,8 @@
                                                     </p>
                                                     <a href="{% url 'transport:transport_info' last_transport.id camara.name %}" class="btn btn-primary btn-camara-card">Ver Transporte</a>
                                                     <br><br>
-                                                    <p>Responsável: {{ last_transport.responsible }}</p>
-                                                    <p>Órgão: {{ last_transport.organ }}</p>
+                                                    <p><b>Responsável:</b> {{ last_transport.responsible }}</p>
+                                                    <p><b>Órgão:</b> {{ last_transport.organ }}</p>
                                                     {% endif %}
                                                 {% endwith %}
                                             {% endif %}
