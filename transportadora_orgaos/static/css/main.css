@@ -45,8 +45,8 @@ p{
     height: 30.6rem;
 }
 
-.card-height-box{
-    height: 27.6rem;
+.card-height-camara{
+    height: 30rem;
 }
 
 
@@ -116,4 +116,8 @@ p{
 
 #camara-name{
     font-weight: 500;
+}
+
+.btn-camara-card{
+    width: 70%;
 }

@@ -15,7 +15,7 @@
                 <div class="row">
                 {% for camara in camaras_dict %}
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="card card-height-camara">
                             <div class="card-body">
                                 <center>
                                     <h2 id="camara-name" class="card-title">{{camara.id}} - {{camara.name}}</h2>
@@ -24,7 +24,8 @@
                                         <p class="card-text box-available">
                                             <i class="fa fa-circle"></i> Disponível
                                         </p>
-                                        <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-success">Iniciar Transporte</a>
+                                        <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-success btn-camara-card">Iniciar Transporte</a>
+                                        <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-danger btn-camara-card">Deletar câmara do sistema</a>
                                     {% else %}
                                         {% with camara.transports|last as last_transport %}
                                             {% if not last_transport.reports %}
@@ -41,7 +42,8 @@
                                                     <p class="card-text box-available">
                                                         <i class="fa fa-circle"></i> Disponível
                                                     </p>
-                                                    <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-success">Iniciar Transporte</a>
+                                                    <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-success btn-camara-card">Iniciar Transporte</a>
+                                                    <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-danger btn-camara-card">Deletar câmara do sistema</a>
                                                     {%  elif last_report.enable == 1 %}
                                                     <!-- EM USO -->
                                                     <p class="card-text box-in-use">
