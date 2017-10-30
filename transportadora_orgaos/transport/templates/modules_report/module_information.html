@@ -1,16 +1,16 @@
 <div class="card card-height">  
     <div class="card-body">
         <center>
-            <h3 class="title-modules-report">Informações</h3>
+            <h3 class="title-modules-report"><strong>Informações</strong> <i class="fa fa-info-circle fa-module-report"></i></h3> 
             <p><b>Nome:</b> {{ camara_name }}</p>
             <p><b>Órgão:</b> {{ transport.organ }}</p>
             <p><b>Responsável:</b> {{ transport.responsible }}</p>
             <p><b>Status:</b> 
             {% with transport_reports|last as last %}
                 {% if last.is_locked == 1 %}
-                    Fechada
+                    Fechada <i class="fa fa-circle fa-module-report text-danger"></i>
                     {% else %}
-                    Aberta
+                    Aberta <i class="fa fa-circle fa-module-report text-danger"></i>
                 {% endif %}
             {% endwith %}
             </p>

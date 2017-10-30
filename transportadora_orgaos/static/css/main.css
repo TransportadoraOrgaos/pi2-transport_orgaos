@@ -59,8 +59,8 @@ p{
 
 .text-sidebar{
     /*font-family: 'Montserrat', sans-serif;*/
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 600;
 }
 
 @media (min-width: 768px) {
@@ -91,16 +91,16 @@ p{
     padding: 8px;
 }
 
-.brand-part-1, h1{
-    color: #77c0a8 !important;;
+.brand-part-1{
+    color: #32936F !important;
 }
 
-.fa{
+.fa-side-bar{
     vertical-align: middle;
 }
 
-.fa:not(.fa-circle){
-    color: #77c0a8;
+.fa:not(.fa-circle):not(.fa-module-report){
+    color: #32936F;
 }
 
 .brand-part-2, .text-sidebar, h1, h2, h3, h4{
@@ -127,7 +127,7 @@ p{
 }
 
 .title-modules-report{
-    background: #77c0a8;
+    background: #32936F;
     color: white !important;
     margin-top: -25px;
     margin-bottom: 30px !important;

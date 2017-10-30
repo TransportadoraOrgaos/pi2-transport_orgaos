@@ -20,7 +20,7 @@
         {% else %}
             <div class="row">
                 <div class="col-md-12">
-                    <h1><b>{{camara_name}}</b></h1>
+                    <h2><strong>{{camara_name}}</strong></h2>
                 </div>
             </div>
 
@@ -37,11 +37,11 @@
 
             <div class="row">
                 <!-- renderiza o gráfico da temperatura atual --> 
-                <div class="col-md-4">
+                <div class="col-md-5">
                     {% include "modules_report/module_current_temperature.html" %}
                 </div>
                 <!-- renderiza o mapa do google maps -->
-                <div class="col-md-8">
+                <div class="col-md-7">
                 {% include "modules_report/module_google_maps.html" %}
                 </div>   
             </div>
