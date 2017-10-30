@@ -6,7 +6,7 @@
             <p><b>Órgão:</b> {{ transport.organ }}</p>
             <p><b>Responsável:</b> {{ transport.responsible }}</p>
             <p><b>Status:</b> 
-            {% with camara_reports|last as last %}
+            {% with transport_reports|last as last %}
                 {% if last.is_locked == 1 %}
                     Fechada
                     {% else %}

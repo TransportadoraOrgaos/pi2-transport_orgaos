@@ -38,7 +38,7 @@ html, body {
 
 p{
     font-size: 15px;
-    color: #0174d8 !important;
+    color: #77c0a8 !important;
 }
 
 .card-height{
@@ -92,15 +92,19 @@ p{
 }
 
 .brand-part-1, h1{
-    color: #0174d8 !important;;
+    color: #77c0a8 !important;;
 }
 
 .fa{
     vertical-align: middle;
 }
 
-.brand-part-2, .text-sidebar, h2, h3, h4{
-    color: #ff9800 !important;
+.fa:not(.fa-circle){
+    color: #77c0a8;
+}
+
+.brand-part-2, .text-sidebar, h1, h2, h3, h4{
+    color: #e19d2a !important;
 }
 
 .card{
@@ -123,11 +127,20 @@ p{
 }
 
 .title-modules-report{
-    background: #ff9701;
+    background: #77c0a8;
     color: white !important;
     margin-top: -25px;
     margin-bottom: 30px !important;
     margin-left: -25px;
     margin-right: -25px;
     padding: 15px;
+}
+
+
+.btn{
+    font-size: 10px !important;
+}
+
+body.modal-open {
+    overflow: hidden !important;
 }
