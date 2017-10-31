@@ -11,25 +11,29 @@ class Index(TemplateView):
 
 def cadastro(request, template_name='usuario/cadastro.html'):
 	if 'token' in request.session:
-		form = UsuarioModelForm(request.POST or None)
-		
-		if form.is_valid():
-			username = form.cleaned_data['username']
-			password = form.cleaned_data['password']
-			email = form.cleaned_data['email']
-			access_level = form.cleaned_data['access_level']
+		level = get_acess_level(request)
+		if '1' in level["access_level"]:
+			form = UsuarioModelForm(request.POST or None)
+			
+			if form.is_valid():
+				username = form.cleaned_data['username']
+				password = form.cleaned_data['password']
+				email = form.cleaned_data['email']
+				access_level = form.cleaned_data['access_level']
 
-			headers = {'content-type': 'application/json'}
-			payload = "{\n\t\"username\": \""+ username +"\",\n\t\"password\": \""+ password +"\", \n\t\"email\": \""+ email +"\", \n\t\"access_level\": \""+ access_level +"\"\n}"
-			url = "https://transports-rest-api.herokuapp.com/user"
-			response = requests.post(url, data=payload, headers=headers)
+				headers = {'content-type': 'application/json'}
+				payload = "{\n\t\"username\": \""+ username +"\",\n\t\"password\": \""+ password +"\", \n\t\"email\": \""+ email +"\", \n\t\"access_level\": \""+ access_level +"\"\n}"
+				url = "https://transports-rest-api.herokuapp.com/user"
+				response = requests.post(url, data=payload, headers=headers)
 
-			if 'error_message' or 'message' in response.json():
-				response_dict = response.json()
-				return render(request, template_name, {'form': form, 'response_dict': response_dict})
-			else:
-				return redirect('usuario:cadastro')
-		return render(request, template_name, {'form': form})
+				if 'error_message' or 'message' in response.json():
+					response_dict = response.json()
+					return render(request, template_name, {'form': form, 'response_dict': response_dict})
+				else:
+					return redirect('usuario:cadastro')
+			return render(request, template_name, {'form': form})
+		else:
+			return redirect('usuario:denied')
 	else:
 		return redirect('usuario:login')
 
@@ -51,6 +55,7 @@ def do_login(request, template_name='usuario/login.html'):
 		elif 'access_token' in response.json():
 			token = response.json()
 			request.session['token'] = token
+			request.session['username'] = username
 			return redirect('home')
 	return render(request, template_name, {'form': form})
 
@@ -91,3 +96,18 @@ def del_User(request, template_name='usuario/list.html'):
 	if 'error_message' or 'message' in response.json():
 				response_dict = response.json()
 				return render(request, template_name, {'form': form, 'response_dict': response_dict})
+
+def get_acess_level(request):
+
+	url = "https://transports-rest-api.herokuapp.com/user_access/" + request.session['username']
+	headers = {'content-type': 'application/json'}
+	response = requests.request("GET", url, headers=headers)
+
+	if 'access_level' in response.json():
+		level = response.json()
+
+	return level
+
+def denied(request):
+	template_name = 'denied.html'
+	return render(request, template_name)
