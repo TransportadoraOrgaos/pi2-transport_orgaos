@@ -38,15 +38,15 @@ html, body {
 
 p{
     font-size: 15px;
-    color: #00bcd4 !important;
+    color: #77c0a8 !important;
 }
 
 .card-height{
     height: 30.6rem;
 }
 
-.card-height-box{
-    height: 27.6rem;
+.card-height-camara{
+    height: 30rem;
 }
 
 
@@ -59,8 +59,8 @@ p{
 
 .text-sidebar{
     /*font-family: 'Montserrat', sans-serif;*/
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 @media (min-width: 768px) {
@@ -73,15 +73,9 @@ p{
     }
 }
 
-.charts{
-    /*height: 40rem;*/
-}
-
 .container{
     width: 100% !important;
 }
-
-
 
 .sidebar ul li {
     border-bottom: none !important;
@@ -97,16 +91,20 @@ p{
     padding: 8px;
 }
 
-.brand-part-1, h1{
-    color: #00bcd4;
+.brand-part-1{
+    color: #FF3B3F !important;
 }
 
-.fa{
+.fa-side-bar{
     vertical-align: middle;
 }
 
-.brand-part-2, .text-sidebar, h2, h3, h4{
-    color: #ff9800 !important;
+.fa:not(.fa-circle):not(.fa-module-report){
+    color: #96858F;
+}
+
+.brand-part-2, .text-sidebar, h1, h2, h3, h4{
+    color: #6d7993 !important;
 }
 
 .card{
@@ -124,3 +122,26 @@ p{
     font-weight: 500;
 }
 
+.btn-camara-card{
+    width: 70%;
+}
+
+.title-modules-report{
+    background: #efefef;
+    color: #96858F !important;
+    margin-top: -25px;
+    margin-bottom: 30px !important;
+    margin-left: -25px;
+    margin-right: -25px;
+    padding: 15px;
+}
+
+
+.btn{
+    font-size: 10px !important;
+    box-shadow: 0 !important;
+}
+
+body.modal-open {
+    overflow: hidden !important;
+}

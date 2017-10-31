@@ -1,0 +1,28 @@
+<div class="col-md-4">
+		<div class="card card-height-camara">
+			<div class="card-body">
+				<center>
+					<h2 id="camara-name" class="card-title title-modules-report"><strong>Nova Câmara</strong></h2>
+					<i class="fa fa-plus-circle fa-5x" style="font-size:30px;display:none;"></i>
+					<form class="form-sign" method="POST">
+							{% csrf_token %}
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Nome da câmara: </label>
+											{{ form.name }}
+									</div>
+								</div>
+									<span class="error-message">{{ response_dict.error_message }}</span>
+									<span class="error-message">{{ response_dict.message }}</span>
+								<div class="col-md-12">
+									<div class="form-group">
+										<button class="btn btn-outline-primary btn-block" onclick="this.disabled=true;this.value='Submitting...'; this.form.submit();">Cadastrar</button>
+									</div>
+								</div>
+							</div>
+						</form>
+				</center>
+			</div>
+		</div>
+	</div>

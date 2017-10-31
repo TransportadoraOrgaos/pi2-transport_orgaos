@@ -1,0 +1,19 @@
+<div class="modal fade" id="{{forloop.counter}}" role="dialog">
+    <div class="modal-dialog">
+        
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Deletar {{ camara.name }} do sistema?</h4>
+        </div>
+        <div class="modal-body">
+          <p>Isso irá deletar TODOS os transportes e reports associados a essa câmara. Essa ação não pode ser desfeita.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="{% url 'camara:camara_delete' camara.name %}" class="btn btn-danger col-md-12">Deletar</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>

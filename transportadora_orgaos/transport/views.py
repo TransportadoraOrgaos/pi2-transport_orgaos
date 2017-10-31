@@ -3,6 +3,7 @@
 from django.forms import ModelForm
 from .models import *
 from django.shortcuts import render, redirect
+from django.conf import settings
 import requests
 
 
@@ -11,36 +12,34 @@ class TransportForm(ModelForm):
         model = Transport
         fields = ['organ', 'responsible']
         
-def transport_cadastro(request, box_id, template_name='page_transport_cadastro.html'):
+def transport_cadastro(request, box_id, camara_name, template_name='page_transport_cadastro.html'):
     form = TransportForm(request.POST or None)
-
+    
     if 'token' in request.session:
+        
         if form.is_valid():
-            transport_id = 1
-            transport_id+=1
+        
 
-            headers = {'content-type': 'application/json'}
-            url = "https://transports-rest-api.herokuapp.com/transport/"+str(transport_id)
+            url = "https://transports-rest-api.herokuapp.com/createtransport"
 
             organ = form.cleaned_data['organ']
             responsible = form.cleaned_data['responsible']
 
             payload = "{\n\t\"organ\": \"" + organ + "\",\n\t\"responsible\": \""+ responsible +"\",\n\t\"box_id\": "+ box_id +"\n}"
             
-
             response = requests.request("POST", url, data=payload, headers=headers)
 
-            if 'error_message' or 'message' in response.json():
+            if 'error_message' in response.json():
                 response_dict = response.json()
                 return render(request, template_name, {'form': form, 'response_dict': response_dict})
             else:
-                return redirect('camara:listar_camaras')
-        return render(request, template_name, {'form' : form})
+                return redirect("camara:listar_camaras")
+        return render(request, template_name, {'form' : form, 'camara_info' : camara_info})
     else:
         return redirect('usuario:login')
 
 
-def transport_info(request, transport_id, template_name="page_reports.html"):
+def transport_info(request, transport_id, camara_name, template_name="page_reports.html"):
 
     if 'token' in request.session:
         #RECUPERAR REPORTS DO TRANSPORT_ID
@@ -66,6 +65,7 @@ def transport_info(request, transport_id, template_name="page_reports.html"):
 
         #RECUPERAR DADOS DO BOX_ID
         
-        return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas})
+        return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas, 'camara_name':camara_name})
     else:
         return redirect('usuario:login')
+    
