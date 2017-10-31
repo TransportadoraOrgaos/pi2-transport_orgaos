@@ -14,28 +14,24 @@ class CamaraForm(ModelForm):
 def camara_list(request, template_name='page_camaras_list.html'):
 	url = "https://transports-rest-api.herokuapp.com/boxes"
 	headers = {'content-type': 'application/json'}
+	payload = ""
 
 	camaras = requests.request("GET", url, headers=headers)
 	camaras_dict = camaras.json()['boxes']
-	
-	return render(request, template_name, {'camaras_dict':camaras_dict})
 
-def camara_cadastro(request, template_name='page_camara_cadastro.html'):
 	form = CamaraForm(request.POST or None)
 	
 	if form.is_valid():
-		
-		headers = {'content-type': 'application/json'}
-		payload = ""
 		url = "https://transports-rest-api.herokuapp.com/box/" + form.cleaned_data['name']
 		response = requests.post(url, data=payload, headers=headers)
 
 		if 'error_message' in response.json():
 			response_dict = response.json()
-			return render(request, template_name, {'form': form, 'response_dict': response_dict})
+			return render(request, template_name, {'form': form, 'response_dict': response_dict, 'camaras_dict':camaras_dict})
 		else:
 			return redirect('camara:listar_camaras')
-	return render(request, template_name, {'form': form})
+	return render(request, template_name, {'camaras_dict':camaras_dict, 'form':form})
+
 
 def camara_delete(request, camara_name, template_name="page_camaras_list.html"):
 	
@@ -46,8 +42,4 @@ def camara_delete(request, camara_name, template_name="page_camaras_list.html"):
 	url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
 	response = requests.request("DELETE", url, data=payload, headers=headers)
 
-	#Retornar todas as câmaras após a deleção da câmara específica
-	url = "https://transports-rest-api.herokuapp.com/boxes"
-	camaras_dict = requests.request("GET", url, headers=headers).json()['boxes']
-
-	return render(request, template_name, {'camaras_dict':camaras_dict})
+	return redirect('camara:listar_camaras')

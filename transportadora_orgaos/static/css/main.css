@@ -139,6 +139,7 @@ p{
 
 .btn{
     font-size: 10px !important;
+    box-shadow: 0 !important;
 }
 
 body.modal-open {
