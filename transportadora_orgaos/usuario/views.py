@@ -79,3 +79,15 @@ def list(request, template_name='usuario/list.html'):
 		return render(request, template_name, {'users_dict':users_dict})
 	else:
 		return redirect('usuario:login')
+
+def del_User(request, template_name='usuario/list.html'):
+	
+	headers = {'content-type': 'application/json'}
+	payload = "{\n\t\"username\": \""+ username +"\"\n}"
+	url = "https://transports-rest-api.herokuapp.com/user"
+	
+	response = requests.request("DELETE", url, data=payload, headers=headers)
+
+	if 'error_message' or 'message' in response.json():
+				response_dict = response.json()
+				return render(request, template_name, {'form': form, 'response_dict': response_dict})
