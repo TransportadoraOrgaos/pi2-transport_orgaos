@@ -1,22 +1,33 @@
 # -*- coding: utf-8 -*-
 from django.forms import ModelForm
 from django import forms
-from django.contrib.auth.models import User
+from usuario.models import Usuario
 
-class UsuarioModelForm(forms.ModelForm):
+class UsuarioModelForm(ModelForm):
 	class Meta:
-		model = User
-		fields = ['username', 'first_name', 'email', 'password']
+		ADMINISTRADOR = 1
+		TRASPORTADOR = 2
+		USUARIO = 3
+		ACCESS_CHOICES = (
+		(ADMINISTRADOR, 'Administrador'), 
+		(TRASPORTADOR, 'Transportador'),
+		(USUARIO, 'Usuario'),
+		)
+
+		model = Usuario
+		fields = ['username', 'password', 'email', 'access_level']
 		widgets = {
-			'username': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 100}),
-			'first_name': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 100}),
-			'email': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 100}),
-			'password': forms.PasswordInput(attrs={'class': 'form_control', 'maxlength': 100}),
+			'username': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 50}),
+			'email': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 50}),
+			'password': forms.PasswordInput(attrs={'class': 'form_control', 'maxlength': 50}),
+			'access_level': forms.Select(choices= ACCESS_CHOICES, attrs={'class': 'form_control'}),
 		}
 
-def save(self, commit="True"):
-	user = super(UsuarioModelForm, self).save(commit="false")
-	user.set_password(self.cleaned_data['password'])
-	if commit:
-		user.save()
-	return user
+class UsuarioLoginForm(ModelForm):
+	class Meta:
+		model = Usuario
+		fields = ['username', 'password']
+		widgets = {
+			'username': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 50}),
+			'email': forms.TextInput(attrs={'class': 'form_control', 'maxlength': 50}),
+		}

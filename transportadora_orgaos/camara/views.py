@@ -12,25 +12,29 @@ class CamaraForm(ModelForm):
 		fields = ['name']
 
 def camara_list(request, template_name='page_camaras_list.html'):
-	url = "https://transports-rest-api.herokuapp.com/boxes"
-	headers = {'content-type': 'application/json'}
-	payload = ""
 
-	camaras = requests.request("GET", url, headers=headers)
-	camaras_dict = camaras.json()['boxes']
+	if 'token' in request.session:
+		url = "https://transports-rest-api.herokuapp.com/boxes"
+		headers = {'content-type': 'application/json'}
+		payload = ""
 
-	form = CamaraForm(request.POST or None)
+		camaras = requests.request("GET", url, headers=headers)
+		camaras_dict = camaras.json()['boxes']
+
+		form = CamaraForm(request.POST or None)
 	
-	if form.is_valid():
-		url = "https://transports-rest-api.herokuapp.com/box/" + form.cleaned_data['name']
-		response = requests.post(url, data=payload, headers=headers)
+		if form.is_valid():
+			url = "https://transports-rest-api.herokuapp.com/box/" + form.cleaned_data['name']
+			response = requests.post(url, data=payload, headers=headers)
 
-		if 'error_message' in response.json():
-			response_dict = response.json()
-			return render(request, template_name, {'form': form, 'response_dict': response_dict, 'camaras_dict':camaras_dict})
-		else:
-			return redirect('camara:listar_camaras')
-	return render(request, template_name, {'camaras_dict':camaras_dict, 'form':form})
+			if 'error_message' in response.json():
+				response_dict = response.json()
+				return render(request, template_name, {'form': form, 'response_dict': response_dict, 'camaras_dict':camaras_dict})
+			else:
+				return redirect('camara:listar_camaras')
+		return render(request, template_name, {'camaras_dict':camaras_dict, 'form':form})
+	else:
+		return redirect('usuario:login')
 
 
 def camara_delete(request, camara_name, template_name="page_camaras_list.html"):
