@@ -38,7 +38,7 @@ def camara_cadastro(request, template_name='page_camara_cadastro.html'):
 			return redirect('camara:listar_camaras')
 	return render(request, template_name, {'form': form})
 
-def get_all_reports(request, template_name='camaras_list_for_reports.html'):
+def get_all_boxes(request, template_name='all_reports_list.html'):
     url = "https://transports-rest-api.herokuapp.com/boxes"
     headers = {'content-type': 'application/json'}
        
@@ -53,3 +53,12 @@ def get_transports_from_box(request, camara_name, template_name="transports_list
 	transports_dict = camara_transports.json()['transports']
 
 	return render(request, template_name, {'transports_dict':transports_dict})
+
+def reports_list(request, camara_name, transport_id, template_name="reports_list.html"):
+	url = "https://transports-rest-api.herokuapp.com/box/" + camara_name + transport_id
+	headers = {'content-type': 'application/json'}
+	response = requests.request("GET", url, headers=headers)
+	reports_dict = response.json()
+
+	print(response.text)
+	return render(request, template_name, {'reports_dict':reports_dict})
