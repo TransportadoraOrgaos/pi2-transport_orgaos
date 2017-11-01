@@ -25,7 +25,7 @@ SECRET_KEY = 'uhckpy*nrateqo=nj6bzma_7as+e7_rf_+y$e#n9t%2g_*e6&%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.0.11", "192.168.0.13", "127.0.0.1"]
+ALLOWED_HOSTS = ["192.168.0.11", "192.168.0.13", "127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usuario',
     'camara',
+    'transport'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -79,7 +80,12 @@ WSGI_APPLICATION = 'transportadora_orgaos.wsgi.application'
 
 DATABASES = {
     'default': {
+    }
+}
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
 
