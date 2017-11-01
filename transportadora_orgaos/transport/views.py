@@ -14,6 +14,11 @@ class TransportForm(ModelForm):
         
 def transport_cadastro(request, box_id, camara_name, template_name='page_transport_cadastro.html'):
     form = TransportForm(request.POST or None)
+
+    headers = {'content-type': "application/json"}
+    url = "https://transports-rest-api.herokuapp.com/box/" +camara_name
+
+    camara_info = requests.request("GET", url, headers=headers).json()
     
     if 'token' in request.session:
         
