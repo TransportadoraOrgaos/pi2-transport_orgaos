@@ -19,7 +19,7 @@ def transport_cadastro(request, box_id, template_name='page_transport_cadastro.h
         transport_id+=1
 
         headers = {'content-type': 'application/json'}
-        url = "https://transports-rest-api.herokuapp.com/transport/"+str(transport_id)
+        url = "https://transports-rest-api.herokuapp.com/createtransport"
 
         organ = form.cleaned_data['organ']
         responsible = form.cleaned_data['responsible']

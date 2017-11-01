@@ -39,16 +39,17 @@ def camara_cadastro(request, template_name='page_camara_cadastro.html'):
 	return render(request, template_name, {'form': form})
 
 def get_all_reports(request, template_name='camaras_list_for_reports.html'):
-    	url = "https://transports-rest-api.herokuapp.com/boxes"
-        headers = {'content-type': 'application/json'}
-        
-        camaras = requests.request("GET", url, headers=headers)
-        camaras_dict = camaras.json()['boxes']
-        return render(request, template_name, {'camaras_dict':camaras_dict})
+    url = "https://transports-rest-api.herokuapp.com/boxes"
+    headers = {'content-type': 'application/json'}
+       
+    camaras = requests.request("GET", url, headers=headers)
+    camaras_dict = camaras.json()['boxes']
+    return render(request, template_name, {'camaras_dict':camaras_dict})
 
 def get_transports_from_box(request, camara_name, template_name="transports_list_for_report.html"):
-		url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
-		headers = {'content-type': 'application/json'}
-		camara_transports = requests.request("GET", url, headers=headers).json()['transports']
+	url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
+	headers = {'content-type': 'application/json'}
+	camara_transports = requests.request("GET", url, headers=headers)
+	transports_dict = camara_transports.json()['transports']
 
-		return render(request, template_name, {'camara_transports' : camara_transports})
+	return render(request, template_name, {'transports_dict':transports_dict})
