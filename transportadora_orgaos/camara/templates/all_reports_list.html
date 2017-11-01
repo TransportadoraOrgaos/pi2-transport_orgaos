@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <h2>Relatório - Câmara {{camara.id}} - Tranporte {{transport.id}}</h2>
+            <a href="{% url 'camara:generate_pdf' %}" class="btn btn-primary pull-right">PDF</a>
         </div>
     </div>
     <div class="row">
