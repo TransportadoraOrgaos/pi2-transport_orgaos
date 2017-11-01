@@ -3,14 +3,14 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h2>Câmaras Cadastradas</h2>
+            <h2>Transportes Cadastrados</h2>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="painel-body">
-                {% if not camaras_dict %}
-                    <span class="error-message"> Nenhuma câmara cadastrada </span>
+                {% if not camara_transports %}
+                    <span class="error-message"> Nenhum Transporte Realizado</span>
                 {% endif %}
                 <div class="row">
                 
@@ -19,16 +19,20 @@
                             <table class="table">
                             <thead> 
                                 <tr>
-                                    <th>Nome da Câmara</th>
+                                    <th>Id</th>
+                                    <th>Responsável</th>
+                                    <th>Órgão Transportado</th>
                                     <th><span class="pull-right">Ações</span></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for camara in camaras_dict %}
+                                {% for transport in camara_transports %}
                                 <tr>
                                     <td><a href="#">Transporte {{transport.id}}</a></td>
+                                    <td><a href="#"> {{transport.responsible}}</a></td>
+                                    <td><a href="#"> {{transport.organ}}</a></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary pull-right">AEHOOO</a>
+                                        <a href="#" class="btn btn-primary pull-right">Gerar Relatório</a>
                                     </td>
                                 </tr>
                                 {% endfor %}
