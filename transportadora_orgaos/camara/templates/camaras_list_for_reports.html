@@ -28,7 +28,7 @@
                                 <tr>
                                     <td><a href="#">{{camara.id}} - {{camara.name}}</a></td>
                                     <td>
-                                        <a href="{% url 'camara:listar_transports_relatorios' %}" class="btn btn-primary pull-right">Visualizar Transportes</a>
+                                        <a href="{% url 'camara:transport_list_reports' camara.name %}" class="btn btn-primary pull-right">Visualizar Transportes</a>
                                     </td>
                                 </tr>
                                 {% endfor %}

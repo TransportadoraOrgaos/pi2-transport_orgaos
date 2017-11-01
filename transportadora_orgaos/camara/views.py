@@ -46,7 +46,7 @@ def get_all_reports(request, template_name='camaras_list_for_reports.html'):
     camaras_dict = camaras.json()['boxes']
     return render(request, template_name, {'camaras_dict':camaras_dict})
 
-def get_transports_from_box(request, camara_name, template_name="transports_list_for_report.html"):
+def get_transports_from_box(request, camara_name, template_name="transports_list_for_reports.html"):
 	url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
 	headers = {'content-type': 'application/json'}
 	camara_transports = requests.request("GET", url, headers=headers)
