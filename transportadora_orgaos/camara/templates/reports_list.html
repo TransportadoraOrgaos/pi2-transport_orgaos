@@ -3,13 +3,13 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h2>Câmaras Cadastradas</h2>
+            <h2>Relatório - Câmara {{camara.id}} - Tranporte {{transport.id}}</h2>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="painel-body">
-                {% if not camaras_dict %}
+                {% if not reports_dict %}
                     <span class="error-message"> Nenhuma câmara cadastrada </span>
                 {% endif %}
                 <div class="row">
@@ -19,17 +19,21 @@
                             <table class="table">
                             <thead> 
                                 <tr>
-                                    <th>Nome da Câmara</th>
-                                    <th><span class="pull-right">Ações</span></th>
+                                    <th>Data</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
+                                    <th>Temperatura</th>
+                                    <th>Está Trancada?</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for camara in camaras_dict %}
+                                {% for report in reports_dict %}
                                 <tr>
-                                    <td><a> {{camara.id}} - {{camara.name}}</a></td>
-                                    <td>
-                                        <a href="{% url 'camara:listar_transports_relatorios' camara.name %}" class="btn btn-primary pull-right">Visualizar Transportes</a>
-                                    </td>
+                                    <td>{{report.date}}</td>
+                                    <td>{{report.latitude}} </td>
+                                    <td>{{report.longitude}}</td>
+                                    <td>{{report.temperature}}</td>
+                                    <td>{{report.is_locked}}</td>                                    
                                 </tr>
                                 {% endfor %}
                             </tbody>

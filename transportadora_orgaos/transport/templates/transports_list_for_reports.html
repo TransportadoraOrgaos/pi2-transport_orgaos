@@ -32,7 +32,7 @@
                                     <td><a href="#"> {{transport.responsible}}</a></td>
                                     <td><a href="#"> {{transport.organ}}</a></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary pull-right">Gerar Relatório</a>
+                                        <a href="{% url 'camara:reports_list' camara.name transport.id %}" class="btn btn-primary pull-right">Mostrar Relatório</a>
                                     </td>
                                 </tr>
                                 {% endfor %}
