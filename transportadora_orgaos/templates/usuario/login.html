@@ -1,0 +1,131 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>TransOrg - Sistema de Trasporte de Órgãos para Transplante</title>
+
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "bootstrap/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <link href="{% static "mdb/css/mdb.min.css" %}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static "bootstrap/vendor/metisMenu/metisMenu.min.css" %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static "bootstrap/dist/css/sb-admin-2.css" %}" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="{% static "bootstrap/vendor/morrisjs/morris.css" %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static "bootstrap/vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="{% static "js/google-charts.js" %}"></script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'camara:listar_camaras' %}"><span class="brand-part-1">TRANS</span><span class="brand-part-2">ORG</span></a>
+            </div>
+            <!-- /.navbar-header -->
+        </nav>
+
+    </div>
+{% block conteudo %}
+<div id="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+			<h2 class="form-sign-heading">LOGIN</h2>
+		</div>
+	</div>
+	<div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        Insira os dados para Login
+                    </div>
+					<form class="form-sign" method="POST">
+						{% csrf_token %}
+					<div class="panel-body">
+						{% if form.errors %}
+                            <p><strong>Usuário e/ou senha inválidos.</strong></p>
+                        {% endif %}
+                            <fieldset>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Nome de Usuário: </label>
+										<input type="text" name="username" class="form-control">
+								    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+										<label>Senha: </label>
+										<input type="password" name="password" class="form-control">
+								    </div>
+                                </div>
+
+                                <span class="error-message">{{ response_dict.error_message }}</span>
+                                <span class="error-message">{{ response_dict.message }}</span>
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+										<button class="btn btn-primary btn-block" type="submit">Login</button>
+                                    </div>
+                                </div>
+                                  
+                            </fieldset>
+                    </div>
+					</form>
+				</div>
+			</div>
+	</div>
+{% endblock %}
+
+    <!-- jQuery -->
+    <script src="{% static "bootstrap/vendor/jquery/jquery.min.js" %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "bootstrap/vendor/bootstrap/js/bootstrap.min.js" %}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static "bootstrap/vendor/metisMenu/metisMenu.min.js" %}"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="{% static "bootstrap/vendor/raphael/raphael.min.js" %}"></script>
+    <script src="{% static "bootstrap/vendor/morrisjs/morris.min.js" %}"></script>
+    <script src="{% static "bootstrap/data/morris-data.js" %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static "bootstrap/dist/js/sb-admin-2.js" %}"></script>
+
+</body>
+
+</html>

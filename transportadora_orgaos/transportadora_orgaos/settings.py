@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usuario',
     'camara',
+    'transport'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -50,6 +51,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 ROOT_URLCONF = 'transportadora_orgaos.urls'
 
@@ -79,7 +82,12 @@ WSGI_APPLICATION = 'transportadora_orgaos.wsgi.application'
 
 DATABASES = {
     'default': {
+    }
+}
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
 

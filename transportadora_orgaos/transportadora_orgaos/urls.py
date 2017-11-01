@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', camara_list, name='home'),
     url(r'^', include('usuario.urls', namespace='usuario', app_name='usuario')),
-    url(r'^', include('camara.urls', namespace='camara', app_name='camara'))
+    url(r'^', include('camara.urls', namespace='camara', app_name='camara')),
+    url(r'^', include('transport.urls', namespace='transport', app_name='transport'))
 ]

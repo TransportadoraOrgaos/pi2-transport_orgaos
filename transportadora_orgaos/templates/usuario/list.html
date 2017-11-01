@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<div id="page-wrapper">
+	<div class="row">
+            <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="form-sign-heading">Lista de Usuário</h2>
+                        </div>
+                        {% if not users_dict %}
+                            <p> Nenhum usuário cadastrado </p>
+                        {% endif %}
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped" size="14">
+                                    <thead>
+                                        <tr>
+                                            <th style="font-size: 15px">Nome</th>
+                                            <th style="font-size: 15px">Email</th>
+                                            <th style="font-size: 15px">Apagar?</th>
+                                        </tr>
+                                    </thead>
+                        			{% for users in users_dict %}
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-size: 13px">{{users.username}}</td>
+                                            <td style="font-size: 13px">{{users.email}}</td>
+                                            <td style="font-size: 13px"><button value="deletar" onclick="confirma()" style="background-color: #FA8072">X</button> </td>
+                                        </tr>
+                                    </tbody>
+                   					{% endfor %}
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+	</div>
+
+{% endblock %}
