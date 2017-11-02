@@ -3,54 +3,42 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <h2>Relatório - Câmara {{camara.id}} - Tranporte {{transport.id}}</h2>
-            <a href="{% url 'camara:generate_pdf' %}" class="btn btn-primary pull-right">PDF</a>
+            <a href="{% url 'camara:generate_pdf' %}" class="btn btn-primary pull-left">PDF</a>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="painel-body">
-                {% if not camaras_dict %}
+                <!-- {% if not camaras_dict %}
                     <span class="error-message"> Nenhuma câmara cadastrada </span>
-                {% endif %}
+                {% endif %} -->
                 <div class="row">
-                
                     <div class="container">
-                            
-                            <table class="table">
-                            <thead> 
-                                <tr>
-                                    <th>Nome</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for camara in camaras_dict %}
-                                <tr> 
-                                    <td>{{camara.name}}</td>
-                                    {% for transport in camara.transports%}
-                                    <tr>
-                                        <th>{{transport.responsible}}</th>
-                                        <tr>
-                                            <th>{{transport.organ}}</th>
-                                        </tr>
-                                    </tr>  
-                                    {% for report in transport.reports %}
-                                    <tr>
-                                            <tr>
-                                                <th>{{report.temperature}}</th>
-                                                <th>{{report.latitude}}</th>
-                                                <th>{{report.longitude}}</th>
-                                                <th>{{report.is_locked}}</th>
-                                                <th>{{report.date}}</th>
-                                            </tr>
-                                        </tr>  
-                                </tr>
-                                        {% endfor %}
-                                        {% endfor%}
+                        {% for camara in camaras_dict %}
+                            <h1>{{camara.name}}</h1>
+                            {% for transport in camara.transports %}
+                                <b>Responsável: {{transport.responsible}}</b><br>
+                                <b>Órgão: {{transport.organ}}</b> <br>                               
+                                {% for report in transport.reports %}
+                                    <table class="table">
+                                        <thead>
+                                            <th>Data</th>
+                                            <th>Temperatura</th>
+                                            <th>Latitude</th>
+                                            <th>Longitude</th>
+                                            <th>Estava Trancada?</th>
+                                        </thead>
+                                        <tbody>
+                                            <td>{{report.date}}</td>
+                                            <td>{{report.temperature}}</td>
+                                            <td>{{report.latitude}}</td>
+                                            <td>{{report.longitude}}</td>
+                                            <td>{{report.is_locked}}</td>                                                
+                                        </tbody>
+                                    </table>
                                 {% endfor %}
-                            </tbody>
-                            </table>
-                           
+                            {% endfor %}
+                        {% endfor %}
                     </div>
                 
                 </div>
@@ -59,3 +47,5 @@
     </div>
 </div>
 {% endblock %}
+
+ 
