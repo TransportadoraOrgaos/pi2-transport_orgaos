@@ -7,7 +7,7 @@ function drawChart() {
 
   var data = google.visualization.arrayToDataTable([
     ['Label', 'Value'],
-    ['', currentTemperature]
+    ['', Number(currentTemperature)]
   ]);
 
   var options = {
