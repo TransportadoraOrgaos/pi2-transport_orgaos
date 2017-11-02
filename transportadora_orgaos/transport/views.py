@@ -58,6 +58,18 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
     for temperatura in transport_reports:
 		temperaturas.append([i, transport_reports[i]['temperature']])
 		i += 1
+    
+    latitudes = []
+    j = 0
+    for latitude in transport_reports:
+        latitudes.append(transport_reports[j]['latitude'])
+        j += 1
+    
+    longitudes = []
+    k = 0
+    for longitude in transport_reports:
+        longitudes.append(transport_reports[k]['longitude'])
+        k += 1
 
     #RECUPERAR DADOS DO TRANSPORT_ID
     url = "https://transports-rest-api.herokuapp.com/transport/" + transport_id
@@ -66,4 +78,10 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
     transport = requests.request("GET", url, headers=headers).json()
 
     
-    return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas, 'camara_name':camara_name})
+    return render(request, template_name, {'transport_reports':transport_reports, 
+                                            'transport':transport ,
+                                            'temperaturas':temperaturas, 
+                                            'camara_name':camara_name,
+                                            'latitudes':latitudes,
+                                            'longitudes':longitudes
+                                        })
