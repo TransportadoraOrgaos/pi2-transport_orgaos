@@ -2,9 +2,13 @@
 {% block conteudo %}
 <div id="page-wrapper">
     <div class="row">
-        <div class="col-md-12">
+        <div class="hidden-xs hidden-sm col-md-8">
             <h1><b>Câmaras Cadastradas</b></h1>
         </div>
+        <div class=" col-sm-12 col-md-4">
+            <button class="btn btn-outline-primary btn-cadastrar-camara pull-right-xs" data-toggle="modal" data-target="#cadastro_camara">Cadastrar nova câmara</button>
+        </div>
+        {% include "modals/cadastro_camara.html" %}
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -70,7 +74,6 @@
                         </div>
                     </div> 
                 {% endfor %}
-                    {% include "modules/module_camara_cadastro.html" %}
                 </div>
             </div>
         </div>
