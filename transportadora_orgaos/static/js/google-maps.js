@@ -1,5 +1,12 @@
 function initMap() {
-    var current_location = {lat: -15.98755379, lng: -48.0434221};
+
+    var latitude = $("#map").data("latitude");
+    var longitude = $("#map").data("longitude");
+
+    console.log("Latitude: " + latitude);
+    console.log("Longitude: " + longitude);
+
+    var current_location = {lat: latitude, lng: longitude};
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 18,
       center: current_location

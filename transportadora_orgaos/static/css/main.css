@@ -162,3 +162,13 @@ body.modal-open {
     margin-top: 20px !important; 
     margin-bottom: 10px !important;
 }
+
+@media(max-width: 329px){
+    .title-modules-report {
+        padding: 10px;
+    }
+}
+
+.navbar-toggle{
+    margin-top: 20px !important;
+}
