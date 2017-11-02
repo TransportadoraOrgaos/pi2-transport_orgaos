@@ -74,3 +74,4 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
     else:
         return redirect('usuario:login')
     
+    return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas, 'camara_name':camara_name})
