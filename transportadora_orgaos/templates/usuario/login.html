@@ -62,19 +62,12 @@
 {% block conteudo %}
 <div id="container">
 	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-			<h2 class="form-sign-heading">LOGIN</h2>
-		</div>
-	</div>
-	<div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        Insira os dados para Login
-                    </div>
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="card" style="margin-top: 60px;">
+                    <h2 class="card-title title-modules-report"><strong>Login</strong></h2>
 					<form class="form-sign" method="POST">
 						{% csrf_token %}
-					<div class="panel-body">
+					<div class="card-body">
 						{% if form.errors %}
                             <p><strong>Usuário e/ou senha inválidos.</strong></p>
                         {% endif %}
@@ -97,7 +90,7 @@
 
                                 <div class="col-lg-12">
                                     <div class="form-group">
-										<button class="btn btn-primary btn-block" type="submit">Login</button>
+										<button class="btn btn-outline-primary btn-block" type="submit">Login</button>
                                     </div>
                                 </div>
                                   
