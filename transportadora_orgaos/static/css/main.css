@@ -145,3 +145,20 @@ p{
 body.modal-open {
     overflow: hidden !important;
 }
+
+@media (min-width: 992px) {
+    .pull-right-md {
+        float: right;
+    }
+}
+
+@media(min-width: 320px){
+    .pull-right-xs {
+        float: right;
+    }
+}
+
+.btn-cadastrar-camara{
+    margin-top: 20px !important; 
+    margin-bottom: 10px !important;
+}
