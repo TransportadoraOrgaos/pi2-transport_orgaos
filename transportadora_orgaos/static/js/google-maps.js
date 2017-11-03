@@ -8,8 +8,11 @@ function initMap() {
 
 
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 14,
-        center: current_location
+        zoom: 12,
+        center: {
+            lat: (latitudes[latitudes.length-1] + latitudes[0])/2,
+            lng: (longitudes[longitudes.length-1] + longitudes[0])/2
+        }
     });
 
     for (var i = 0, j=0; i < latitudes.length; i++, j++) {
