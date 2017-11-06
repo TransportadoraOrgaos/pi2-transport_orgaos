@@ -116,6 +116,7 @@ p{
     color: #cc0000;
     font-weight: 500;
     font-size: 17px;
+    margin-left: 15px;
 }
 
 #camara-name{
@@ -161,4 +162,14 @@ body.modal-open {
 .btn-cadastrar-camara{
     margin-top: 20px !important; 
     margin-bottom: 10px !important;
+}
+
+@media(max-width: 329px){
+    .title-modules-report {
+        padding: 10px;
+    }
+}
+
+.navbar-toggle{
+    margin-top: 20px !important;
 }

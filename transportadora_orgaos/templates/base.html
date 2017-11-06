@@ -83,6 +83,10 @@
         <!-- Google Maps Scripts -->
         <script type="text/javascript" src="{% static "js/google-maps.js" %}"></script>
 
+         <!-- jQuery -->
+         <script src="{% static "bootstrap/vendor/jquery/jquery.min.js" %}"></script>
+       
+
         <!-- Content Block -->
         {% block conteudo %}
         <div id="page-wrapper">
@@ -90,8 +94,11 @@
         </div>
         {% endblock %}
 
-        <!-- jQuery -->
-        <script src="{% static "bootstrap/vendor/jquery/jquery.min.js" %}"></script>
+        
+
+         <!-- JavaScript Base -->
+         <script src="{% static "js/main.js" %}"></script>
+
 
         <!-- Bootstrap Core JavaScript -->
         <script src="{% static "bootstrap/vendor/bootstrap/js/bootstrap.min.js" %}"></script>
