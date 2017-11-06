@@ -56,23 +56,23 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
 
         transport_reports = requests.request("GET", url, headers=headers).json()['reports']
 
-    temperaturas = []
-    i = 0
-    for temperatura in transport_reports:
-		temperaturas.append([i, transport_reports[i]['temperature']])
-		i += 1
-    
-    latitudes = []
-    j = 0
-    for latitude in transport_reports:
-        latitudes.append(transport_reports[j]['latitude'])
-        j += 1
-    
-    longitudes = []
-    k = 0
-    for longitude in transport_reports:
-        longitudes.append(transport_reports[k]['longitude'])
-        k += 1
+        temperaturas = []
+        i = 0
+        for temperatura in transport_reports:
+            temperaturas.append([i, transport_reports[i]['temperature']])
+            i += 1
+        
+        latitudes = []
+        j = 0
+        for latitude in transport_reports:
+            latitudes.append(transport_reports[j]['latitude'])
+            j += 1
+        
+        longitudes = []
+        k = 0
+        for longitude in transport_reports:
+            longitudes.append(transport_reports[k]['longitude'])
+            k += 1
 
         #RECUPERAR DADOS DO TRANSPORT_ID
         url = "https://transports-rest-api.herokuapp.com/transport/" + transport_id
@@ -82,14 +82,15 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
 
         #RECUPERAR DADOS DO BOX_ID
         
-        return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas, 'camara_name':camara_name})
-    else:
-        return redirect('usuario:login')
-    
-    return render(request, template_name, {'transport_reports':transport_reports, 
+        return render(request, template_name, {'transport_reports':transport_reports, 
                                             'transport':transport ,
                                             'temperaturas':temperaturas, 
                                             'camara_name':camara_name,
                                             'latitudes':latitudes,
                                             'longitudes':longitudes
                                         })
+        
+    else:
+        return redirect('usuario:login')
+    
+    
