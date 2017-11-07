@@ -18,7 +18,7 @@
                         </div>
                         {% if response_dict.error_message %}
                             <div class="alert alert-danger">
-                                <strong>Já possui uma caixa "{{ form.name.value }}". Escolha outro nome.</strong>
+                                <strong>Já possui uma câmara "{{ form.name.value }}" no sistema. Escolha outro nome.</strong>
                             </div>
                             
                         {% endif %}
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     {% if response_dict.error_message %}
-                        <strong style="font-size: 11px;">Caso queira apenas fechar a caixa de diálogo, cadastre um nome vazio</strong>
+                        <strong style="font-size: 11px;">Caso queira apenas fechar a caixa de diálogo, entre com um nome vazio</strong>
                     {% endif %} 
                 </div>
                 
