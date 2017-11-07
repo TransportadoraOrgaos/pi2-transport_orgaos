@@ -56,6 +56,9 @@ def do_login(request, template_name='usuario/login.html'):
 			token = response.json()
 			request.session['token'] = token
 			request.session['username'] = username
+			access_level = get_acess_level(request)
+			request.session['access_level'] = access_level['access_level']
+			import ipdb; ipdb.set_trace()
 			return redirect('home')
 	return render(request, template_name, {'form': form})
 
