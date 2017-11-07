@@ -22,12 +22,6 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Nome: </label>
-                                    {{ form.first_name }}
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
                                     <label>Email: </label>
                                     {{ form.email }}
                                 </div>
@@ -37,6 +31,16 @@
                                     <label>Senha: </label>
                                     {{ form.password }}
                                 </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+									<label>Nível de Acesso: </label>
+									{% for choice in form.access_level %}
+								    <div>
+								        {{ choice }}
+								    </div>
+								{% endfor %}
+							    </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">

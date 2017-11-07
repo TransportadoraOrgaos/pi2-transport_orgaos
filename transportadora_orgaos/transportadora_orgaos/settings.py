@@ -25,7 +25,7 @@ SECRET_KEY = 'uhckpy*nrateqo=nj6bzma_7as+e7_rf_+y$e#n9t%2g_*e6&%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.0.11", "192.168.0.13", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["192.168.0.11", "192.168.0.13", "127.0.0.1"]
 
 
 # Application definition
@@ -51,6 +51,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 ROOT_URLCONF = 'transportadora_orgaos.urls'
 
@@ -80,7 +82,6 @@ WSGI_APPLICATION = 'transportadora_orgaos.wsgi.application'
 
 DATABASES = {
     'default': {
-
     }
 }
 
