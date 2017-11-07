@@ -26,11 +26,11 @@ def cadastro(request, template_name='usuario/cadastro.html'):
 				url = "https://transports-rest-api.herokuapp.com/user"
 				response = requests.post(url, data=payload, headers=headers)
 
-				if 'error_message' or 'message' in response.json():
+				if 'error_message' in response.json():
 					response_dict = response.json()
 					return render(request, template_name, {'form': form, 'response_dict': response_dict})
 				else:
-					return redirect('usuario:cadastro')
+					return redirect('usuario:list')
 			return render(request, template_name, {'form': form})
 		else:
 			return redirect('usuario:denied')

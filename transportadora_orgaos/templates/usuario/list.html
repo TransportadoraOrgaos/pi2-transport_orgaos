@@ -6,7 +6,9 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 class="form-sign-heading">Lista de Usuário</h2>
+                                <a href="{% url 'usuario:cadastro' %}"><button class="btn btn-outline-primary btn-cadastrar-camara pull-right-xs">Cadastrar novo usuário</button></a>
                         </div>
+                        
                         {% if not users_dict %}
                             <p> Nenhum usuário cadastrado </p>
                         {% endif %}
