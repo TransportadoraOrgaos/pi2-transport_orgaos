@@ -3,12 +3,13 @@
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="form-sign-heading"><strong>Iniciar Transporte para a Câmara "{{camara_info.name}}"</strong></h2>
+			<h2 class="form-sign-heading"><strong>Iniciar Transporte</strong></h2>
+			<p style="font-size: 18px;"><strong>Câmara: </strong> {{ camara_info.name }}</p>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-4">
-			<div class="card card-height-camara">
+			<div class="card card-cadastro card-height-camara">
 				<div class="card-body">
 					<h3 class="title-modules-report"><strong>Novo Transporte</strong></h3>
 					<form class="form-sign" method="POST" >
@@ -21,11 +22,13 @@
 								</div>
 								<div class="form-group">
 									<label>Órgão a ser transportado: </label>
-									{{ form.organ }}
+									<div id="select-wrapper">
+										{{ form.organ }}
+									</div>
 								</div>
 							</div>
 								<div class="form-group">
-									<button class="btn btn-outline-primary pull-right" type="submit">Iniciar</button>
+									<button class="btn btn-outline-primary pull-right" onclick="this.disabled=true; this.form.submit();">Iniciar</button>
 									<a href="{% url 'camara:listar_camaras' %}" class="btn btn-outline-danger pull-right">Cancelar</a>
 								</div>
 								

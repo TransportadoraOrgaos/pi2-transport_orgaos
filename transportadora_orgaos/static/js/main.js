@@ -15,5 +15,9 @@ $(document).ready(function() {
             show: false,
             backdrop: 'static'
         });
+        $('.delete-camara').modal({
+            show: false,
+            backdrop: 'static'
+        });
     }
 });

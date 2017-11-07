@@ -5,7 +5,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" {% if response_dict.error_message %} style="display: none;" {% endif %} data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">cadastrar nova câmara no sistema</h4>
+          <h4 class="modal-title">cadastrar nova câmara</h4>
         </div>
         <div class="modal-body">
             <form id="form-cadastrar-camara" class="form-sign" method="POST">
@@ -18,18 +18,18 @@
                         </div>
                         {% if response_dict.error_message %}
                             <div class="alert alert-danger">
-                                <strong>Já possui uma caixa "{{ form.name.value }}". Escolha outro nome.</strong>
+                                <strong>Já possui uma câmara "{{ form.name.value }}". Escolha outro nome.</strong>
                             </div>
                             
                         {% endif %}
                     <div id="error_message" data-error-message="{{ response_dict.error_message }}"></div>
                     <div class="col-md-4 pull-right">
                         <div class="form-group">
-                            <input class="btn btn-outline-primary btn-block" value="Cadastrar" onclick="this.disabled=true; this.form.submit();"></input>
+                            <button class="btn btn-outline-primary btn-block" onclick="this.disabled=true; this.form.submit();">Cadastrar</button>
                         </div>
                     </div>
                     {% if response_dict.error_message %}
-                        <strong style="font-size: 11px;">Caso queira apenas fechar a caixa de diálogo, cadastre um nome vazio</strong>
+                        <strong style="font-size: 11px;">Caso queira apenas fechar a caixa de diálogo, entre com um nome vazio</strong>
                     {% endif %} 
                 </div>
                 
