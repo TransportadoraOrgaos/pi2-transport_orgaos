@@ -5,7 +5,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" {% if response_dict.error_message %} style="display: none;" {% endif %} data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">cadastrar nova câmara no sistema</h4>
+          <h4 class="modal-title">cadastrar nova câmara</h4>
         </div>
         <div class="modal-body">
             <form id="form-cadastrar-camara" class="form-sign" method="POST">
@@ -18,7 +18,7 @@
                         </div>
                         {% if response_dict.error_message %}
                             <div class="alert alert-danger">
-                                <strong>Já possui uma câmara "{{ form.name.value }}" no sistema. Escolha outro nome.</strong>
+                                <strong>Já possui uma câmara "{{ form.name.value }}". Escolha outro nome.</strong>
                             </div>
                             
                         {% endif %}
