@@ -173,3 +173,25 @@ body.modal-open {
 .navbar-toggle{
     margin-top: 20px !important;
 }
+
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    padding: 5px;
+    border-radius: 0;
+    background: url("../images/dropdown-arrow.png") no-repeat 97% #fff;
+    background-size: 20px 20px;
+}
+
+select:focus{
+    outline: 0;
+    color: #4285f4;
+    border: 1px solid #4285f4;
+}
+
+@media (max-width: 359px){
+    .hidden-xxs{
+        display: none;
+    }
+}

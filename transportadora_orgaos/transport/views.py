@@ -8,6 +8,8 @@ import requests
 
 
 class TransportForm(ModelForm):
+    CHOICES = (('Rim', 'Rim'),('Pancreas', 'Pancreas'),('Cornea', 'Córnea'))
+    organ = forms.ChoiceField(choices=CHOICES)
     class Meta():
         model = Transport
         fields = ['organ', 'responsible']

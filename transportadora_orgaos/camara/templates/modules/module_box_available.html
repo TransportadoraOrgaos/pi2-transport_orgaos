@@ -1,0 +1,5 @@
+<p class="card-text box-available">
+    <i class="fa fa-circle"></i> Disponível
+</p>
+<a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-outline-success btn-camara-card">Iniciar Transporte</a>
+<button type="button" class="btn btn-danger btn-camara-card" data-toggle="modal" data-target="#{{forloop.counter}}">Deletar câmara</button>

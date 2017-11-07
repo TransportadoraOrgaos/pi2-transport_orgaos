@@ -1,0 +1,7 @@
+<p class="card-text box-in-use">
+    <i class="fa fa-circle" aria-hidden="true"></i> Em uso
+</p>
+<a href="{% url 'transport:transport_info' last_transport.id camara.name %}" class="btn btn-outline-primary btn-camara-card">Ver Transporte</a>
+<br><br>
+<p><b>Responsável:</b> {{ last_transport.responsible }}</p>
+<p><b>Órgão:</b> {{ last_transport.organ }}</p>
