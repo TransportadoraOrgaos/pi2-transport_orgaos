@@ -85,17 +85,15 @@ def list(request, template_name='usuario/list.html'):
 	else:
 		return redirect('usuario:login')
 
-def del_User(request, template_name='usuario/list.html'):
+def del_User(request, users_username, template_name='usuario/list.html'):
 	
 	headers = {'content-type': 'application/json'}
-	payload = "{\n\t\"username\": \""+ username +"\"\n}"
+	payload = "{\n\t\"username\": \""+ users_username +"\"\n}"
 	url = "https://transports-rest-api.herokuapp.com/user"
 	
 	response = requests.request("DELETE", url, data=payload, headers=headers)
 
-	if 'error_message' or 'message' in response.json():
-				response_dict = response.json()
-				return render(request, template_name, {'form': form, 'response_dict': response_dict})
+	return redirect('usuario:list')
 
 def get_acess_level(request):
 

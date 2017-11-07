@@ -18,6 +18,7 @@
                                         <tr>
                                             <th style="font-size: 15px">Nome</th>
                                             <th style="font-size: 15px">Email</th>
+                                            <th style="font-size: 15px">Nível de Acesso</th>
                                             <th style="font-size: 15px">Apagar?</th>
                                         </tr>
                                     </thead>
@@ -26,8 +27,11 @@
                                         <tr>
                                             <td style="font-size: 13px">{{users.username}}</td>
                                             <td style="font-size: 13px">{{users.email}}</td>
-                                            <td style="font-size: 13px"><button value="deletar" onclick="confirma()" style="background-color: #FA8072">X</button> </td>
+                                            <td style="font-size: 13px">{{users.access_level}}</td>
+                                            <td style="font-size: 13px"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#{{forloop.counter}}">Deletar Usuário</button> </td>
+                                            {% include "usuario/modal/del_user.html" %}
                                         </tr>
+
                                     </tbody>
                    					{% endfor %}
                                 </table>
