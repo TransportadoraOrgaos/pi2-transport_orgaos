@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="painel-body">
-                {% if not camara_transports %}
+                {% if not transports_dict %}
                     <span class="error-message"> Nenhum Transporte Realizado</span>
                 {% endif %}
                 <div class="row">
@@ -26,7 +26,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for transport in camara_transports %}
+                                {% for transport in transports_dict %}
                                 <tr>
                                     <td><a href="#">Transporte {{transport.id}}</a></td>
                                     <td><a href="#"> {{transport.responsible}}</a></td>

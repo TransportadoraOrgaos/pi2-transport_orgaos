@@ -21,6 +21,13 @@ def transport_cadastro(request, box_id, camara_name, template_name='page_transpo
     camara_info = requests.request("GET", url, headers=headers).json()
     
     if 'token' in request.session:
+        headers = {'content-type': 'application/json'}
+        url = "https://transports-rest-api.herokuapp.com/createtransport"
+
+        organ = form.cleaned_data['organ']
+        responsible = form.cleaned_data['responsible']
+
+        payload = "{\n\t\"organ\": \"" + organ + "\",\n\t\"responsible\": \""+ responsible +"\",\n\t\"box_id\": "+ box_id +"\n}"
         
         if form.is_valid():
         
