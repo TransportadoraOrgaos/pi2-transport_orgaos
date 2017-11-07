@@ -61,19 +61,26 @@
                 </ul>
                 <!-- /.navbar-top-links -->
 
-                    <div class="navbar-default sidebar" role="navigation">
-                        <div class="sidebar-nav navbar-collapse">
-                            <ul class="nav" id="side-menu">
-                                <li>
-                                    <a href="{% url 'camara:listar_camaras' %}"><i class="fa fa-ambulance fa-2x fa-fw fa-side-bar"></i> <span class="text-sidebar">Todas as Câmaras</span></a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'usuario:cadastro' %}"><i class="fa fa-user fa-2x fa-fw fa-side-bar"></i> <span class="text-sidebar">Cadastro de Usuários</span></a>
-                                </li>
-                                
-                            </ul>
-                        </div>
-                        <!-- /.sidebar-collapse -->
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li>
+                                <a href="{% url 'camara:listar_camaras' %}"><i class="fa fa-ambulance fa-2x fa-fw"></i> <span class="text-sidebar">Todas as Câmaras</span></a>
+                            </li>
+                            <li>
+                                <a href="{% url 'usuario:cadastro' %}"><i class="fa fa-user fa-2x fa-fw"></i> <span class="text-sidebar">Cadastro de Usuários</span></a>
+                            </li>
+                            <li>
+                                <a href='{% url "camara:camaras_cadastro" %}'><i class="fa fa-archive fa-2x fa-fw"></i> <span class="text-sidebar">Cadastro de Câmaras</span></a>
+                            </li>
+                            <li>
+                                <a href='#'><i class="fa fa-file-pdf-o fa-2x fa-fw"></i> <span class="text-sidebar">Gerar Relatórios</span></a>
+                                <ul>
+                                    <li><a href="{% url 'camara:relatorio_geral' %}">Relatório Geral</a></li>
+                                    <li><a href="#">Gerar Relatórios De Uma Câmara Específica</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <!-- /.navbar-static-side -->
