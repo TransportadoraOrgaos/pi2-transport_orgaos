@@ -12,7 +12,7 @@ class Index(TemplateView):
 def cadastro(request, template_name='usuario/cadastro.html'):
 	if 'token' in request.session:
 		level = get_acess_level(request)
-		if '1' in level["access_level"]:
+		if 'Administrador' in level["access_level"]:
 			form = UsuarioModelForm(request.POST or None)
 			
 			if form.is_valid():

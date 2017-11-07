@@ -5,9 +5,9 @@ from usuario.models import Usuario
 
 class UsuarioModelForm(ModelForm):
 	class Meta:
-		ADMINISTRADOR = 1
-		TRASPORTADOR = 2
-		USUARIO = 3
+		ADMINISTRADOR = "Administrador"
+		TRASPORTADOR = "Transpordador"
+		USUARIO = "Usuario"
 		ACCESS_CHOICES = (
 		(ADMINISTRADOR, 'Administrador'), 
 		(TRASPORTADOR, 'Transportador'),
