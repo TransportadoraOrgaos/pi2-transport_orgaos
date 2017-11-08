@@ -47,11 +47,6 @@
                             <i class="fa fa-user fa-2x fa-fw"></i> <i class="fa fa-2x fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-2x fa-fw"></i>Perfil do Usuário</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-2x fa-fw"></i>Configurações</a>
-                            </li>
-                            <li class="divider"></li>
                             <li><a href="{% url 'usuario:logout' %}"><i class="fa fa-sign-out fa-2x fa-fw"></i>Sair</a>
                         </li>
                         </ul>
@@ -61,20 +56,25 @@
                 </ul>
                 <!-- /.navbar-top-links -->
 
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
-                            <li>
-                                <a href="{% url 'camara:listar_camaras' %}"><i class="fa fa-ambulance fa-2x fa-fw"></i> <span class="text-sidebar">Todas as Câmaras</span></a>
-                            </li>
-                            <li>
-                                <a href="{% url 'usuario:cadastro' %}"><i class="fa fa-user fa-2x fa-fw"></i> <span class="text-sidebar">Cadastro de Usuários</span></a>
-                            </li>
-                            <li>
-                                <a href="{% url 'camara:relatorio_geral' %}"><i class="fa fa-file-pdf-o fa-2x fa-fw"></i> <span class="text-sidebar">Gerar Relatórios</span></a>
-                            </li>
-                        </ul>
+                    {% if request.session.access_level == "Administrador"%}
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
+                                <li>
+                                    <a href="{% url 'camara:listar_camaras' %}"><i class="fa fa-ambulance fa-2x fa-fw fa-side-bar"></i> <span class="text-sidebar">Todas as Câmaras</span></a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'usuario:list' %}"><i class="fa fa-user fa-2x fa-fw fa-side-bar"></i> <span class="text-sidebar">Usuários</span></a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'camara:relatorio_geral' %}"><i class="fa fa-file-pdf-o fa-2x fa-fw"></i> <span class="text-sidebar">Gerar Relatórios</span></a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <!-- /.sidebar-collapse -->
                     </div>
+                    {% endif %}
                 </div>
                 <!-- /.navbar-static-side -->
             </nav>
