@@ -27,7 +27,7 @@
                 {% if request.session.access_level == "Administrador" or request.session.access_level == "Transportador" %}
                 {% for camara in camaras_dict %}
                     <div class="col-md-4">
-                        <div class="card card-height-camara">
+                        <div class="card card-camara card-height-camara">
                             <div class="card-body">
                                 <center>
                                     <h2 id="camara-name" class="card-title title-modules-report"><strong>{{camara.name}}</strong></h2>
