@@ -10,10 +10,10 @@ html, body {
 }
 
 #map {
-    width: 100%;
-    height: 200px;
+    height: 250px;
+    margin: -30px -25px;
     background-color: grey;
-  }
+}
 
 
 .card-text{
@@ -48,6 +48,7 @@ p{
 .card-height-camara{
     height: 30rem;
 }
+
 
 
 .navbar-brand{
@@ -113,9 +114,13 @@ p{
 }
 
 @media (max-width: 768px){
-    .card:not(.card-cadastro){
+    .card-camara{
         margin-left: 15px;
         margin-right: 15px;
+    }
+    .card-transport{
+        margin-left: -15px;
+        margin-right: -15px;
     }
 }
 
