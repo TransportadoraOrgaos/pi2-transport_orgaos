@@ -47,12 +47,6 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand" href="{% url 'camara:listar_camaras' %}"><span class="brand-part-1">TRANS</span><span class="brand-part-2">ORG</span></a>
             </div>
             <!-- /.navbar-header -->
@@ -63,7 +57,7 @@
 <div id="container">
 	<div class="row">
             <div class="col-md-4 col-sm-6 col-xs-10 col-md-offset-4 col-sm-offset-3 col-xs-offset-1">
-                <div class="card" style="margin-top: 60px;">
+                <div class="card card-login" style="margin-top: 60px;">
                     <h2 class="card-title title-modules-report"><strong>Login</strong></h2>
 					<form class="form-sign" method="POST">
 						{% csrf_token %}
