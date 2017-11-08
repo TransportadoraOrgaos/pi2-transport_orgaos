@@ -12,7 +12,7 @@ class Index(TemplateView):
 def cadastro(request, template_name='usuario/cadastro.html'):
 	if 'token' in request.session:
 		level = get_acess_level(request)
-		if '1' in level["access_level"]:
+		if 'Administrador' in level["access_level"]:
 			form = UsuarioModelForm(request.POST or None)
 			
 			if form.is_valid():
@@ -26,11 +26,11 @@ def cadastro(request, template_name='usuario/cadastro.html'):
 				url = "https://transports-rest-api.herokuapp.com/user"
 				response = requests.post(url, data=payload, headers=headers)
 
-				if 'error_message' or 'message' in response.json():
+				if 'error_message' in response.json():
 					response_dict = response.json()
 					return render(request, template_name, {'form': form, 'response_dict': response_dict})
 				else:
-					return redirect('usuario:cadastro')
+					return redirect('usuario:list')
 			return render(request, template_name, {'form': form})
 		else:
 			return redirect('usuario:denied')
@@ -56,6 +56,8 @@ def do_login(request, template_name='usuario/login.html'):
 			token = response.json()
 			request.session['token'] = token
 			request.session['username'] = username
+			access_level = get_acess_level(request)
+			request.session['access_level'] = access_level['access_level']
 			return redirect('home')
 	return render(request, template_name, {'form': form})
 
@@ -85,17 +87,15 @@ def list(request, template_name='usuario/list.html'):
 	else:
 		return redirect('usuario:login')
 
-def del_User(request, template_name='usuario/list.html'):
+def del_User(request, users_username, template_name='usuario/list.html'):
 	
 	headers = {'content-type': 'application/json'}
-	payload = "{\n\t\"username\": \""+ username +"\"\n}"
+	payload = "{\n\t\"username\": \""+ users_username +"\"\n}"
 	url = "https://transports-rest-api.herokuapp.com/user"
 	
 	response = requests.request("DELETE", url, data=payload, headers=headers)
 
-	if 'error_message' or 'message' in response.json():
-				response_dict = response.json()
-				return render(request, template_name, {'form': form, 'response_dict': response_dict})
+	return redirect('usuario:list')
 
 def get_acess_level(request):
 

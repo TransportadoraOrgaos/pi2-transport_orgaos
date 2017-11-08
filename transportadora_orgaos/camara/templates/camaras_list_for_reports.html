@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Câmaras Cadastradas</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="painel-body">
+                {% if not camaras_dict %}
+                    <span class="error-message"> Nenhuma câmara cadastrada </span>
+                {% endif %}
+                <div class="row">
+                
+                    <div class="container">
+                            
+                            <table class="table">
+                            <thead> 
+                                <tr>
+                                    <th>Nome da Câmara</th>
+                                    <th><span class="pull-right">Ações</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for camara in camaras_dict %}
+                                <tr>
+                                    <td><a> {{camara.id}} - {{camara.name}}</a></td>
+                                    <td>
+<<<<<<< HEAD
+                                        <a href="{% url 'camara:listar_transports_relatorios' camara.name %}" class="btn btn-primary pull-right">Visualizar Transportes</a>
+=======
+                                        <a href="{% url 'camara:transport_list_reports' camara.name %}" class="btn btn-primary pull-right">Visualizar Transportes</a>
+>>>>>>> d50b005047307474c391044fc5c368879f0f24b1
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            </table>
+                           
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

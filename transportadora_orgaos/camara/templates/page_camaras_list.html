@@ -2,17 +2,29 @@
 {% block conteudo %}
 <div id="page-wrapper">
     <div class="row">
-        <div class="col-md-12">
-            <h1><b>Câmaras Cadastradas</b></h1>
+        <div class="hidden-xxs hidden-xs hidden-sm col-md-8">
+            <h1><strong>Câmaras</strong></h1>
         </div>
+
+        {% if not request.session.access_level == "Usuario" %}
+        <div class="col-sm-8 col-md-4">
+            <button class="btn btn-outline-primary btn-cadastrar-camara pull-right-xs" data-toggle="modal" data-target="#cadastro_camara">Cadastrar nova câmara</button>
+        </div>   
+    </div>
+    <div class="row">
+        {% include "modals/cadastro_camara.html" %}
+        {% endif %}
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="painel-body">
                 {% if not camaras_dict %}
-                    <span class="error-message"> Nenhuma câmara cadastrada </span>
+                    <div class="alert alert-danger">
+                        Nenhuma câmara cadastrada
+                    </div>  
                 {% endif %}
                 <div class="row">
+                {% if request.session.access_level == "Administrador" or request.session.access_level == "Transportador" %}
                 {% for camara in camaras_dict %}
                     <div class="col-md-4">
                         <div class="card card-height-camara">
@@ -21,45 +33,26 @@
                                     <h2 id="camara-name" class="card-title title-modules-report"><strong>{{camara.name}}</strong></h2>
                                     {% if not camara.transports %}
                                         <!--  DISPONIVEL -->
-                                        <p class="card-text box-available">
-                                            <i class="fa fa-circle"></i> Disponível
-                                        </p>
-                                        <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-outline-success btn-camara-card">Iniciar Transporte</a>
-                                        <button type="button" class="btn btn-danger btn-camara-card" data-toggle="modal" data-target="#{{forloop.counter}}">Deletar câmara</button>
-
+                                        {% include "modules/module_box_available.html" %}
                                         {% include "modals/delete_camara.html" %}
-
+                                        
                                     {% else %}
                                         {% with camara.transports|last as last_transport %}
                                             {% if not last_transport.reports %}
                                             <!--  AGUARDANDO CONEXAO -->
-                                            <p class="card-text box-waiting">
-                                                <i class="fa fa-circle" aria-hidden="true"></i> Aguardando conexão...
-                                            </p>
-                                            <p><b>Responsável:</b> {{ last_transport.responsible }}</p>
-                                            <p><b>Órgão:</b> {{ last_transport.organ }}</p>
+                                            {% include "modules/module_box_waiting.html" %}
+                                            
                                             {% else %}
                                                 {% with last_transport.reports|last as last_report %}
                                                     {% if last_report.enable == 0 %}
                                                     <!--  DISPONIVEL -->
-                                                    <p class="card-text box-available">
-                                                        <i class="fa fa-circle"></i> Disponível
-                                                    </p>
-                                                    <a href="{% url 'transport:transport_cadastro' camara.id camara.name %}" class="btn btn-outline-success btn-camara-card">Iniciar Transporte</a>
-                                                    <button type="button" class="btn btn-danger btn-camara-card" data-toggle="modal" data-target="#{{forloop.counter}}">Deletar câmara</button>
-
-                                                    
+                                                    {% include "modules/module_box_available.html" %}
                                                     {% include "modals/delete_camara.html" %}
-
+                                                    
                                                     {%  elif last_report.enable == 1 %}
                                                     <!-- EM USO -->
-                                                    <p class="card-text box-in-use">
-                                                        <i class="fa fa-circle" aria-hidden="true"></i> Em uso
-                                                    </p>
-                                                    <a href="{% url 'transport:transport_info' last_transport.id camara.name %}" class="btn btn-outline-primary btn-camara-card">Ver Transporte</a>
-                                                    <br><br>
-                                                    <p><b>Responsável:</b> {{ last_transport.responsible }}</p>
-                                                    <p><b>Órgão:</b> {{ last_transport.organ }}</p>
+                                                    {% include "modules/module_box_use.html" %}
+                                                    
                                                     {% endif %}
                                                 {% endwith %}
                                             {% endif %}
@@ -70,7 +63,35 @@
                         </div>
                     </div> 
                 {% endfor %}
-                    {% include "modules/module_camara_cadastro.html" %}
+
+                {% else %}
+                    {% for camara in camaras_dict %}
+                        {% with camara.transports|last as last_transport %}
+                        {% with last_transport.reports|last as last_report %}
+                        {%  if last_report.enable == 1 %}
+                        <div class="col-md-4">
+                            <div class="card card-height-camara">
+                                <div class="card-body">
+                                    <center>
+                                        <h2 id="camara-name" class="card-title title-modules-report"><strong>{{camara.name}}</strong></h2>
+                                        
+                                        <!-- EM USO -->
+                                        <p class="card-text box-in-use">
+                                            <i class="fa fa-circle" aria-hidden="true"></i> Em uso
+                                        </p>
+                                        <a href="{% url 'transport:transport_info' last_transport.id camara.name %}" class="btn btn-outline-primary btn-camara-card">Ver Transporte</a>
+                                        <br><br>
+                                        <p><b>Responsável:</b> {{ last_transport.responsible }}</p>
+                                        <p><b>Órgão:</b> {{ last_transport.organ }}</p>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+                        {% endwith %}
+                    {% endfor %}
+                {% endif %}
                 </div>
             </div>
         </div>

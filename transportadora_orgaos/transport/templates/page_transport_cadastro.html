@@ -4,35 +4,38 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<h2 class="form-sign-heading"><strong>Iniciar Transporte</strong></h2>
+			<p style="font-size: 18px;"><strong>Câmara: </strong> {{ camara_info.name }}</p>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-6">
-			<div class="card">
-				<div class="card-body>">
+		<div class="col-md-4">
+			<div class="card card-cadastro card-height-camara">
+				<div class="card-body">
 					<h3 class="title-modules-report"><strong>Novo Transporte</strong></h3>
 					<form class="form-sign" method="POST" >
 						{% csrf_token %}
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-8">
-									<div class="form-group">
-										<label>Nome do Responsável: </label>
-											{{ form.responsible }}
-									</div>
-									<div class="form-group">
-										<label>Órgão a ser transportado: </label>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label>Nome do Responsável: </label>
+										{{ form.responsible }}
+								</div>
+								<div class="form-group">
+									<label>Órgão a ser transportado: </label>
+									<div id="select-wrapper">
 										{{ form.organ }}
 									</div>
-									<div class="form-group">
-										<button class="btn btn-primary btn-block" type="submit">Iniciar</button>
-									</div>
-									</div>
-										<span class="error-message">{{ response_dict.error_message }}</span>
-										<span class="error-message">{{ response_dict.message }}</span>
-									<div class="col-md-4">
-									
 								</div>
+							</div>
+								<div class="form-group">
+									<button class="btn btn-outline-primary pull-right" onclick="this.disabled=true; this.form.submit();">Iniciar</button>
+									<a href="{% url 'camara:listar_camaras' %}" class="btn btn-outline-danger pull-right">Cancelar</a>
+								</div>
+								
+									<span class="error-message">{{ response_dict.error_message }}</span>
+									<span class="error-message">{{ response_dict.message }}</span>
+								<div class="col-md-4">
+								
 							</div>
 						</div>
 					</form>

@@ -1,0 +1,16 @@
+<div class="modal fade" id="{{forloop.counter}}" role="dialog">
+  <div class="modal-dialog">
+      
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Deletar {{ users.username }} do sistema?</h4>
+      </div>
+      <div class="modal-footer">
+        <a href="{% url 'usuario:user_delete' users.username %}" class="btn btn-danger col-md-12">Deletar</a>
+      </div>
+    </div>
+    
+  </div>
+</div>

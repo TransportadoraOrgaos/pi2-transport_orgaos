@@ -8,7 +8,7 @@
 	</div>
 	<div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card card-cadastro">
                 <div class="card-body">
                     <h3 class="title-modules-report"><strong>Novo Usuário</strong></h3>
                     <form action="{% url 'usuario:cadastro' %}" class="form-sign" method="POST">
@@ -35,11 +35,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
 									<label>Nível de Acesso: </label>
-									{% for choice in form.access_level %}
-								    <div>
-								        {{ choice }}
-								    </div>
-								{% endfor %}
+								        {{ form.access_level }}
 							    </div>
                             </div>
                             <div class="col-md-2">
@@ -47,6 +43,7 @@
                                     <button class="btn btn-outline-primary btn-block" type="submit">Registrar</button>
                                 </div>
                             </div>
+                            <span class="error-message">{{ response_dict.error_message }}</span>
                         </div>
                     </form>
                 </div>

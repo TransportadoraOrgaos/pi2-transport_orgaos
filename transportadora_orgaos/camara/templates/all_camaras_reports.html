@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{% url 'camara:generate_pdf' %}" class="btn btn-primary pull-left">PDF</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="painel-body">
+                <!-- {% if not camaras_dict %}
+                    <span class="error-message"> Nenhuma câmara cadastrada </span>
+                {% endif %} -->
+                <div class="row">
+                    <div class="container">
+                        {% for camara in camaras_dict %}
+                            <h1>{{camara.name}}</h1>
+                            {% for transport in camara.transports %}
+                                <b>Responsável: {{transport.responsible}}</b><br>
+                                <b>Órgão: {{transport.organ}}</b> <br>                               
+                                {% for report in transport.reports %}
+                                    <table class="table">
+                                        <thead>
+                                            <th>Data</th>
+                                            <th>Temperatura</th>
+                                            <th>Latitude</th>
+                                            <th>Longitude</th>
+                                            <th>Estava Trancada?</th>
+                                        </thead>
+                                        <tbody>
+                                            <td>{{report.date}}</td>
+                                            <td>{{report.temperature}}</td>
+                                            <td>{{report.latitude}}</td>
+                                            <td>{{report.longitude}}</td>
+                                            <td>{{report.is_locked}}</td>                                                
+                                        </tbody>
+                                    </table>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+ 

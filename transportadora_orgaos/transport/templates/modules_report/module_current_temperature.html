@@ -1,13 +1,11 @@
 <div class="card card-height">  
     <div class="card-body">
         <center>
-            <h3 class="title-modules-report"><strong>Temperatura Atual</strong> <i class="fa fa-thermometer-quarter fa-module-report"></i></h3>
+            <h3 class="title-modules-report"><strong>Temperatura Atual</strong> <i class="fa fa-thermometer-quarter fa-module-report hidden-xs"></i></h3>
             {% if not transport_reports %}
                 <div id="chart_div_current_temperature" data-current-temperature="0"></div>
             {% endif %}
-            {% with transport_reports|last as last %}
-                <div id="chart_div_current_temperature" data-current-temperature="{{ last.temperature }}"></div>
-            {% endwith %} 
+            <div id="chart_div_current_temperature" data-current-temperature="{{ last_report.temperature }}"></div>  
         </center>
     </div>
 </div>

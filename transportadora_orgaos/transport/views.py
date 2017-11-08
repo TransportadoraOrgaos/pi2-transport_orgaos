@@ -8,6 +8,8 @@ import requests
 
 
 class TransportForm(ModelForm):
+    CHOICES = (('Rim', 'Rim'),('Pancreas', 'Pancreas'),('Cornea', 'Córnea'))
+    organ = forms.ChoiceField(choices=CHOICES)
     class Meta():
         model = Transport
         fields = ['organ', 'responsible']
@@ -21,6 +23,7 @@ def transport_cadastro(request, box_id, camara_name, template_name='page_transpo
     camara_info = requests.request("GET", url, headers=headers).json()
     
     if 'token' in request.session:
+       
         
         if form.is_valid():
         
@@ -59,8 +62,20 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
         temperaturas = []
         i = 0
         for temperatura in transport_reports:
-    		temperaturas.append([i, transport_reports[i]['temperature']])
-    		i += 1
+            temperaturas.append([i, transport_reports[i]['temperature']])
+            i += 1
+        
+        latitudes = []
+        j = 0
+        for latitude in transport_reports:
+            latitudes.append(transport_reports[j]['latitude'])
+            j += 1
+        
+        longitudes = []
+        k = 0
+        for longitude in transport_reports:
+            longitudes.append(transport_reports[k]['longitude'])
+            k += 1
 
         #RECUPERAR DADOS DO TRANSPORT_ID
         url = "https://transports-rest-api.herokuapp.com/transport/" + transport_id
@@ -70,7 +85,15 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
 
         #RECUPERAR DADOS DO BOX_ID
         
-        return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas, 'camara_name':camara_name})
+        return render(request, template_name, {'transport_reports':transport_reports, 
+                                            'transport':transport ,
+                                            'temperaturas':temperaturas, 
+                                            'camara_name':camara_name,
+                                            'latitudes':latitudes,
+                                            'longitudes':longitudes
+                                        })
+        
     else:
         return redirect('usuario:login')
     
+    return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas, 'camara_name':camara_name})
