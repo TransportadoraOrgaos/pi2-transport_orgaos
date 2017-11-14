@@ -20,8 +20,8 @@
     {% for camara in camaras_dict %}
         <h1>{{camara.name}}</h1>
         {% for transport in camara.transports %}
-            <h2>Responsável: {{transport.responsible}}</h2>
-            <h2>Órgão: {{transport.organ}}</h2>
+            <h3>Responsável: {{transport.responsible}}</h3>
+            <h3>Órgão: {{transport.organ}}</h3>
             {% for report in transport.reports %} 
             <table style="width:100%">
                 <tr>
@@ -42,9 +42,14 @@
                 </tr>
                 <tr>
                     <th>Estava Trancada?</th>
-                    <td>{{report.is_locked}}</td>
+                    {% if is_locked == 1 %}
+                        <td>Sim</td>
+                    {% else %}
+                        <td>Não</td>
+                    {% endif %}
                 </tr>
             </table>
+            <br>
             {% endfor %}
         {% endfor %}
      {% endfor %}
