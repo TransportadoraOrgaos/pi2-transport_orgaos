@@ -92,7 +92,7 @@ def list(request, template_name='usuario/list.html'):
         return redirect('usuario:login')
 
 def del_User(request, users_username, template_name='usuario/list.html'):
-	if 'token' in request.session:
+    if 'token' in request.session:
         level = get_acess_level(request)
         if 'Administrador' in level["access_level"]:
             headers = {'content-type': 'application/json'}
