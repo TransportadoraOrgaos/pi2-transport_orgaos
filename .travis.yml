@@ -1,7 +1,7 @@
 branches:
-  except:
-  - relatorios
-  - usuarios
+  only:
+  - master
+  - development
 
 language: python
 python:
@@ -21,5 +21,6 @@ deploy:
     secure: CyHGHc8hZymn7pryRDipgGhsg/IBNnk2wkQMTvYMY2t0fc1cmUDVp69W8hEzQ/ZstcZyn/5RMWvCN3+4GIdrdhjWNk7ZZFCKyZAO+rnsm3x/wY+4vGmAzW1RXUuxcaHiAjzEddTO2uSFVuvSydc8PSrksK//7KO9sI5CetFABCRIFNg/wpeyQUBsiokAfZNMUv2f5qxmnflGuoflFK7qgIU2XBwOg+tVlIxVfVCpzucAqw+GCqA5uH0NkN75CRFR/VdXhG43hVolkMXB4O5zJr+YiIYsN3R0ueGUovuF/AnbX0Xn6H5Q/OYplwIif8xlk+HFjVIFBIHIfvwCSFyTXqtBPh4wJ81Wzle31aXR93BmIn1TpOHYh1jXW52Jv8T8uflDrFdmOMqEQB6ntcjIdJp91tGfBdDkGi8BoZ6FJsjs8gLYgGfW7o2OTItHCHNa/fgR2Olcy64vCdfL9SFcjHZkbo1hHItd3cNnQjIf6p9nhM6q2+LrOS62T9nlv3Vv77OtYCjaGKWIoFgRLZRrD+BfVTxf5MLwRPmQb+G9Fb26ZCBB3/udGuHspJV1wByq1P3hChoSOzhO0mIldqw7vul3+HC0VNTvwLFbxLh2muX8ohb+0/Zespgdda5PL2H8wJIuVeiuae/abXsq0HVvXbj+kdTkgallxdSQq8ftk6g=
   app:
     master: transorg
+    development: transorg-dev
   
 
