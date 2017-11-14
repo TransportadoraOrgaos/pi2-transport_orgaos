@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from .models import *
 from django.shortcuts import render, redirect
 from django.conf import settings
+from usuario.views import get_acess_level
 import requests
 
 
@@ -23,26 +24,29 @@ def transport_cadastro(request, box_id, camara_name, template_name='page_transpo
     camara_info = requests.request("GET", url, headers=headers).json()
     
     if 'token' in request.session:
-       
+        level = get_acess_level(request)
+        if 'Administrador' or 'Transportador' in level["access_level"]:
+
+            if form.is_valid():
         
-        if form.is_valid():
-        
 
-            url = "https://transports-rest-api.herokuapp.com/createtransport"
+                url = "https://transports-rest-api.herokuapp.com/createtransport"
 
-            organ = form.cleaned_data['organ']
-            responsible = form.cleaned_data['responsible']
+                organ = form.cleaned_data['organ']
+                responsible = form.cleaned_data['responsible']
 
-            payload = "{\n\t\"organ\": \"" + organ + "\",\n\t\"responsible\": \""+ responsible +"\",\n\t\"box_id\": "+ box_id +"\n}"
+                payload = "{\n\t\"organ\": \"" + organ + "\",\n\t\"responsible\": \""+ responsible +"\",\n\t\"box_id\": "+ box_id +"\n}"
             
-            response = requests.request("POST", url, data=payload, headers=headers)
+                response = requests.request("POST", url, data=payload, headers=headers)
 
-            if 'error_message' in response.json():
-                response_dict = response.json()
-                return render(request, template_name, {'form': form, 'response_dict': response_dict})
-            else:
-                return redirect("camara:listar_camaras")
-        return render(request, template_name, {'form' : form, 'camara_info' : camara_info})
+                if 'error_message' in response.json():
+                    response_dict = response.json()
+                    return render(request, template_name, {'form': form, 'response_dict': response_dict})
+                else:
+                    return redirect("camara:listar_camaras")
+            return render(request, template_name, {'form' : form, 'camara_info' : camara_info})
+        else:
+            return redirect('usuario:denied')
     else:
         return redirect('usuario:login')
 
