@@ -5,11 +5,14 @@ services: sqlite3
 env:
     - DJANGO=1.11.6
 before_install:
-    - export DJANGO_SETTINGS_MODULE=transportadora_orgaos.settings
+    - export DJANGO_SETTINGS_MODULE=transportadora_orgaos.settings 
 install:
     - pip install -r requirements.txt
+before_script:
+    - python manage.py makemigrations
+    - python manage.py migrate
 script:
-    - pytest
+    - pytest   
 deploy:
   provider: heroku
   api_key:
