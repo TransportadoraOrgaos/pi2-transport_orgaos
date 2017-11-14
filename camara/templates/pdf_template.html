@@ -1,42 +1,53 @@
+{% block conteudo %}
 <html>
 <head>
-  <title>{{camara.name}}</title>
-  <style>
-    body {
-      background-color: #f7f7f7;
-    }
-  </style>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-<div class="row">
-
-    <div class="container">
-
-        <table class="table">
-            <thead>
+    {% for camara in camaras_dict %}
+        <h1>{{camara.name}}</h1>
+        {% for transport in camara.transports %}
+            <h2>Responsável: {{transport.responsible}}</h2>
+            <h2>Órgão: {{transport.organ}}</h2>
+            {% for report in transport.reports %} 
+            <table style="width:100%">
                 <tr>
                     <th>Data</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
-                    <th>Temperatura</th>
-                    <th>Está Trancada?</th>
+                    <td>{{report.date}}</td>
                 </tr>
-            </thead>
-            <tbody>
-                
                 <tr>
-                    <td>teste</td>
-                    <td>teste</td>
-                    <td>teste</td>
-                    <td>teste</td>
-                    <td>teste</td>
+                    <th>Latitude</th>
+                    <td>{{report.latitude}}</td>
                 </tr>
-                
-            </tbody>
-        </table>
-
-    </div>
-
-</div>
+                <tr>
+                    <th>Longitude</th>
+                    <td>{{report.longitude}}</td>
+                </tr>
+                <tr>
+                    <th>Temperatura</th>
+                    <td>{{report.temperature}}</td>
+                </tr>
+                <tr>
+                    <th>Estava Trancada?</th>
+                    <td>{{report.is_locked}}</td>
+                </tr>
+            </table>
+            {% endfor %}
+        {% endfor %}
+     {% endfor %}
 </body>
 </html>
+{% endblock %}

@@ -87,9 +87,15 @@ def get_transports_from_box(request, camara_name, template_name="transports_list
 
 
 def generate_pdf(request):
-    paragraphs = ['first paragraph', 'second paragraph', 'third paragraph']
+    url = "https://transports-rest-api.herokuapp.com/boxes"
+    headers = {'content-type': 'application/json'}
+
+    camaras = requests.request("GET", url, headers=headers)
+    camaras_dict = camaras.json()['boxes']
+    
+    
     html_string = render_to_string(
-        'pdf_template.html', {'paragraphs': paragraphs})
+        'pdf_template.html', {'camaras_dict': camaras_dict})
 
     html = HTML(string=html_string)
     html.write_pdf(target='/tmp/reports.pdf')
