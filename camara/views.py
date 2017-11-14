@@ -6,7 +6,10 @@ from django.shortcuts import render, redirect
 import requests
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
+from django.template.loader import render_to_string
 
+from weasyprint import HTML
 
 class CamaraForm(ModelForm):
     class Meta:
@@ -65,19 +68,42 @@ def get_transports_from_box(request, camara_name, template_name="transports_list
 
     return render(request, template_name, {'camara_transports' : camara_transports})
 
+# def generate_pdf(request):
+#     # Create the HttpResponse object with the appropriate PDF headers.
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
+
+#     # Create the PDF object, using the response object as its "file."
+#     p = canvas.Canvas(response)
+
+#     # Draw things on the PDF. Here's where the PDF generation happens.
+#     # See the ReportLab documentation for the full list of functionality.
+#     p.drawString(0,0, "Hello world.")
+
+#     # Close the PDF object cleanly, and we're done.
+#     p.showPage()
+#     p.save()
+#     return response
+
+
 def generate_pdf(request):
-    # Create the HttpResponse object with the appropriate PDF headers.
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
+    url = "https://transports-rest-api.herokuapp.com/boxes"
+    headers = {'content-type': 'application/json'}
 
-    # Create the PDF object, using the response object as its "file."
-    p = canvas.Canvas(response)
+    camaras = requests.request("GET", url, headers=headers)
+    camaras_dict = camaras.json()['boxes']
+    
+    
+    html_string = render_to_string(
+        'pdf_template.html', {'camaras_dict': camaras_dict})
 
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    p.drawString(0,0, "Hello world.")
+    html = HTML(string=html_string)
+    html.write_pdf(target='/tmp/reports.pdf')
 
-    # Close the PDF object cleanly, and we're done.
-    p.showPage()
-    p.save()
+    fs = FileSystemStorage('/tmp')
+    with fs.open('reports.pdf') as pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="reports.pdf"'
+        return response
+
     return response
