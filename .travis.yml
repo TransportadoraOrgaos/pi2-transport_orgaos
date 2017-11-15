@@ -2,19 +2,18 @@ branches:
   only:
   - master
   - development
-
 language: python
 python:
-    - '2.7'
+- '2.7'
 services: sqlite3
 env:
-    - DJANGO=1.11.6
+- DJANGO=1.11.6
 before_install:
-    - export DJANGO_SETTINGS_MODULE=transportadora_orgaos.settings 
+- export DJANGO_SETTINGS_MODULE=transportadora_orgaos.settings
 install:
-    - pip install -r requirements.txt
+- pip install -r requirements.txt
 script:
-    - pytest   
+- pytest
 deploy:
   provider: heroku
   api_key:
@@ -22,5 +21,6 @@ deploy:
   app:
     master: transorg
     development: transorg-dev
-  
-
+notifications:
+  slack:
+    secure: aJxYkW9/05IJ0jnz5viuJFDEGPR51vz7aY7lzAlsef3ip7I1ivUZyqG6iKgAdBHdTRelR3DR8eYANcNAEta3Tp/XpiV9RGKqXgvmk05wAIQjW8N1HsXdPBB/AZ66UEl56hb+mcJwRtJ6RwVZXEpZHlUT+aSPr3n+v5bEoy2KXBE4UNN8uWqcDwEdoPG7Z11I1iPB10Gow/iTASo2mwIbMemPZ1leEmAcjp0IuseCstTVbo0v46qIBLAESv6ZA3vEJSf+ZXtMCv94/uxDXuh7FU3dV8MskIBsEZNSDR9+J5mcBrGp4cYPi4p/IfipmGAtkth9X6yKBa/cAVpGcN6XqZtU3MVfQpya2PGqfZK6shVdsvmNXCETZLYrpIfgdCmjDRa0cRgdnjzlHv6TAdX7X7S0ypQvkeS9dlya2obca7R3FSFkDXS3hyFdoTDrmBp7LWYjfRme3Dp//6p9U4K8f4L3dWjRo1XIpnba3xzS46HbiGp7l+ZoZ4sr63vNLWh49aBAxG9mhrjDnSvChu10Otyig/H8THUC+im3zLUEKoz3RA89nxzA1rJS4QXyiVOq8Nd+BWTijVGWfBxurtxaQXQ+FhBECoiI3bltagMVDou3P41s/iISMzePRm0KsPHW1y/KKL6o+yAKhqCcGNUMUlPyrWvkOiAq4ykz/TXfrj0=
