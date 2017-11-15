@@ -12,9 +12,6 @@ before_install:
 - export DJANGO_SETTINGS_MODULE=transportadora_orgaos.settings
 install:
 - pip install -r requirements.txt
-before_script:
-- python manage.py runserver
-- echo "^C"
 script:
 - pytest
 deploy:
