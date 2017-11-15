@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 import requests
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
-from usuario.view import get_acess_level
+from usuario.views import get_acess_level
 
 
 class CamaraForm(ModelForm):
