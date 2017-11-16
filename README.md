@@ -21,6 +21,12 @@ Instruções para instalação
 
 1 - Instalação do pip:
 
+  Antes, verifique se já não tem o pip instalado em sua máquina:
+  
+  ```
+  $pip --version
+  ```
+
   1.1 - Ubuntu (Linux)
 
   ```
