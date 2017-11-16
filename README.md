@@ -50,7 +50,6 @@ Instruções para instalação
 $ cd
 $ git clone https://github.com/TransportadoraOrgaos/pi2-transport_orgaos.git
 $ cd pi2-transport_orgaos
-$ cd transportadora_orgaos
 ```
 
 3 - Instalar os pacotes python:
