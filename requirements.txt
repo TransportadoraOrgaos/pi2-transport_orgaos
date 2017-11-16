@@ -4,5 +4,6 @@ requests==2.18.4
 virtualenv==15.1.0
 gunicorn==19.7.1
 whitenoise==3.3.1
+reportlab==3.4.0
 cairocffi==0.8
 weasyprint==0.41
