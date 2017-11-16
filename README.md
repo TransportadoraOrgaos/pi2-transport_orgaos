@@ -68,7 +68,7 @@ $ pip install -r requirements.txt
 
 __troubleshooting 1__
 
-Caso o `pip install` apresente problema de `permission denied`, executar os comandos a seguir:
+Caso o `pip install` apresente problema de `permission denied`, executar o comando a seguir:
 
 ```
 $ sudo -H pip install -r requirements.txt
