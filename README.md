@@ -26,6 +26,8 @@ Instruções para instalação
   ```
   $pip --version
   ```
+  
+  Caso dê erro de `command not found`, segue instruções de instalação:
 
   1.1 - Ubuntu (Linux)
 
@@ -66,7 +68,7 @@ $ pip install -r requirements.txt
 
 __troubleshooting 1__
 
-Caso o `pip install` apresente problemas, executar os comandos a seguir:
+Caso o `pip install` apresente problema de `permission denied`, executar os comandos a seguir:
 
 ```
 $ sudo -H pip install -r requirements.txt
