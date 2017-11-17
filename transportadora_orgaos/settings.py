@@ -25,7 +25,7 @@ SECRET_KEY = 'uhckpy*nrateqo=nj6bzma_7as+e7_rf_+y$e#n9t%2g_*e6&%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "transorg.herokuapp.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "transorg.herokuapp.com", "transorg-dev.herokuapp.com"]
 
 
 # Application definition
