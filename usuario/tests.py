@@ -1,6 +1,9 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
+import django
+django.setup()
+
 class PagesTest(TestCase):
 
     def setUp(self):
