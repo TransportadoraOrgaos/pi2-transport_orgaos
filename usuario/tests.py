@@ -1,8 +1,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
-import django
-django.setup()
+import transportadora_orgaos.settings
 
 class PagesTest(TestCase):
 
