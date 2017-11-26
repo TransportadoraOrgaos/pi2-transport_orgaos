@@ -103,7 +103,7 @@ def get_transports_from_box(request, camara_name, template_name="transports_list
 
 def generate_pdf(request):
     url = "https://transports-rest-api.herokuapp.com/boxes"
-    headers = {'content-type': 'application/json'}
+    headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
     camaras = requests.request("GET", url, headers=headers)
     camaras_dict = camaras.json()['boxes']
