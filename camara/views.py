@@ -8,6 +8,7 @@ from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 from django.template.loader import render_to_string
+from usuario.views import get_acess_level
 
 from weasyprint import HTML
 
@@ -20,7 +21,7 @@ def camara_list(request, template_name='page_camaras_list.html'):
 
     if 'token' in request.session:
         url = "https://transports-rest-api.herokuapp.com/boxes"
-        headers = {'content-type': 'application/json'}
+        headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
         payload = ""
 
         camaras = requests.request("GET", url, headers=headers)
@@ -45,7 +46,7 @@ def camara_list(request, template_name='page_camaras_list.html'):
 def camara_delete(request, camara_name, template_name="page_camaras_list.html"):
     	
     payload = ""
-    headers = {'content-type': 'application/json'}
+    headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
     #Deletar câmara específica
     url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
@@ -54,19 +55,33 @@ def camara_delete(request, camara_name, template_name="page_camaras_list.html"):
     return redirect('camara:listar_camaras')
 
 def get_all_boxes(request, template_name='all_camaras_reports.html'):
-    url = "https://transports-rest-api.herokuapp.com/boxes"
-    headers = {'content-type': 'application/json'}
+    if 'token' in request.session:
+        level = get_acess_level(request)
+        if 'Administrador' in level["access_level"]:
+            url = "https://transports-rest-api.herokuapp.com/boxes"
+            headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
-    camaras = requests.request("GET", url, headers=headers)
-    camaras_dict = camaras.json()['boxes']
-    return render(request, template_name, {'camaras_dict':camaras_dict})
+            camaras = requests.request("GET", url, headers=headers)
+            camaras_dict = camaras.json()['boxes']
+            return render(request, template_name, {'camaras_dict':camaras_dict})
+        else:
+            return redirect('usuario:denied')
+    else:
+        return redirect('usuario:login')
 
 def get_transports_from_box(request, camara_name, template_name="transports_list_for_reports.html"):
-    url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
-    headers = {'content-type': 'application/json'}
-    camara_transports = requests.request("GET", url, headers=headers).json()['transports']
+    if 'token' in request.session:
+        level = get_acess_level(request)
+        if 'Administrador' in level["access_level"]:
+            url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
+            headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
+            camara_transports = requests.request("GET", url, headers=headers).json()['transports']
 
-    return render(request, template_name, {'camara_transports' : camara_transports})
+            return render(request, template_name, {'camara_transports' : camara_transports})
+        else:
+            return redirect('usuario:denied')
+    else:
+        return redirect('usuario:login')
 
 # def generate_pdf(request):
 #     # Create the HttpResponse object with the appropriate PDF headers.
