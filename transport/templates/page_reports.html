@@ -5,7 +5,7 @@
 
         {% with transport_reports|last as last_report  %}
 
-        {% if last_report.enable == 0 %}
+        {% if last_report.enable == 0 or not transport_reports %}
         
             <div class="row">
                 <div class="col-md-12">

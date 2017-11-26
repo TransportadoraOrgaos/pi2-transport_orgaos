@@ -20,7 +20,7 @@
             <div class="painel-body">
                 {% if not camaras_dict %}
                     <div class="alert alert-danger">
-                        Nenhuma câmara cadastrada
+                    Nenhuma câmara cadastrada
                     </div>  
                 {% endif %}
                 <div class="row">
@@ -76,13 +76,7 @@
                                         <h2 id="camara-name" class="card-title title-modules-report"><strong>{{camara.name}}</strong></h2>
                                         
                                         <!-- EM USO -->
-                                        <p class="card-text box-in-use">
-                                            <i class="fa fa-circle" aria-hidden="true"></i> Em uso
-                                        </p>
-                                        <a href="{% url 'transport:transport_info' last_transport.id camara.name %}" class="btn btn-outline-primary btn-camara-card">Ver Transporte</a>
-                                        <br><br>
-                                        <p><b>Responsável:</b> {{ last_transport.responsible }}</p>
-                                        <p><b>Órgão:</b> {{ last_transport.organ }}</p>
+                                        {% include "modules/module_box_use.html" %}
                                     </center>
                                 </div>
                             </div>

@@ -18,7 +18,7 @@ def camara_list(request, template_name='page_camaras_list.html'):
 
     if 'token' in request.session:
         url = "https://transports-rest-api.herokuapp.com/boxes"
-        headers = {'content-type': 'application/json'}
+        headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
         payload = ""
 
         camaras = requests.request("GET", url, headers=headers)
@@ -43,7 +43,7 @@ def camara_list(request, template_name='page_camaras_list.html'):
 def camara_delete(request, camara_name, template_name="page_camaras_list.html"):
     	
     payload = ""
-    headers = {'content-type': 'application/json'}
+    headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
     #Deletar câmara específica
     url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
@@ -56,7 +56,7 @@ def get_all_boxes(request, template_name='all_camaras_reports.html'):
         level = get_acess_level(request)
         if 'Administrador' in level["access_level"]:
             url = "https://transports-rest-api.herokuapp.com/boxes"
-            headers = {'content-type': 'application/json'}
+            headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
             camaras = requests.request("GET", url, headers=headers)
             camaras_dict = camaras.json()['boxes']
@@ -71,7 +71,7 @@ def get_transports_from_box(request, camara_name, template_name="transports_list
         level = get_acess_level(request)
         if 'Administrador' in level["access_level"]:
             url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
-            headers = {'content-type': 'application/json'}
+            headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
             camara_transports = requests.request("GET", url, headers=headers).json()['transports']
 
             return render(request, template_name, {'camara_transports' : camara_transports})

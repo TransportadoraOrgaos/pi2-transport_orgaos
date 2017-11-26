@@ -80,8 +80,7 @@ def list(request, template_name='usuario/list.html'):
         level = get_acess_level(request)
         if 'Administrador' in level["access_level"]:
             url = "https://transports-rest-api.herokuapp.com/users"
-            headers = {'content-type': 'application/json'}
-
+            headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
             users = requests.request("GET", url, headers=headers)
             users_dict = users.json()['users']
 
@@ -95,7 +94,7 @@ def del_User(request, users_username, template_name='usuario/list.html'):
     if 'token' in request.session:
         level = get_acess_level(request)
         if 'Administrador' in level["access_level"]:
-            headers = {'content-type': 'application/json'}
+            headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
             payload = "{\n\t\"username\": \""+ users_username +"\"\n}"
             url = "https://transports-rest-api.herokuapp.com/user"
 

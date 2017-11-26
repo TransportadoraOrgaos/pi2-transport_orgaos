@@ -21,7 +21,7 @@
     <body>
         <div id="wrapper">
             <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -32,27 +32,15 @@
                     <a class="navbar-brand" href="{% url 'camara:listar_camaras' %}"><span class="brand-part-1">TRANS</span><span class="brand-part-2">ORG</span></a>
                 </div>
                 <!-- /.navbar-header -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-top-links navbar-right">
-                
-                    <!-- /.dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-2x fa-fw"></i> <i class="fa fa-2x fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="{% url 'usuario:logout' %}"><i class="fa fa-sign-out fa-2x fa-fw"></i>Sair</a>
-                        </li>
-                        </ul>
-                        <!-- /.dropdown-user -->
-                    </li>
-                    <!-- /.dropdown -->
+                <ul class="nav navbar-top-links navbar-right hidden-xs">
+                    <li><a href="{% url 'usuario:logout' %}" class="text-sidebar">Sair <i class="fa fa-sign-out fa-fw"></i></a></li>
+                    
                 </ul>
                 <!-- /.navbar-top-links -->
 
                     {% if request.session.access_level == "Administrador"%}
                     <div class="navbar-default sidebar" role="navigation">
-                        <div class="sidebar-nav navbar-collapse">
+                        <div class="sidebar-nav navbar-collapse collapse">
                             <ul class="nav" id="side-menu">
                                 <li>
                                     <a href="{% url 'camara:listar_camaras' %}"><i class="fa fa-ambulance fa-2x fa-fw fa-side-bar"></i> <span class="text-sidebar">Todas as Câmaras</span></a>
@@ -63,13 +51,15 @@
                                 <li>
                                     <a href="{% url 'camara:relatorio_geral' %}"><i class="fa fa-file-pdf-o fa-2x fa-fw"></i> <span class="text-sidebar">Gerar Relatórios</span></a>
                                 </li>
+                                <li class="hidden-sm hidden-md hidden-lg">
+                                    <a href="{% url 'usuario:logout' %}" class="text-sidebar"><i class="fa fa-sign-out fa-2x fa-fw"></i> Sair</a>
+                                </li>
                                 
                             </ul>
                         </div>
                         <!-- /.sidebar-collapse -->
                     </div>
                     {% endif %}
-                </div>
                 <!-- /.navbar-static-side -->
             </nav>
 
@@ -87,14 +77,16 @@
         </div>
         {% endblock %}
 
-         <!-- JavaScript Base -->
-         <script src="{% static "js/main.js" %}"></script>
+        
 
         <!-- Bootstrap Core JavaScript -->
         <script src="{% static "bootstrap/vendor/bootstrap/js/bootstrap.min.js" %}"></script>
 
         <!-- Custom Theme JavaScript -->
         <script src="{% static "bootstrap/dist/js/sb-admin-2.js" %}"></script>
+
+         <!-- JavaScript Base -->
+         <script src="{% static "js/main.js" %}"></script>
 
         <!-- Google Charts Scripts -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
