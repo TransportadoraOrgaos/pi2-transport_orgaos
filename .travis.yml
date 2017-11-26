@@ -11,7 +11,7 @@ install:
 before_script:
 - python manage.py check
 script:
-- pytest
+- ./manage.py test
 deploy:
   provider: heroku
   api_key:
