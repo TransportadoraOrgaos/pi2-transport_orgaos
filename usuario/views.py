@@ -77,25 +77,34 @@ def do_logout(request):
 
 def list(request, template_name='usuario/list.html'):
     if 'token' in request.session:
-        url = "https://transports-rest-api.herokuapp.com/users"
-        headers = {'content-type': 'application/json'}
+        level = get_acess_level(request)
+        if 'Administrador' in level["access_level"]:
+            url = "https://transports-rest-api.herokuapp.com/users"
+            headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
+            users = requests.request("GET", url, headers=headers)
+            users_dict = users.json()['users']
 
-        users = requests.request("GET", url, headers=headers)
-        users_dict = users.json()['users']
-
-        return render(request, template_name, {'users_dict':users_dict})
+            return render(request, template_name, {'users_dict':users_dict})
+        else:
+            return redirect('usuario:denied')
     else:
         return redirect('usuario:login')
 
 def del_User(request, users_username, template_name='usuario/list.html'):
-	
-    headers = {'content-type': 'application/json'}
-    payload = "{\n\t\"username\": \""+ users_username +"\"\n}"
-    url = "https://transports-rest-api.herokuapp.com/user"
+    if 'token' in request.session:
+        level = get_acess_level(request)
+        if 'Administrador' in level["access_level"]:
+            headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
+            payload = "{\n\t\"username\": \""+ users_username +"\"\n}"
+            url = "https://transports-rest-api.herokuapp.com/user"
 
-    response = requests.request("DELETE", url, data=payload, headers=headers)
+            response = requests.request("DELETE", url, data=payload, headers=headers)
 
-    return redirect('usuario:list')
+            return redirect('usuario:list')
+        else:
+            return redirect('usuario:denied')
+    else:
+        return redirect('usuario:login')
 
 def get_acess_level(request):
 
