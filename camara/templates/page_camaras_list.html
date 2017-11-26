@@ -6,7 +6,7 @@
             <h1><strong>Câmaras</strong></h1>
         </div>
 
-        {% if not request.session.access_level == "Usuario" %}
+        {% if request.session.access_level == "Administrador" %}
         <div class="col-sm-8 col-md-4">
             <button class="btn btn-outline-primary btn-cadastrar-camara pull-right-xs" data-toggle="modal" data-target="#cadastro_camara">Cadastrar nova câmara</button>
         </div>   
