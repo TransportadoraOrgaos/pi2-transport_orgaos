@@ -1,0 +1,58 @@
+{% block conteudo %}
+<html>
+<head>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    {% for camara in camaras_dict %}
+        <h1>{{camara.name}}</h1>
+        {% for transport in camara.transports %}
+            <h3>Responsável: {{transport.responsible}}</h3>
+            <h3>Órgão: {{transport.organ}}</h3>
+            {% for report in transport.reports %} 
+            <table style="width:100%">
+                <tr>
+                    <th>Data</th>
+                    <td>{{report.date}}</td>
+                </tr>
+                <tr>
+                    <th>Latitude</th>
+                    <td>{{report.latitude}}</td>
+                </tr>
+                <tr>
+                    <th>Longitude</th>
+                    <td>{{report.longitude}}</td>
+                </tr>
+                <tr>
+                    <th>Temperatura</th>
+                    <td>{{report.temperature}}</td>
+                </tr>
+                <tr>
+                    <th>Estava Trancada?</th>
+                    {% if is_locked == 1 %}
+                        <td>Sim</td>
+                    {% else %}
+                        <td>Não</td>
+                    {% endif %}
+                </tr>
+            </table>
+            <br>
+            {% endfor %}
+        {% endfor %}
+     {% endfor %}
+</body>
+</html>
+{% endblock %}

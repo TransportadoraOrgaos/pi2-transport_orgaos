@@ -6,7 +6,7 @@
             <h1><strong>Câmaras</strong></h1>
         </div>
 
-        {% if not request.session.access_level == "Usuario" %}
+        {% if request.session.access_level == "Administrador" %}
         <div class="col-sm-8 col-md-4">
             <button class="btn btn-outline-primary btn-cadastrar-camara pull-right-xs" data-toggle="modal" data-target="#cadastro_camara">Cadastrar nova câmara</button>
         </div>   
@@ -76,13 +76,7 @@
                                         <h2 id="camara-name" class="card-title title-modules-report"><strong>{{camara.name}}</strong></h2>
                                         
                                         <!-- EM USO -->
-                                        <p class="card-text box-in-use">
-                                            <i class="fa fa-circle" aria-hidden="true"></i> Em uso
-                                        </p>
-                                        <a href="{% url 'transport:transport_info' last_transport.id camara.name %}" class="btn btn-outline-primary btn-camara-card">Ver Transporte</a>
-                                        <br><br>
-                                        <p><b>Responsável:</b> {{ last_transport.responsible }}</p>
-                                        <p><b>Órgão:</b> {{ last_transport.organ }}</p>
+                                        {% include "modules/module_box_use.html" %}
                                     </center>
                                 </div>
                             </div>
