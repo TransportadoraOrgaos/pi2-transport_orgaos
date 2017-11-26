@@ -6,11 +6,8 @@ from django.shortcuts import render, redirect
 import requests
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
-from django.core.files.storage import FileSystemStorage
-from django.template.loader import render_to_string
 from usuario.views import get_acess_level
 
-from weasyprint import HTML
 
 class CamaraForm(ModelForm):
     class Meta:
@@ -83,42 +80,19 @@ def get_transports_from_box(request, camara_name, template_name="transports_list
     else:
         return redirect('usuario:login')
 
-# def generate_pdf(request):
-#     # Create the HttpResponse object with the appropriate PDF headers.
-#     response = HttpResponse(content_type='application/pdf')
-#     response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
-
-#     # Create the PDF object, using the response object as its "file."
-#     p = canvas.Canvas(response)
-
-#     # Draw things on the PDF. Here's where the PDF generation happens.
-#     # See the ReportLab documentation for the full list of functionality.
-#     p.drawString(0,0, "Hello world.")
-
-#     # Close the PDF object cleanly, and we're done.
-#     p.showPage()
-#     p.save()
-#     return response
-
-
 def generate_pdf(request):
-    url = "https://transports-rest-api.herokuapp.com/boxes"
-    headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="somefilename.pdf"'
 
-    camaras = requests.request("GET", url, headers=headers)
-    camaras_dict = camaras.json()['boxes']
-    
-    
-    html_string = render_to_string(
-        'pdf_template.html', {'camaras_dict': camaras_dict})
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response)
 
-    html = HTML(string=html_string)
-    html.write_pdf(target='/tmp/reports.pdf')
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(0,0, "Hello world.")
 
-    fs = FileSystemStorage('/tmp')
-    with fs.open('reports.pdf') as pdf:
-        response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="reports.pdf"'
-        return response
-
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
     return response
