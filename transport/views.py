@@ -18,7 +18,7 @@ class TransportForm(ModelForm):
 def transport_cadastro(request, box_id, camara_name, template_name='page_transport_cadastro.html'):
     form = TransportForm(request.POST or None)
 
-    headers = {'content-type': "application/json"}
+    headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
     url = "https://transports-rest-api.herokuapp.com/box/" +camara_name
 
     camara_info = requests.request("GET", url, headers=headers).json()
@@ -56,10 +56,7 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
     if 'token' in request.session:
         #RECUPERAR REPORTS DO TRANSPORT_ID
         url = "https://transports-rest-api.herokuapp.com/report/" + transport_id
-        headers = {
-            'content-type': "application/json",
-            'authorization': "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MDc5MTc0NzAsImlkZW50aXR5IjoyLCJleHAiOjE1MDc5MTc3NzAsIm5iZiI6MTUwNzkxNzQ3MH0.qsC3Md3L8Jc7WHfjqX5MpZYdtKbkJEiKT6ndpDFM7ho"
-        }
+        headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
         transport_reports = requests.request("GET", url, headers=headers).json()['reports']
 
