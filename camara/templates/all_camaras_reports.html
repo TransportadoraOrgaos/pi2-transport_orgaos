@@ -33,7 +33,11 @@
                                             <td>{{report.temperature}}</td>
                                             <td>{{report.latitude}}</td>
                                             <td>{{report.longitude}}</td>
-                                            <td>{{report.is_locked}}</td>                                                
+                                             {% if is_locked == 1 %}
+                                            <td>Sim</td>
+                                            {% else %}
+                                            <td>Não</td>
+                                            {% endif %}
                                         </tbody>
                                     </table>
                                 {% endfor %}
