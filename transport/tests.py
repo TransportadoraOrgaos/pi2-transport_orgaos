@@ -12,9 +12,6 @@ class TransportTest(TestCase):
         self.url = "https://transports-rest-api.herokuapp.com/auth"
        
         self.token = requests.post(self.url, data=self.payload, headers=self.headers).json()
-        
-        log = logging.getLogger('TransportTest.setUp')
-        log.debug(self.token)
 
         self.url_cadastro = reverse(
             'transport:transport_cadastro', kwargs={'box_id': 1, 'camara_name':'camara 1'})
