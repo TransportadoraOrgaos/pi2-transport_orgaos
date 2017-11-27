@@ -16,8 +16,8 @@ class TransportTest(TestCase):
         log = logging.getLogger('TransportTest.setUp')
         log.debug(self.token)
 
-        self.url_cadastro = reverse(
-            'transport:transport_cadastro', kwargs={'box_id': 1, 'camara_name':'camara 1'})
+        self.url_cadastro = reverse('transport:transport_cadastro', kwargs={'box_id': 1, 'camara_name':'camara 1'})
+        self.url_info = reverse('transport:transport_info', kwargs={'transport_id':2, 'camara_name':'camara 2'})
 
     def test_transport_cadastro(self):
         session = self.client.session
@@ -27,4 +27,12 @@ class TransportTest(TestCase):
         response = self.client.get(self.url_cadastro)
         
         self.assertEqual(response.status_code, 200)
-   
+    
+    def test_transport_info(self):
+        session = self.client.session
+        session['token'] = self.token
+        session['username'] = self.username
+        session.save()
+        response = self.client.get(self.url_info)
+
+        self.assertEqual(response.status_code, 200)
