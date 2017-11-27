@@ -53,8 +53,9 @@ def do_login(request, template_name='usuario/login.html'):
         url = "https://transports-rest-api.herokuapp.com/auth"
         response = requests.post(url, data=payload, headers=headers)
 
-        if 'error_message' in response.json():
+        if 'error' in response.json():
             response_dict = response.json()
+            response_dict['error'] = "Usuario e/ou Senha invalidos"
             return render(request, template_name, {'form': form, 'response_dict': response_dict})
         elif 'access_token' in response.json():
             token = response.json()
