@@ -28,7 +28,10 @@ def camara_list(request, template_name='page_camaras_list.html'):
 
         if form.is_valid():
             url = "https://transports-rest-api.herokuapp.com/box/" + form.cleaned_data['name']
-            response = requests.post(url, data=payload, headers=headers)
+            try:
+                response = requests.post(url, data=payload, headers=headers)
+            except KeyError, e:
+                return redirect('usuario:login')
 
             if 'error_message' in response.json():
                 response_dict = response.json()
@@ -58,7 +61,11 @@ def get_all_boxes(request, template_name='all_camaras_reports.html'):
             url = "https://transports-rest-api.herokuapp.com/boxes"
             headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
-            camaras = requests.request("GET", url, headers=headers)
+            try:
+                camaras = requests.request("GET", url, headers=headers)
+            except KeyError, e:
+                return redirect('usuario:login')
+            
             camaras_dict = camaras.json()['boxes']
             return render(request, template_name, {'camaras_dict':camaras_dict})
         else:
@@ -72,7 +79,11 @@ def get_transports_from_box(request, camara_name, template_name="transports_list
         if 'Administrador' in level["access_level"]:
             url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
             headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
-            camara_transports = requests.request("GET", url, headers=headers).json()['transports']
+            
+            try:
+                camara_transports = requests.request("GET", url, headers=headers).json()['transports']
+            except KeyError, e:
+                return redirect('usuario:login')
 
             return render(request, template_name, {'camara_transports' : camara_transports})
         else:
