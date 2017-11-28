@@ -37,7 +37,10 @@ def transport_cadastro(request, box_id, camara_name, template_name='page_transpo
 
                 payload = "{\n\t\"organ\": \"" + organ + "\",\n\t\"responsible\": \""+ responsible +"\",\n\t\"box_id\": "+ box_id +"\n}"
             
-                response = requests.request("POST", url, data=payload, headers=headers)
+                try:
+                    response = requests.request("POST", url, data=payload, headers=headers)
+                except KeyError, e:
+                    return redirect('usuario:login')
 
                 if 'error_message' in response.json():
                     response_dict = response.json()
@@ -58,7 +61,10 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
         url = "https://transports-rest-api.herokuapp.com/report/" + transport_id
         headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
-        transport_reports = requests.request("GET", url, headers=headers).json()['reports']
+        try:
+            transport_reports = requests.request("GET", url, headers=headers).json()['reports']
+        except KeyError, e:
+            return redirect('usuario:login')
 
         temperaturas = []
         i = 0

@@ -172,6 +172,34 @@ $ sudo apt-get install libffi-dev
 $ sudo -H pip install -r requirements.txt
 ```
 
+3 - Instalar os pacotes python:
+
+```
+$ pip install -r requirements.txt
+```
+
+__troubleshooting 1__
+
+Caso o `pip install` apresente problemas, executar os comandos a seguir:
+
+```
+$ sudo -H pip install -r requirements.txt
+```
+
+__troubleshooting 2__
+
+Caso a instalação do módulo `cairocffi` apresente o problema a seguir:
+
+```
+Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-y0b_ir/cairocff
+```
+Executar os comandos a seguir:
+
+```
+$ sudo apt-get install libffi-dev
+$ sudo -H pip install -r requirements.txt
+```
+
 3 - Rodar o servidor
 
  ```

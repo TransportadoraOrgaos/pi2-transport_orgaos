@@ -1,4 +1,4 @@
-<div class="card card-transport card-height">  
+<div class="card card-transport card-height-top">  
     <div class="card-body">
         <center>
             <h3 class="title-modules-report"><strong>Informações</strong> <i class="fa fa-info-circle fa-module-report hidden-xs"></i></h3> 
@@ -11,9 +11,10 @@
                     Fechada <i class="fa fa-circle fa-module-report text-danger"></i>
                     {% else %}
                     Aberta <i class="fa fa-circle fa-module-report text-success"></i>
-                {% endif %}
-            {% endwith %}
             </p>
+            {% endif %}
+                <p><b>Último envio:</b> {{ last.date }}</p>
+            {% endwith %}
             <a href="#" class="btn btn-outline-primary">Relatório do Transporte</a>
         </center>
     </div>

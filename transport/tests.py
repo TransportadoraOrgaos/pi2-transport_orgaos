@@ -1,8 +1,38 @@
 from django.test import TestCase
-from transportadora_orgaos.settings import INSTALLED_APPS
+from django.core.urlresolvers import reverse
+import requests
+import logging
 
+class TransportTest(TestCase):    
 
-# TESTE PARA NAO QUEBRAR A BUILD
-class SettingsTest(TestCase):    
-    def test_transport_is_configured(self):
-        assert 'transport' in INSTALLED_APPS
+    def setUp(self):
+        self.headers = {'content-type': 'application/json'}
+        self.username = 'teste'
+        self.payload = "{\n\t\"username\": \"teste\",\n\t\"password\": \"teste\"\n}"
+        self.url = "https://transports-rest-api.herokuapp.com/auth"
+       
+        self.token = requests.post(self.url, data=self.payload, headers=self.headers).json()
+        
+        log = logging.getLogger('TransportTest.setUp')
+        log.debug(self.token)
+
+        self.url_cadastro = reverse('transport:transport_cadastro', kwargs={'box_id': 1, 'camara_name':'camara 1'})
+        self.url_info = reverse('transport:transport_info', kwargs={'transport_id':2, 'camara_name':'camara 2'})
+
+    def test_transport_cadastro(self):
+        session = self.client.session
+        session['token'] = self.token
+        session['username'] = self.username
+        session.save()
+        response = self.client.get(self.url_cadastro)
+        
+        self.assertEqual(response.status_code, 200)
+    
+    def test_transport_info(self):
+        session = self.client.session
+        session['token'] = self.token
+        session['username'] = self.username
+        session.save()
+        response = self.client.get(self.url_info)
+
+        self.assertEqual(response.status_code, 200)
