@@ -40,7 +40,7 @@ def transport_cadastro(request, box_id, camara_name, template_name='page_transpo
                 try:
                     response = requests.request("POST", url, data=payload, headers=headers)
                 except KeyError, e:
-                    return redirect('usuario:login')
+                    return redirect('usuario:session_expired')
 
                 if 'error_message' in response.json():
                     response_dict = response.json()
@@ -64,7 +64,7 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
         try:
             transport_reports = requests.request("GET", url, headers=headers).json()['reports']
         except KeyError, e:
-            return redirect('usuario:login')
+            return redirect('usuario:session_expired')
 
         temperaturas = []
         i = 0

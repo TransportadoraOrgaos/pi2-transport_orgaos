@@ -28,7 +28,7 @@ def cadastro(request, template_name='usuario/cadastro.html'):
                 try:
                     response = requests.post(url, data=payload, headers=headers)
                 except KeyError, e:
-                    return redirect('usuario:login')
+                    return redirect('usuario:session_expired')
 
                 if 'error_message' in response.json():
                     response_dict = response.json()
@@ -66,6 +66,36 @@ def do_login(request, template_name='usuario/login.html'):
             return redirect('home')
     return render(request, template_name, {'form': form})
 
+def do_login_session_expired(request, template_name='usuario/session_expired.html'):
+
+    if 'token' in request.session:
+        del request.session['token']
+        form = UsuarioLoginForm(request.POST or None)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            headers = {'content-type': 'application/json'}
+            payload = "{\n\t\"username\": \""+ username +"\",\n\t\"password\": \""+ password +"\"\n}"
+            url = "https://transports-rest-api.herokuapp.com/auth"
+            response = requests.post(url, data=payload, headers=headers)
+
+            if 'error' in response.json():
+                response_dict = response.json()
+                response_dict['error'] = "Usuario e/ou Senha invalidos"
+                return render(request, template_name, {'form': form, 'response_dict': response_dict})
+            elif 'access_token' in response.json():
+                token = response.json()
+                request.session['token'] = token
+                request.session['username'] = username
+                access_level = get_acess_level(request)
+                request.session['access_level'] = access_level['access_level']
+                return redirect('home')
+        return render(request, template_name, {'form': form})
+    else:
+        return redirect('usuario:login')
+
 def formView(request):
     if request.session.has_key('token'):
         token = request.session['token']
@@ -90,7 +120,7 @@ def list(request, template_name='usuario/list.html'):
             try:
                 users = requests.request("GET", url, headers=headers)
             except KeyError, e:
-                return redirect('usuario:login')
+                return redirect('usuario:session_expired')
             
             users_dict = users.json()['users']
 
@@ -111,7 +141,7 @@ def del_User(request, users_username, template_name='usuario/list.html'):
             try:
                response = requests.request("DELETE", url, data=payload, headers=headers)
             except KeyError, e:
-                return redirect('usuario:login')
+                return redirect('usuario:session_expired')
 
             return redirect('usuario:list')
         else:
