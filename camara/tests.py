@@ -24,7 +24,7 @@ class CamaraTest(TestCase):
         session['username'] = self.username
         session.save()
         response = self.client.get(self.url_cadastro)
-        self.assertEqual(response.status_code, 200 or 302 )
+        self.assertEqual(response.status_code, 200 or 302)
 
     def test_list(self):
         session = self.client.session
@@ -32,7 +32,7 @@ class CamaraTest(TestCase):
         session['username'] = self.username
         session.save()
         response = self.client.get(self.url_list)
-        self.assertEqual(response.status_code, 200 or 302 )
+        self.assertEqual(response.status_code, 200 or 302)
 
     def test_get_all_boxes(self):
         session = self.client.session
