@@ -69,3 +69,17 @@ class PagesTest(TestCase):
         response = self.client.delete(self.url_del_user, form_data)
 
         self.assertEqual(response.status_code, 200)
+
+    def test_login_user(self):
+    	form_data = {'username': 'aaaa','password': '12345'}
+        
+        response = self.client.post(self.url_login, form_data)
+        
+        self.assertEqual(response.status_code, 302)
+
+    def test_login_user_invalid(self):
+    	form_data = {'username': 'aaaa','password': '54321'}
+        
+        response = self.client.post(self.url_login, form_data)
+        
+        self.assertEqual(response.status_code, 200)
