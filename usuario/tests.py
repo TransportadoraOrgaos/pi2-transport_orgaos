@@ -13,6 +13,7 @@ class PagesTest(TestCase):
 
         self.headers = {'content-type': 'application/json'}
         self.username = 'teste'
+        self.username_usuario = 'usuario'
         self.payload = "{\n\t\"username\": \"teste\",\n\t\"password\": \"teste\"\n}"
         self.url = "https://transports-rest-api.herokuapp.com/auth"
        
@@ -46,6 +47,15 @@ class PagesTest(TestCase):
     	response = self.client.get(self.url_list)
         self.assertEqual(response.status_code, 302)
 
+    def test_list_sem_access_level(self):
+    	session = self.client.session
+        session['token'] = self.token
+        session['username'] = self.username_usuario
+        session.save()
+
+    	response = self.client.get(self.url_list)
+        self.assertEqual(response.status_code, 302)
+
     def test_cadastro_user(self):
     	session = self.client.session
         session['token'] = self.token
@@ -56,6 +66,17 @@ class PagesTest(TestCase):
 
         response = self.client.post(self.url_cadastro, form_data)
         self.assertEqual(response.status_code, 200)
+
+    def test_cadastro_sem_access_level(self):
+    	session = self.client.session
+        session['token'] = self.token
+        session['username'] = self.username_usuario
+        session.save()
+
+        form_data = {'username': 'aaaa','password': '12345', 'email': 'aaa@aa.com', 'access_level': 'Administrador'}
+
+        response = self.client.post(self.url_cadastro, form_data)
+        self.assertEqual(response.status_code, 302)
 
     def test_del_user(self):
     	session = self.client.session
