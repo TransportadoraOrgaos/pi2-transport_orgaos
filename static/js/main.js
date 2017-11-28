@@ -20,4 +20,8 @@ $(document).ready(function() {
             backdrop: 'static'
         });
     }
+
+    setInterval(function(){
+        window.location.reload(1);
+    },10000);
 });
