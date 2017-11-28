@@ -24,7 +24,11 @@ def cadastro(request, template_name='usuario/cadastro.html'):
                 headers = {'content-type': 'application/json'}
                 payload = "{\n\t\"username\": \""+ username +"\",\n\t\"password\": \""+ password +"\", \n\t\"email\": \""+ email +"\", \n\t\"access_level\": \""+ access_level +"\"\n}"
                 url = "https://transports-rest-api.herokuapp.com/user"
-                response = requests.post(url, data=payload, headers=headers)
+                
+                try:
+                    response = requests.post(url, data=payload, headers=headers)
+                except KeyError, e:
+                    return redirect('usuario:session_expired')
 
                 if 'error_message' in response.json():
                     response_dict = response.json()
@@ -49,8 +53,9 @@ def do_login(request, template_name='usuario/login.html'):
         url = "https://transports-rest-api.herokuapp.com/auth"
         response = requests.post(url, data=payload, headers=headers)
 
-        if 'error_message' in response.json():
+        if 'error' in response.json():
             response_dict = response.json()
+            response_dict['error'] = "Usuario e/ou Senha invalidos"
             return render(request, template_name, {'form': form, 'response_dict': response_dict})
         elif 'access_token' in response.json():
             token = response.json()
@@ -60,6 +65,36 @@ def do_login(request, template_name='usuario/login.html'):
             request.session['access_level'] = access_level['access_level']
             return redirect('home')
     return render(request, template_name, {'form': form})
+
+def do_login_session_expired(request, template_name='usuario/session_expired.html'):
+
+    if 'token' in request.session:
+        del request.session['token']
+        form = UsuarioLoginForm(request.POST or None)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            headers = {'content-type': 'application/json'}
+            payload = "{\n\t\"username\": \""+ username +"\",\n\t\"password\": \""+ password +"\"\n}"
+            url = "https://transports-rest-api.herokuapp.com/auth"
+            response = requests.post(url, data=payload, headers=headers)
+
+            if 'error' in response.json():
+                response_dict = response.json()
+                response_dict['error'] = "Usuario e/ou Senha invalidos"
+                return render(request, template_name, {'form': form, 'response_dict': response_dict})
+            elif 'access_token' in response.json():
+                token = response.json()
+                request.session['token'] = token
+                request.session['username'] = username
+                access_level = get_acess_level(request)
+                request.session['access_level'] = access_level['access_level']
+                return redirect('home')
+        return render(request, template_name, {'form': form})
+    else:
+        return redirect('usuario:login')
 
 def formView(request):
     if request.session.has_key('token'):
@@ -81,7 +116,12 @@ def list(request, template_name='usuario/list.html'):
         if 'Administrador' in level["access_level"]:
             url = "https://transports-rest-api.herokuapp.com/users"
             headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
-            users = requests.request("GET", url, headers=headers)
+            
+            try:
+                users = requests.request("GET", url, headers=headers)
+            except KeyError, e:
+                return redirect('usuario:session_expired')
+            
             users_dict = users.json()['users']
 
             return render(request, template_name, {'users_dict':users_dict})
@@ -98,7 +138,10 @@ def del_User(request, users_username, template_name='usuario/list.html'):
             payload = "{\n\t\"username\": \""+ users_username +"\"\n}"
             url = "https://transports-rest-api.herokuapp.com/user"
 
-            response = requests.request("DELETE", url, data=payload, headers=headers)
+            try:
+               response = requests.request("DELETE", url, data=payload, headers=headers)
+            except KeyError, e:
+                return redirect('usuario:session_expired')
 
             return redirect('usuario:list')
         else:
