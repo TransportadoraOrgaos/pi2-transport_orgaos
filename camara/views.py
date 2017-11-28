@@ -24,18 +24,18 @@ def camara_list(request, template_name='page_camaras_list.html'):
         headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
         payload = ""
 
-        camaras = requests.request("GET", url, headers=headers)
-        camaras_dict = camaras.json()['boxes']
+        try:
+            camaras = requests.request("GET", url, headers=headers)
+            camaras_dict = camaras.json()['boxes']
+        except KeyError, e:
+            return redirect('usuario:login')
 
         form = CamaraForm(request.POST or None)
 
         if form.is_valid():
             url = "https://transports-rest-api.herokuapp.com/box/" + form.cleaned_data['name']
-            try:
-                response = requests.post(url, data=payload, headers=headers)
-            except KeyError, e:
-                return redirect('usuario:login')
-
+            response = requests.post(url, data=payload, headers=headers)
+        
             if 'error_message' in response.json():
                 response_dict = response.json()
                 return render(request, template_name, {'form': form, 'response_dict': response_dict, 'camaras_dict':camaras_dict})
