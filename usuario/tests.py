@@ -10,6 +10,7 @@ class PagesTest(TestCase):
         self.url_denied = reverse('usuario:denied')
         self.url_list = reverse('usuario:list')
         self.url_del_user = reverse('usuario:user_delete', kwargs={'users_username': 'aaaa'})
+        self.url_do_logout = reverse('usuario:logout')
 
         self.headers = {'content-type': 'application/json'}
         self.username = 'teste'
@@ -131,4 +132,8 @@ class PagesTest(TestCase):
 
         response = self.client.delete(self.url_del_user)
 
+        self.assertEqual(response.status_code, 302)
+
+    def test_do_logout(self):
+    	response = self.client.post(self.url_do_logout)
         self.assertEqual(response.status_code, 302)
