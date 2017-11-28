@@ -28,7 +28,7 @@ def camara_list(request, template_name='page_camaras_list.html'):
             camaras = requests.request("GET", url, headers=headers)
             camaras_dict = camaras.json()['boxes']
         except KeyError, e:
-            return redirect('usuario:login')
+            return redirect('usuario:session_expired')
 
         form = CamaraForm(request.POST or None)
 
@@ -67,7 +67,7 @@ def get_all_boxes(request, template_name='all_camaras_reports.html'):
             try:
                 camaras = requests.request("GET", url, headers=headers)
             except KeyError, e:
-                return redirect('usuario:login')
+                return redirect('usuario:session_expired')
             
             camaras_dict = camaras.json()['boxes']
             return render(request, template_name, {'camaras_dict':camaras_dict})
@@ -86,7 +86,7 @@ def get_transports_from_box(request, camara_name, template_name="transports_list
             try:
                 camara_transports = requests.request("GET", url, headers=headers).json()['transports']
             except KeyError, e:
-                return redirect('usuario:login')
+                return redirect('usuario:session_expired')
 
             return render(request, template_name, {'camara_transports' : camara_transports})
         else:
@@ -98,8 +98,11 @@ def generate_pdf(request):
     url = "https://transports-rest-api.herokuapp.com/boxes"
     headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
-    camaras = requests.request("GET", url, headers=headers)
-    camaras_dict = camaras.json()['boxes']
+    try:
+        camaras = requests.request("GET", url, headers=headers)
+        camaras_dict = camaras.json()['boxes']
+    except:
+        return redirect('usuario:session_expired')
     
     
     html_string = render_to_string(
