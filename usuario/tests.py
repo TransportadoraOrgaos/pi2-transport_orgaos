@@ -9,6 +9,7 @@ class PagesTest(TestCase):
         self.url_cadastro = reverse('usuario:cadastro')
         self.url_denied = reverse('usuario:denied')
         self.url_list = reverse('usuario:list')
+        self.url_del_user = reverse('usuario:list')
 
         self.headers = {'content-type': 'application/json'}
         self.username = 'teste'
@@ -18,13 +19,20 @@ class PagesTest(TestCase):
         self.token = requests.post(self.url, data=self.payload, headers=self.headers).json()
 
 
+
+
     def test_login(self):
         response = self.client.get(self.url_login)
         self.assertEqual(response.status_code, 200)
 
     def test_cadastro(self):
+    	session = self.client.session
+        session['token'] = self.token
+        session['username'] = self.username
+        session.save()
+
         response = self.client.get(self.url_cadastro)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_denied(self):
     	response = self.client.get(self.url_denied)
@@ -36,5 +44,28 @@ class PagesTest(TestCase):
         session['username'] = self.username
         session.save()
         response = self.client.get(self.url_list)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_cadastro_user(self):
+    	session = self.client.session
+        session['token'] = self.token
+        session['username'] = self.username
+        session.save()
+
+        form_data = {'username': 'aaaa','password': '12345', 'email': 'aaa@aa.com', 'access_level': 'Administrador'}
+
+        response = self.client.post(self.url_cadastro, form_data)
+        self.assertEqual(response.status_code, 200)
+
+    def test_del_user(self):
+    	session = self.client.session
+        session['token'] = self.token
+        session['username'] = self.username
+        session.save()
+
+        form_data = {'username': 'aaaa'}
+
+        response = self.client.delete(self.url_del_user, form_data)
 
         self.assertEqual(response.status_code, 200)
