@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 import requests
-import logging
 
 class TransportTest(TestCase):    
 
@@ -12,9 +11,6 @@ class TransportTest(TestCase):
         self.url = "https://transports-rest-api.herokuapp.com/auth"
        
         self.token = requests.post(self.url, data=self.payload, headers=self.headers).json()
-        
-        log = logging.getLogger('TransportTest.setUp')
-        log.debug(self.token)
 
         self.url_cadastro = reverse('transport:transport_cadastro', kwargs={'box_id': 1, 'camara_name':'camara 1'})
         self.url_info = reverse('transport:transport_info', kwargs={'transport_id':2, 'camara_name':'camara 2'})
