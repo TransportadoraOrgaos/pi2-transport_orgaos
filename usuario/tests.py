@@ -26,13 +26,8 @@ class PagesTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_cadastro(self):
-    	session = self.client.session
-        session['token'] = self.token
-        session['username'] = self.username
-        session.save()
-
         response = self.client.get(self.url_cadastro)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_denied(self):
     	response = self.client.get(self.url_denied)
@@ -46,6 +41,10 @@ class PagesTest(TestCase):
         response = self.client.get(self.url_list)
 
         self.assertEqual(response.status_code, 200)
+
+    def test_list_sem_token(self):
+    	response = self.client.get(self.url_list)
+        self.assertEqual(response.status_code, 302)
 
     def test_cadastro_user(self):
     	session = self.client.session
