@@ -12,6 +12,7 @@ omit =
     */forms.py
     */models.py
     */urls.py
+    */settings_deploy.py
 
 [report]
 exclude_lines = 

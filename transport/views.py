@@ -14,8 +14,19 @@ class TransportForm(ModelForm):
     class Meta():
         model = Transport
         fields = ['organ', 'responsible']
+
+def recupera_token(request):
+    #RECUPERAR O NOVO TOKEN DA API
+    headers = {'content-type': 'application/json'}
+    url_access = "https://transports-rest-api.herokuapp.com/auth"
+    payload_access = "{\n\t\"username\": \""+ request.session['username'] +"\",\n\t\"password\": \""+ request.session['password'] +"\"\n}"
+    response = requests.post(url_access, data=payload_access, headers=headers)
+    token = response.json()
+    request.session['token'] = token
         
 def transport_cadastro(request, box_id, camara_name, template_name='page_transport_cadastro.html'):
+    recupera_token(request)
+
     form = TransportForm(request.POST or None)
 
     headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
@@ -37,10 +48,8 @@ def transport_cadastro(request, box_id, camara_name, template_name='page_transpo
 
                 payload = "{\n\t\"organ\": \"" + organ + "\",\n\t\"responsible\": \""+ responsible +"\",\n\t\"box_id\": "+ box_id +"\n}"
             
-                try:
-                    response = requests.request("POST", url, data=payload, headers=headers)
-                except KeyError, e:
-                    return redirect('usuario:session_expired')
+                
+                response = requests.request("POST", url, data=payload, headers=headers)
 
                 if 'error_message' in response.json():
                     response_dict = response.json()
@@ -57,14 +66,13 @@ def transport_cadastro(request, box_id, camara_name, template_name='page_transpo
 def transport_info(request, transport_id, camara_name, template_name="page_reports.html"):
 
     if 'token' in request.session:
+        recupera_token(request)
         #RECUPERAR REPORTS DO TRANSPORT_ID
         url = "https://transports-rest-api.herokuapp.com/report/" + transport_id
         headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
-        try:
-            transport_reports = requests.request("GET", url, headers=headers).json()['reports']
-        except KeyError, e:
-            return redirect('usuario:session_expired')
+        
+        transport_reports = requests.request("GET", url, headers=headers).json()['reports']
 
         temperaturas = []
         i = 0
