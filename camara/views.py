@@ -17,19 +17,27 @@ class CamaraForm(ModelForm):
         model = Camara
         fields = ['name']
 
+def recupera_token(request):
+    #RECUPERAR O NOVO TOKEN DA API
+    headers = {'content-type': 'application/json'}
+    url_access = "https://transports-rest-api.herokuapp.com/auth"
+    payload_access = "{\n\t\"username\": \""+ request.session['username'] +"\",\n\t\"password\": \""+ request.session['password'] +"\"\n}"
+    response = requests.post(url_access, data=payload_access, headers=headers)
+    token = response.json()
+    request.session['token'] = token
+
 def camara_list(request, template_name='page_camaras_list.html'):
 
     if 'token' in request.session:
+        recupera_token(request)
+
         url = "https://transports-rest-api.herokuapp.com/boxes"
         headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
         payload = ""
 
-        try:
-            camaras = requests.request("GET", url, headers=headers)
-            camaras_dict = camaras.json()['boxes']
-        except KeyError, e:
-            return redirect('usuario:session_expired')
-
+        camaras = requests.request("GET", url, headers=headers)
+        camaras_dict = camaras.json()['boxes']
+        
         form = CamaraForm(request.POST or None)
 
         if form.is_valid():
@@ -47,6 +55,8 @@ def camara_list(request, template_name='page_camaras_list.html'):
 
 
 def camara_delete(request, camara_name, template_name="page_camaras_list.html"):
+
+    recupera_token(request)
     	
     payload = ""
     headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
@@ -59,15 +69,15 @@ def camara_delete(request, camara_name, template_name="page_camaras_list.html"):
 
 def get_all_boxes(request, template_name='all_camaras_reports.html'):
     if 'token' in request.session:
+        recupera_token(request)
         level = get_acess_level(request)
         if 'Administrador' in level["access_level"]:
             url = "https://transports-rest-api.herokuapp.com/boxes"
             headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
-            try:
-                camaras = requests.request("GET", url, headers=headers)
-            except KeyError, e:
-                return redirect('usuario:session_expired')
+            
+            camaras = requests.request("GET", url, headers=headers)
+            
             
             camaras_dict = camaras.json()['boxes']
             return render(request, template_name, {'camaras_dict':camaras_dict})
@@ -78,15 +88,15 @@ def get_all_boxes(request, template_name='all_camaras_reports.html'):
 
 def get_transports_from_box(request, camara_name, template_name="transports_list_for_reports.html"):
     if 'token' in request.session:
+        recupera_token(request)
         level = get_acess_level(request)
         if 'Administrador' in level["access_level"]:
             url = "https://transports-rest-api.herokuapp.com/box/" + camara_name
             headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
             
-            try:
-                camara_transports = requests.request("GET", url, headers=headers).json()['transports']
-            except KeyError, e:
-                return redirect('usuario:session_expired')
+            
+            camara_transports = requests.request("GET", url, headers=headers).json()['transports']
+            
 
             return render(request, template_name, {'camara_transports' : camara_transports})
         else:
@@ -95,14 +105,13 @@ def get_transports_from_box(request, camara_name, template_name="transports_list
         return redirect('usuario:login')
 
 def generate_pdf(request):
+    recupera_token(request)
     url = "https://transports-rest-api.herokuapp.com/boxes"
     headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
-    try:
-        camaras = requests.request("GET", url, headers=headers)
-        camaras_dict = camaras.json()['boxes']
-    except:
-        return redirect('usuario:session_expired')
+    camaras = requests.request("GET", url, headers=headers)
+    camaras_dict = camaras.json()['boxes']
+
     
     
     html_string = render_to_string(

@@ -12,11 +12,11 @@ function drawChart() {
 
   var options = {
     width: 500, height: 160,
-    redFrom: 0, redTo: 4,
-    yellowColor: "#99d6ff", yellowFrom:-4, yellowTo: 0,
+    redFrom: 20, redTo: 30,
+    yellowColor: "#99d6ff", yellowFrom:-4, yellowTo: 6,
     minorTicks: 10,
     min: -4,
-    max: 4
+    max: 30
   };
 
   var chart = new google.visualization.Gauge(document.getElementById('chart_div_current_temperature'));     
