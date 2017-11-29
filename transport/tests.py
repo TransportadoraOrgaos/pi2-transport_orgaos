@@ -7,6 +7,7 @@ class TransportTest(TestCase):
     def setUp(self):
         self.headers = {'content-type': 'application/json'}
         self.username = 'teste'
+        self.password = 'teste'
         self.payload = "{\n\t\"username\": \"teste\",\n\t\"password\": \"teste\"\n}"
         self.url = "https://transports-rest-api.herokuapp.com/auth"
        
@@ -19,6 +20,7 @@ class TransportTest(TestCase):
         session = self.client.session
         session['token'] = self.token
         session['username'] = self.username
+        session['password'] =self.password
         session.save()
         response = self.client.get(self.url_cadastro)
         
@@ -28,6 +30,7 @@ class TransportTest(TestCase):
         session = self.client.session
         session['token'] = self.token
         session['username'] = self.username
+        session['password'] =self.password
         session.save()
         response = self.client.get(self.url_info)
 
