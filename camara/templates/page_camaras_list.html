@@ -38,24 +38,25 @@
                                         
                                     {% else %}
                                         {% with camara.transports|last as last_transport %}
+                                        {% with last_transport.reports|last as last_report %}
                                             {% if not last_transport.reports %}
                                             <!--  AGUARDANDO CONEXAO -->
                                             {% include "modules/module_box_waiting.html" %}
                                             
                                             {% else %}
-                                                {% with last_transport.reports|last as last_report %}
-                                                    {% if last_report.enable == 0 %}
-                                                    <!--  DISPONIVEL -->
-                                                    {% include "modules/module_box_available.html" %}
-                                                    {% include "modals/delete_camara.html" %}
-                                                    
-                                                    {%  elif last_report.enable == 1 %}
-                                                    <!-- EM USO -->
-                                                    {% include "modules/module_box_use.html" %}
-                                                    
-                                                    {% endif %}
-                                                {% endwith %}
+                                                {% if last_report.enable == 0 %}
+                                                <!--  DISPONIVEL -->
+                                                {% include "modules/module_box_available.html" %}
+                                                {% include "modals/delete_camara.html" %}
+                                                
+                                                {%  elif last_report.enable == 1 %}
+                                                <!-- EM USO -->
+                                                {% include "modules/module_box_use.html" %}
+                                                
+                                                {% endif %}
+                                                
                                             {% endif %}
+                                        {% endwith %}
                                         {% endwith %}
                                     {% endif %}
                                 </center>
