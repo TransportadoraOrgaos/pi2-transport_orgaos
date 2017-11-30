@@ -18,11 +18,9 @@ class TransportForm(ModelForm):
 def recupera_token(request):
     #RECUPERAR O NOVO TOKEN DA API
     headers = {'content-type': 'application/json'}
-    url_access = "https://transports-rest-api.herokuapp.com/auth"
-    payload_access = "{\n\t\"username\": \""+ request.session['username'] +"\",\n\t\"password\": \""+ request.session['password'] +"\"\n}"
-    response = requests.post(url_access, data=payload_access, headers=headers)
-    token = response.json()
-    request.session['token'] = token
+    url = "https://transports-rest-api.herokuapp.com/auth"
+    payload = "{\n\t\"username\": \""+ request.session['username'] +"\",\n\t\"password\": \""+ request.session['password'] +"\"\n}"
+    request.session['token'] = requests.post(url, data=payload, headers=headers).json()
         
 def transport_cadastro(request, box_id, camara_name, template_name='page_transport_cadastro.html'):
     recupera_token(request)

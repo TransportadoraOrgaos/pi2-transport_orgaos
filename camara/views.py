@@ -20,11 +20,9 @@ class CamaraForm(ModelForm):
 def recupera_token(request):
     #RECUPERAR O NOVO TOKEN DA API
     headers = {'content-type': 'application/json'}
-    url_access = "https://transports-rest-api.herokuapp.com/auth"
-    payload_access = "{\n\t\"username\": \""+ request.session['username'] +"\",\n\t\"password\": \""+ request.session['password'] +"\"\n}"
-    response = requests.post(url_access, data=payload_access, headers=headers)
-    token = response.json()
-    request.session['token'] = token
+    url = "https://transports-rest-api.herokuapp.com/auth"
+    payload = "{\n\t\"username\": \""+ request.session['username'] +"\",\n\t\"password\": \""+ request.session['password'] +"\"\n}"
+    request.session['token'] = requests.post(url, data=payload, headers=headers).json()
 
 def camara_list(request, template_name='page_camaras_list.html'):
 
