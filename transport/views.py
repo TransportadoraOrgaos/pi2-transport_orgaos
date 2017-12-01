@@ -69,6 +69,9 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
         url = "https://transports-rest-api.herokuapp.com/report/" + transport_id
         headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
+        username = request.session['username']
+        password = request.session['password']
+
         
         transport_reports = requests.request("GET", url, headers=headers).json()['reports']
 
@@ -103,10 +106,11 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
                                             'temperaturas':temperaturas, 
                                             'camara_name':camara_name,
                                             'latitudes':latitudes,
-                                            'longitudes':longitudes
+                                            'longitudes':longitudes,
+                                            'username': username,
+                                            'password': password,
+                                            'transport_id': transport_id
                                         })
         
     else:
         return redirect('usuario:login')
-    
-    return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas, 'camara_name':camara_name})
