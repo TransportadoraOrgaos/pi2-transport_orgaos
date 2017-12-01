@@ -1,4 +1,3 @@
-/* global google, $ */
 google.charts.load('current', { 'packages': ['gauge'] })
 
 var transportId = $('#transport_id').data('transportId')
