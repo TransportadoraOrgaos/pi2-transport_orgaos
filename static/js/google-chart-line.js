@@ -1,3 +1,6 @@
+(function(){
+
+
 google.charts.load('current', {packages: ['corechart', 'line']})
 
 var transportId = $('#transport_id').data('transportId')
@@ -7,7 +10,7 @@ var password = $('#password').data('password')
 
 google.charts.setOnLoadCallback(function(){
     var charElement = new google.visualization.LineChart(
-        document.getElementById('char_div_temperatures')
+        document.getElementById('chart_div_temperatures')
     )
 
     refreshChart(charElement, username, password)
@@ -49,7 +52,7 @@ function requestTemperatures(token){
 
     return $.ajax(settings).then(function(response){
         return response.reports.map(function(report){
-            return report.temperatures
+            return report.temperature
         })
     })
 }
@@ -59,8 +62,16 @@ var options = {
         title: ''
     },
     vAxis: {
-        title: 'Temperatura'
+        title: 'Temperatura  ºC'
     },
+    animation:{
+        startup: true,
+        duration: 1000,
+        easing: 'out',
+    },
+    legend:{
+        position: 'none'
+    }
 };
 
 
@@ -87,9 +98,10 @@ function refreshChart(chart, username, password){
     requestToken(username, password)
         .then(requestTemperatures)
         .then(function(temperatures){
-            temperatures_chart = []
-            for(var i=0; i < temperatures.length; i++)
-                temperatures_chart[i] = temperatures[i, temperatures[i]]
-            drawBasic(chart, temperatures_chart)
+            temperatures = temperatures.map(function(temperature, index){
+                return [index, temperature]
+            })
+            drawBasic(chart, temperatures)
         })
 }
+})()

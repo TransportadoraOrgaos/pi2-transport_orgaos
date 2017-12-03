@@ -1,3 +1,6 @@
+(function(){
+
+
 google.charts.load('current', { 'packages': ['gauge'] })
 
 var transportId = $('#transport_id').data('transportId')
@@ -80,3 +83,4 @@ function drawGauge(chart, temperature) {
   ])
   chart.draw(data, chartOptions)
 }
+})()
