@@ -5,16 +5,11 @@
             <p><b>Nome:</b> {{ camara_name }}</p>
             <p><b>Órgão:</b> {{ transport.organ }}</p>
             <p><b>Responsável:</b> {{ transport.responsible }}</p>
-            <p><b>Status:</b> 
-            {% with transport_reports|last as last %}
-                {% if last.is_locked == 1 %}
-                    Fechada <i class="fa fa-circle fa-module-report text-danger"></i>
-                    {% else %}
-                    Aberta <i class="fa fa-circle fa-module-report text-success"></i>
-            </p>
-            {% endif %}
-                <p><b>Último envio:</b> {{ last.date }}</p>
-            {% endwith %}
+            <p><b>Status:</b>
+            <i class="is_locked_icon"></i> <span class="is_locked"></span></p>
+            <p><b>Último envio:</b><span class="report_date"></span></p>
+           
+            
             <a href="#" class="btn btn-outline-primary">Relatório do Transporte</a>
         </center>
     </div>

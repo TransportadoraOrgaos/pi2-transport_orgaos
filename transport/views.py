@@ -95,14 +95,14 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
 
         #RECUPERAR DADOS DO TRANSPORT_ID
         url = "https://transports-rest-api.herokuapp.com/transport/" + transport_id
-        headers = {'content-type': 'application/json'}
+        headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
         transport = requests.request("GET", url, headers=headers).json()
 
         #RECUPERAR DADOS DO BOX_ID
         
         return render(request, template_name, {'transport_reports':transport_reports, 
-                                            'transport':transport ,
+                                            'transport':transport,
                                             'temperaturas':temperaturas, 
                                             'camara_name':camara_name,
                                             'latitudes':latitudes,

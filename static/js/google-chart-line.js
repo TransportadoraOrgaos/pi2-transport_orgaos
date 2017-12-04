@@ -65,7 +65,7 @@ var options = {
         title: 'Temperatura  ºC'
     },
     animation:{
-        startup: true,
+        //startup: true,
         duration: 1000,
         easing: 'out',
     },
