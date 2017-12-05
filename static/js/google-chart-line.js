@@ -16,7 +16,7 @@ google.charts.setOnLoadCallback(function(){
     refreshChart(charElement, username, password)
     setInterval(function(){
         refreshChart(charElement, username, password)
-    }, 5000)
+    }, 15000)
 })
 
 

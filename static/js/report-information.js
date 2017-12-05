@@ -11,7 +11,7 @@
         setInterval(function(){
             refreshInformation(username, password)
             refreshDate(username, password)
-        }, 5000)
+        }, 15000)
     }
 
     refresh()

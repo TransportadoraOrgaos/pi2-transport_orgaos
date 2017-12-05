@@ -13,7 +13,7 @@ function initMap () {
     .then(function (coords) {
       liveRoute.update(last(coords))
     })
-  }, 5000)
+  }, 15000)
 }
 
 var LiveRoute = function (marker, path) {
