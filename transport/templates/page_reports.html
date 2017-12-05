@@ -1,5 +1,80 @@
-{% extends 'base.html' %}
-{% block conteudo %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+
+        <title>TransOrg - Sistema de Trasporte de Órgãos para Transplante</title>
+
+        <!-- Styles applied -->
+        <link href="{% static "css/main.css" %}" rel="stylesheet">
+        <link href="{% static "bootstrap/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "mdb/css/mdb.min.css" %}" rel="stylesheet">
+        <link href="{% static "bootstrap/dist/css/sb-admin-2.css" %}" rel="stylesheet">
+
+        
+        
+
+        <!-- Font Awesome -->
+        <link href="{% static "bootstrap/vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+        
+    </head>
+    <body>
+        <div id="wrapper">
+            <!-- Navigation -->
+            <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'camara:listar_camaras' %}"><span class="brand-part-1">TRANS</span><span class="brand-part-2">ORG</span></a>
+                </div>
+                <!-- /.navbar-header -->
+                <ul class="nav navbar-top-links navbar-right hidden-xs">
+                    <li><a href="{% url 'usuario:logout' %}" class="text-sidebar">Sair <i class="fa fa-sign-out fa-fw"></i></a></li>
+                    
+                </ul>
+                <!-- /.navbar-top-links -->
+
+                    {% if request.session.access_level == "Administrador"%}
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse collapse">
+                            <ul class="nav" id="side-menu">
+                                <li>
+                                    <a href="{% url 'camara:listar_camaras' %}"><i class="fa fa-ambulance fa-2x fa-fw fa-side-bar"></i> <span class="text-sidebar">Todas as Câmaras</span></a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'usuario:list' %}"><i class="fa fa-user fa-2x fa-fw fa-side-bar"></i> <span class="text-sidebar">Usuários</span></a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'camara:relatorio_geral' %}"><i class="fa fa-file-pdf-o fa-2x fa-fw"></i> <span class="text-sidebar">Gerar Relatórios</span></a>
+                                </li>
+                                <li class="hidden-sm hidden-md hidden-lg">
+                                    <a href="{% url 'usuario:logout' %}" class="text-sidebar"><i class="fa fa-sign-out fa-2x fa-fw"></i> Sair</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                        <!-- /.sidebar-collapse -->
+                    </div>
+                    {% endif %}
+                <!-- /.navbar-static-side -->
+            </nav>
+
+        </div>
+       
+         <script type="text/javascript" src="{% static "js/api.js" %}"></script>
+         <!-- jQuery -->
+         <script src="{% static "bootstrap/vendor/jquery/jquery.min.js" %}"></script>
+
+          <!-- Google Maps Scripts -->
+        <script type="text/javascript" src="{% static "js/google-maps.js" %}"></script>
 <div id="page-wrapper">
     <div class="container page-reports">
 
@@ -23,6 +98,10 @@
                     <h2><strong>{{camara_name}}</strong></h2>
                 </div>
             </div>
+
+            <div id='username' data-username = '{{ username }}'></div>
+            <div id='password' data-password = '{{ password }}'></div>
+            <div id='transport_id' data-transport-id = '{{ transport_id }}'></div>
 
             <div class="row">
                 <!-- renderiza o gráfico de temperaturas -->
@@ -50,4 +129,21 @@
     </div>        
 </div>
     
-{% endblock %}
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static "bootstrap/vendor/bootstrap/js/bootstrap.min.js" %}"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="{% static "bootstrap/dist/js/sb-admin-2.js" %}"></script>
+
+         <!-- JavaScript Base -->
+         <script src="{% static "js/main.js" %}"></script>
+
+        <!-- Google Charts Scripts -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="{% static "js/google-chart-line.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/google-chart-gauge.js" %}"></script> 
+        <script type="text/javascript" src="{% static "js/report-information.js" %}"></script>
+        <!--<script type="text/javascript" src="{% static "js/camara-list.js" %}"></script>-->
+        
+    </body>
+</html>

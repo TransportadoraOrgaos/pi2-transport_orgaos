@@ -18,11 +18,9 @@ class TransportForm(ModelForm):
 def recupera_token(request):
     #RECUPERAR O NOVO TOKEN DA API
     headers = {'content-type': 'application/json'}
-    url_access = "https://transports-rest-api.herokuapp.com/auth"
-    payload_access = "{\n\t\"username\": \""+ request.session['username'] +"\",\n\t\"password\": \""+ request.session['password'] +"\"\n}"
-    response = requests.post(url_access, data=payload_access, headers=headers)
-    token = response.json()
-    request.session['token'] = token
+    url = "https://transports-rest-api.herokuapp.com/auth"
+    payload = "{\n\t\"username\": \""+ request.session['username'] +"\",\n\t\"password\": \""+ request.session['password'] +"\"\n}"
+    request.session['token'] = requests.post(url, data=payload, headers=headers).json()
         
 def transport_cadastro(request, box_id, camara_name, template_name='page_transport_cadastro.html'):
     recupera_token(request)
@@ -71,6 +69,9 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
         url = "https://transports-rest-api.herokuapp.com/report/" + transport_id
         headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
+        username = request.session['username']
+        password = request.session['password']
+
         
         transport_reports = requests.request("GET", url, headers=headers).json()['reports']
 
@@ -94,21 +95,22 @@ def transport_info(request, transport_id, camara_name, template_name="page_repor
 
         #RECUPERAR DADOS DO TRANSPORT_ID
         url = "https://transports-rest-api.herokuapp.com/transport/" + transport_id
-        headers = {'content-type': 'application/json'}
+        headers = {'content-type': 'application/json', 'authorization': 'jwt ' + request.session['token']['access_token']}
 
         transport = requests.request("GET", url, headers=headers).json()
 
         #RECUPERAR DADOS DO BOX_ID
         
         return render(request, template_name, {'transport_reports':transport_reports, 
-                                            'transport':transport ,
+                                            'transport':transport,
                                             'temperaturas':temperaturas, 
                                             'camara_name':camara_name,
                                             'latitudes':latitudes,
-                                            'longitudes':longitudes
+                                            'longitudes':longitudes,
+                                            'username': username,
+                                            'password': password,
+                                            'transport_id': transport_id
                                         })
         
     else:
         return redirect('usuario:login')
-    
-    return render(request, template_name, {'transport_reports':transport_reports, 'transport':transport ,'temperaturas':temperaturas, 'camara_name':camara_name})
