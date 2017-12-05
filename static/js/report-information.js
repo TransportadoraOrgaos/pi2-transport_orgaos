@@ -86,7 +86,6 @@
         .then(requestDate)
         .then(function(date_array){
             var last_date = date_array[date_array.length - 1]
-            console.log(last_date)
             $('.report_date').html(last_date)
         })
     }
